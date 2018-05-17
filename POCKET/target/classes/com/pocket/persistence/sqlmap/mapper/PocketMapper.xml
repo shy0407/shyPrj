@@ -10,9 +10,10 @@
 </select>
 
 <update id ="edit">
-	UPDATE POCKET_INFO
-	SET EXPENSE_DATE, EXPENSE_DETAIL, EXPENSE_CASH, EXPENSE_CARD, EXPENSE_CATEGORY
-	WHERE aws.POCKET_NO=#{pocket_no}
+	UPDATE aws.POCKET_INFO
+	SET EXPENSE_DATE = #{expense_date}, EXPENSE_DETAIL =#{expense_detail}, 
+		EXPENSE_CASH =#{expense_cash}, EXPENSE_CARD=#{expense_card}, EXPENSE_CATEGORY=#{expense_category}
+	WHERE POCKET_NO=#{pocket_no}
 </update>
 
 <insert id="insertPocket" parameterType="PocketDTO" >

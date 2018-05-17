@@ -22,8 +22,8 @@ public class PocketService implements IPocketService {
 	}
 
 	@Override
-	public List<PocketDTO> edit(String pocket_no) throws Exception {
-		return pocketMapper.edit(pocket_no);
+	public void edit(PocketDTO pocketDTO) throws Exception {
+		 pocketMapper.edit(pocketDTO);
 	}
 
 	@Override

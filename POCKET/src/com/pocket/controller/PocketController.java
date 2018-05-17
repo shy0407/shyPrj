@@ -68,7 +68,7 @@ public class PocketController {
 		return "/gridServer";
 		
 	}
-	@RequestMapping(value="edit", method=RequestMethod.GET)
+	/*@RequestMapping(value="edit", method=RequestMethod.GET)
 	
 	public @ResponseBody List<PocketDTO> edit(HttpServletRequest request, HttpServletResponse response ,ModelMap model,String no) throws Exception {
 		
@@ -83,7 +83,7 @@ public class PocketController {
 		log.info("2¹ø¤Š@!!@!");
 		return entity;
 		
-	}
+	}*/
 	
 	
 	
@@ -108,22 +108,31 @@ public class PocketController {
 							@RequestParam("expense_detail")String expense_detail,
 							@RequestParam("expense_cash")String expense_cash,
 							@RequestParam("expense_card")String expense_card,
-							@RequestParam("expense_category")String expense_category) throws Exception {
+							@RequestParam("expense_category")String expense_category,
+							@RequestParam("oper")String oper,
+							@RequestParam("id")String pocket_no) throws Exception {
 		log.info("insertPocket..................");
 		log.info(expense_detail);
 		log.info(expense_detail);
 		log.info(expense_cash);
 		log.info(expense_card);
 		log.info(expense_category);
+		log.info(oper);
+		log.info(pocket_no);
 		
 		PocketDTO pocketDTO=new PocketDTO();
+		
+		pocketDTO.setPocket_no(pocket_no);
 		pocketDTO.setExpense_date(expense_date);
 		pocketDTO.setExpense_detail(expense_detail);
 		pocketDTO.setExpense_cash(expense_cash);
 		pocketDTO.setExpense_card(expense_card);
 		pocketDTO.setExpense_category(expense_category);
-		
-		pocketService.insertPocket(pocketDTO);
+		if(oper.equals("add")) {
+			pocketService.insertPocket(pocketDTO);
+		}else if(oper.equals("edit")) {
+			pocketService.edit(pocketDTO);
+		}
 		
 		
 		

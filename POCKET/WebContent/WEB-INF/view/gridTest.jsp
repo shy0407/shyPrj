@@ -29,14 +29,23 @@
             $("#jqGrid").jqGrid({
                 url: 'expense.do',
 				// we set the changes to be made at client side using predefined word clientArray
-                editurl: 'insertPocket.do',
+                postData:{pocket_no:'pocket_no'},
+				editurl: 'insertPocket.do',
                 datatype: "json",
                 colModel: [
+                	{
+						label: 'pocket_no',
+                        name: 'pocket_no',
+                        width: 75,
+						key: true,
+						editable: false,
+						editrules : { required: true}
+                    },
                     {
 						label: 'expense_date',
                         name: 'expense_date',
                         width: 75,
-						key: true,
+						
 						editable: true,
 						editrules : { required: true}
                     },
@@ -82,19 +91,25 @@
                 {
                     editCaption: "The Edit Dialog",
                     recreateForm: true,
+                    
 					//checkOnUpdate : true,
 					//checkOnSubmit : true,
-					beforeSubmit : function( postdata, form , oper) {
+					beforeSubmit : function(postdata, form , edit,rowKey) {
 						if( confirm('Are you sure you want to update this row?') ) {
 							// do something
 							 console.log(postdata);
 							 console.log(form);
 							 console.log(typeof(postdata));
-							
+							 var rowKey = $('#jqGrid').jqGrid('getGridParam',"selrow");
+							 console.log(rowKey);
 							return [true,''];
 						} else {
 							return [false, 'You can not submit!'];
 						}
+					},
+					afterSubmit: function () {
+					    $(this).jqGrid("setGridParam", {datatype: 'json'});
+					    return [true];
 					},
                     closeAfterEdit: true,
                     errorTextFormat: function (data) {
@@ -116,6 +131,8 @@
                     }
                 });
         });
+
+
 
     </script>
 
