@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//WebContent/ElaAdmin-master/css/style.css=UTF-8
+encoding//WebContent/WEB-INF/view/index.jsp=UTF-8
+encoding//WebContent/WEB-INF/view/indexNoSignUp.jsp=UTF-8
+encoding//WebContent/WEB-INF/view/jqgridTest.jsp=UTF-8
+encoding//WebContent/WEB-INF/view/uploadAjax.jsp=UTF-8
+encoding//src/com/pocket/util/AES256Util.java=UTF-8
+encoding//src/com/pocket/util/MailUtil.java=UTF-8

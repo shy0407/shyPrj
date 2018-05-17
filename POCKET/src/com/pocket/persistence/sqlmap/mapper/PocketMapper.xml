@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pocket.persistence.mapper.PocketMapper">
+
+<select resultType="PocketDTO" id="expense"> 
+	SELECT POCKET_NO, EXPENSE_DATE, EXPENSE_DETAIL, EXPENSE_CASH, EXPENSE_CARD, EXPENSE_CATEGORY
+	FROM aws.POCKET_INFO
+	
+</select>
+
+<update id ="edit">
+	UPDATE POCKET_INFO
+	SET EXPENSE_DATE, EXPENSE_DETAIL, EXPENSE_CASH, EXPENSE_CARD, EXPENSE_CATEGORY
+	WHERE aws.POCKET_NO=#{pocket_no}
+</update>
+
+<insert id="insertPocket" parameterType="PocketDTO" >
+    INSERT INTO aws.POCKET_INFO(POCKET_NO, USER_NO,EXPENSE_DATE, EXPENSE_DETAIL,EXPENSE_CASH, EXPENSE_CARD, EXPENSE_CATEGORY) 
+    VALUES((SELECT IFNULL(MAX(PI.POCKET_NO),10000000)+1 FROM aws.POCKET_INFO PI), '10000001',#{expense_date}, #{expense_detail},#{expense_cash},#{expense_card},#{expense_category})
+</insert>
+
+</mapper>

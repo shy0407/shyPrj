@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pocket.persistence.mapper.UserMapper">
+
+<select resultType="userDTO" id="getUser"> SELECT * FROM USER_INFO </select>
+
+
+<insert id ="insert">
+INSERT INTO USER (ID, PASSWORD, USER_NO)
+VALUES (#{id},#{password},#{user_no})	
+</insert>
+
+<!-- 회원가입 -->
+<insert id="insertJoin" parameterType="userDTO" >
+    INSERT INTO USER_INFO(USER_NO, USER_ID, EMAIL,PASSWORD, USER_BARCODE, INCOME,JOB, GENDER, AGE, POINT, USER_AUTH, REG_USER_NO, REG_DT) 
+    VALUES((SELECT IFNULL(MAX(UI.USER_NO),10000000)+1 FROM USER_INFO UI), #{user_id}, #{email},#{password},'N',#{income},#{job}, 
+    #{gender},#{age},'0','N', (SELECT IFNULL(MAX(UI.USER_NO),10000000)+1 FROM USER_INFO UI), NOW())
+</insert>
+
+<!-- User_no 가져오기 -->
+<select id="getUserNo" resultType="String">
+	SELECT USER_NO
+	FROM USER_INFO
+	WHERE EMAIL=#{email}
+</select>
+
+<!-- 인증컬럼 업데이트 -->
+<update id="updateAuth">
+	UPDATE USER_INFO
+	SET USER_AUTH='Y'
+	WHERE USER_NO=#{user_no}
+</update>
+
+<!-- 로그인 -->
+<select id="login" resultType="userDTO" > 
+	SELECT USER_ID, EMAIL,PASSWORD,USER_AUTH 
+	FROM USER_INFO 
+	WHERE EMAIL=#{email} and PASSWORD=#{password}
+</select>
+
+</mapper>

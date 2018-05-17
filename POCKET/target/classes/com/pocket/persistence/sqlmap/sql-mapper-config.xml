@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+    	<!-- 사용할 DTO 등록  -->
+    	<!-- <typeAlias type="poly.dto.BoardDTO" alias="BoardDTO" /> -->
+    	<typeAlias type="com.pocket.DTO.mainDTO" alias="mainDTO" /> 
+    	<typeAlias type="com.pocket.DTO.userDTO" alias="userDTO" />
+    	<typeAlias type="com.pocket.DTO.PocketDTO" alias="PocketDTO" />
+    	<typeAlias type="com.pocket.DTO.LoginDTO" alias="LoginDTO" />
+    	<typeAlias type="com.pocket.DTO.DataDTO" alias="DataDTO" />
+    	<typeAlias type="com.pocket.DTO.TestDTO" alias="TestDTO" />
+    </typeAliases>
+</configuration>
