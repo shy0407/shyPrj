@@ -10,7 +10,7 @@ import com.pocket.config.Mapper;
 public interface PocketMapper {
 
 	List<PocketDTO> expense()throws Exception;
-	List<PocketDTO>	edit(PocketDTO pocketDTO)throws Exception;
+	void edit(PocketDTO pocketDTO)throws Exception;
 	void insertPocket(PocketDTO pocketDTO)throws Exception;
 	
 

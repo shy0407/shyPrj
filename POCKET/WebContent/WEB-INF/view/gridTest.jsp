@@ -39,7 +39,9 @@
                         width: 75,
 						key: true,
 						editable: false,
-						editrules : { required: true}
+						//editrules : { required: true}
+                		hidedlg: true
+                		
                     },
                     {
 						label: 'expense_date',
@@ -81,6 +83,7 @@
                 width: 780,
                 height: 200,
                 rowNum: 10,
+                rownumbers: true, 
                 pager: "#jqGridPager"
             });
 
@@ -94,14 +97,14 @@
                     
 					//checkOnUpdate : true,
 					//checkOnSubmit : true,
-					beforeSubmit : function(postdata, form , edit,rowKey) {
+					beforeSubmit : function(postdata,form,oper) {
 						if( confirm('Are you sure you want to update this row?') ) {
 							// do something
-							 console.log(postdata);
+							/*  console.log(postdata);
 							 console.log(form);
-							 console.log(typeof(postdata));
-							 var rowKey = $('#jqGrid').jqGrid('getGridParam',"selrow");
-							 console.log(rowKey);
+							 console.log(typeof(postdata)); */
+							
+							 //console.log(rowKey);
 							return [true,''];
 						} else {
 							return [false, 'You can not submit!'];

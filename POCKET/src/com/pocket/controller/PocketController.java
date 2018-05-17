@@ -122,15 +122,24 @@ public class PocketController {
 		
 		PocketDTO pocketDTO=new PocketDTO();
 		
-		pocketDTO.setPocket_no(pocket_no);
-		pocketDTO.setExpense_date(expense_date);
-		pocketDTO.setExpense_detail(expense_detail);
-		pocketDTO.setExpense_cash(expense_cash);
-		pocketDTO.setExpense_card(expense_card);
-		pocketDTO.setExpense_category(expense_category);
+		
 		if(oper.equals("add")) {
+			
+			pocketDTO.setExpense_date(expense_date);
+			pocketDTO.setExpense_detail(expense_detail);
+			pocketDTO.setExpense_cash(expense_cash);
+			pocketDTO.setExpense_card(expense_card);
+			pocketDTO.setExpense_category(expense_category);
+			
+			
 			pocketService.insertPocket(pocketDTO);
 		}else if(oper.equals("edit")) {
+			pocketDTO.setPocket_no(pocket_no);
+			pocketDTO.setExpense_date(expense_date);
+			pocketDTO.setExpense_detail(expense_detail);
+			pocketDTO.setExpense_cash(expense_cash);
+			pocketDTO.setExpense_card(expense_card);
+			pocketDTO.setExpense_category(expense_category);
 			pocketService.edit(pocketDTO);
 		}
 		
