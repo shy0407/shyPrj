@@ -31,6 +31,12 @@ public class PocketService implements IPocketService {
 		pocketMapper.insertPocket(pocketDTO);
 		
 	}
+
+	@Override
+	public void deletePocket(String pocket_no) throws Exception {
+		pocketMapper.deletePocket(pocket_no);
+		
+	}
 		
 	
 		

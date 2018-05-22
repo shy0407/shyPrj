@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pocket.DTO.LoginDTO;
@@ -57,6 +59,17 @@ public class UserController {
 		}
 		return returnURL;
 
+	}
+	
+	@RequestMapping(value="emailDuple", method=RequestMethod.POST)
+	public @ResponseBody String emailDuple(@RequestParam("email")String email,HttpSession session, Model model) throws Exception {
+		log.info("email Duple.........................................");
+		userDTO userDTO =userService.emailDuple(email);
+		String emaill = userDTO.getEmail();
+		return emaill;
+		
+		
+		
 	}
 	
 	

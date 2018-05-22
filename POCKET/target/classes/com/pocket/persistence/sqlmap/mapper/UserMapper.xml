@@ -3,7 +3,7 @@
 
 <mapper namespace="com.pocket.persistence.mapper.UserMapper">
 
-<select resultType="userDTO" id="getUser"> SELECT * FROM USER_INFO </select>
+<select resultType="userDTO" id="getUser"> SELECT * FROM aws.USER_INFO </select>
 
 
 <insert id ="insert">
@@ -13,21 +13,21 @@ VALUES (#{id},#{password},#{user_no})
 
 <!-- 회원가입 -->
 <insert id="insertJoin" parameterType="userDTO" >
-    INSERT INTO USER_INFO(USER_NO, USER_ID, EMAIL,PASSWORD, USER_BARCODE, INCOME,JOB, GENDER, AGE, POINT, USER_AUTH, REG_USER_NO, REG_DT) 
-    VALUES((SELECT IFNULL(MAX(UI.USER_NO),10000000)+1 FROM USER_INFO UI), #{user_id}, #{email},#{password},'N',#{income},#{job}, 
-    #{gender},#{age},'0','N', (SELECT IFNULL(MAX(UI.USER_NO),10000000)+1 FROM USER_INFO UI), NOW())
+    INSERT INTO aws.USER_INFO(USER_NO, USER_ID, EMAIL,PASSWORD, USER_BARCODE, INCOME,JOB, GENDER, AGE, POINT, USER_AUTH, REG_USER_NO, REG_DT) 
+    VALUES((SELECT IFNULL(MAX(UI.USER_NO),10000000)+1 FROM aws.USER_INFO UI), #{user_id}, #{email},#{password},'N',#{income},#{job}, 
+    #{gender},#{age},'0','N', (SELECT IFNULL(MAX(UI.USER_NO),10000000)+1 FROM aws.USER_INFO UI), NOW())
 </insert>
 
 <!-- User_no 가져오기 -->
 <select id="getUserNo" resultType="String">
 	SELECT USER_NO
-	FROM USER_INFO
+	FROM aws.USER_INFO
 	WHERE EMAIL=#{email}
 </select>
 
 <!-- 인증컬럼 업데이트 -->
 <update id="updateAuth">
-	UPDATE USER_INFO
+	UPDATE aws.USER_INFO
 	SET USER_AUTH='Y'
 	WHERE USER_NO=#{user_no}
 </update>
@@ -38,5 +38,12 @@ VALUES (#{id},#{password},#{user_no})
 	FROM USER_INFO 
 	WHERE EMAIL=#{email} and PASSWORD=#{password}
 </select>
+
+<!-- email 가져오기 -->
+<select id="emailDuple" resultType="userDTO">
+	SELECT EMAIL
+	FROM aws.USER_INFO	
+</select>
+
 
 </mapper>

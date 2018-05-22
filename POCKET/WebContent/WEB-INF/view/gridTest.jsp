@@ -29,7 +29,7 @@
             $("#jqGrid").jqGrid({
                 url: 'expense.do',
 				// we set the changes to be made at client side using predefined word clientArray
-                postData:{pocket_no:'pocket_no'},
+                //postData:{pocket_no:'pocket_no'},
 				editurl: 'insertPocket.do',
                 datatype: "json",
                 colModel: [
@@ -40,7 +40,7 @@
 						key: true,
 						editable: false,
 						//editrules : { required: true}
-                		hidedlg: true
+                		hidden: true
                 		
                     },
                     {
@@ -89,7 +89,7 @@
 
             $('#jqGrid').navGrid('#jqGridPager',
                 // the buttons to appear on the toolbar of the grid
-                { edit: true, add: true, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false },
+                { edit: true, add: true, del: true, search: false, refresh: true, view: false, position: "left", cloneToTop: false },
                 // options for the Edit Dialog
                 {
                     editCaption: "The Edit Dialog",
@@ -103,7 +103,7 @@
 							/*  console.log(postdata);
 							 console.log(form);
 							 console.log(typeof(postdata)); */
-							
+							 console.log(postdata);
 							 //console.log(rowKey);
 							return [true,''];
 						} else {
@@ -111,7 +111,8 @@
 						}
 					},
 					afterSubmit: function () {
-					    $(this).jqGrid("setGridParam", {datatype: 'json'});
+					   	$(this).jqGrid("setGridParam", {datatype: 'json'});
+					    //jQuery(this).jqGrid('editGridRow', "new", {datatype: 'json'});
 					    return [true];
 					},
                     closeAfterEdit: true,
@@ -120,7 +121,8 @@
                     }
                 },
                 // options for the Add Dialog
-                {
+                {	
+                	
                     closeAfterAdd: true,
                     recreateForm: true,
                     errorTextFormat: function (data) {

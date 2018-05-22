@@ -21,4 +21,8 @@
     VALUES((SELECT IFNULL(MAX(PI.POCKET_NO),10000000)+1 FROM aws.POCKET_INFO PI), '10000001',#{expense_date}, #{expense_detail},#{expense_cash},#{expense_card},#{expense_category})
 </insert>
 
+<delete id="deletePocket" parameterType="String">
+	DELETE FROM aws.POCKET_INFO WHERE POCKET_NO=#{pocket_no}
+</delete>
+
 </mapper>

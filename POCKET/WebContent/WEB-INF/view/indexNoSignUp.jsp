@@ -47,6 +47,7 @@
 	}
 	
 </script>
+
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -177,7 +178,7 @@
 					<p class="fieldset">
 						<label class="image-replace email" for="signin-email">E-mail</label>
 						<input class="full-width has-padding has-border" name="email" id="signin-email" type="email" placeholder="E-mail">
-						<span class="error-message">An account with this email address does not exist!</span>
+						<span id="error-message"></span>
 					</p>
 
 					<p class="fieldset">
@@ -328,8 +329,42 @@
     <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
-     
-	  <script src="login-signup-form/js/index.js"></script>
+	<script src="login-signup-form/js/index.js"></script>
+	<script>
+		$(document).ready(function(){
+			
+			
+			
+			//.log(inEmail)
+			
+			$("#signup-email").focusout(function(){
+				var inEmail =$('#signup-email').val();
+				$.ajax({
+					data:{email :inEmail},
+					url:"emailDuple.do",
+					method:"POST",
+					success:function(data){
+						//console.log(typeof(data));
+						if(inEmail==data){
+							
+							$("#error-massage").text("중복입니다");
+						}else{
+							$("#error-massage").append("사용합니다");
+						}
+						
+					}
+				});
+			//$("#error-massage").append("중복입니다");
+			
+			
+			
+			});
+	
+		});
+
+
+
+</script>
 	
 	
 </body>

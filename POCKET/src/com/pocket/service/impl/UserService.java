@@ -51,6 +51,11 @@ public class UserService implements IUserService {
 		
 		return userMapper.login(loginDTO);
 	}
+
+	@Override
+	public userDTO emailDuple(String email) throws Exception {
+		return userMapper.emailDuple(email);
+	}
 	
 	
 

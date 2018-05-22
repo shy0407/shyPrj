@@ -41,7 +41,7 @@ public class PocketController {
 	  private String uploadPath;
 	
 	
-/*	@RequestMapping(value="jqgridTest", method=RequestMethod.GET)
+	@RequestMapping(value="jqgridTest", method=RequestMethod.GET)
 	
 	public String accountBookGet(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
 		log.info("jqgridTest............ .....");
@@ -49,7 +49,7 @@ public class PocketController {
 		return "/jqgridTest";
 		
 	}
-	*/
+	
 	@RequestMapping(value="gridTest", method=RequestMethod.GET)
 	
 	public String gridTest(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
@@ -68,25 +68,7 @@ public class PocketController {
 		return "/gridServer";
 		
 	}
-	/*@RequestMapping(value="edit", method=RequestMethod.GET)
-	
-	public @ResponseBody List<PocketDTO> edit(HttpServletRequest request, HttpServletResponse response ,ModelMap model,String no) throws Exception {
-		
-		List<PocketDTO> entity=null;
-		
-		try {
-			entity = pocketService.edit(no);
-		}catch(Exception e) {
-			e.printStackTrace();
-			//entity=new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		log.info("2¹ø¤Š@!!@!");
-		return entity;
-		
-	}*/
-	
-	
-	
+
 	@RequestMapping(value="expense", method=RequestMethod.GET)
 	public @ResponseBody List<PocketDTO> getExpense() throws Exception {
 		log.info("gdssss");
@@ -96,7 +78,6 @@ public class PocketController {
 			entity = pocketService.expense();
 		}catch(Exception e) {
 			e.printStackTrace();
-			//entity=new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		log.info("2¹ø¤Š@!!@!");
 		return entity;
@@ -112,13 +93,13 @@ public class PocketController {
 							@RequestParam("oper")String oper,
 							@RequestParam("id")String pocket_no) throws Exception {
 		log.info("insertPocket..................");
-		log.info(expense_detail);
+		
 		log.info(expense_detail);
 		log.info(expense_cash);
 		log.info(expense_card);
 		log.info(expense_category);
 		log.info(oper);
-		log.info(pocket_no);
+		log.info("pocket :"+pocket_no);
 		
 		PocketDTO pocketDTO=new PocketDTO();
 		
@@ -141,13 +122,17 @@ public class PocketController {
 			pocketDTO.setExpense_card(expense_card);
 			pocketDTO.setExpense_category(expense_category);
 			pocketService.edit(pocketDTO);
-		}
-		
-		
-		
+		}	
 		
 	}
 	
+	
+	@RequestMapping(value="deletePocket", method=RequestMethod.POST)
+	public void deletePocket(HttpServletRequest request, HttpServletResponse response,
+							@RequestParam("id")String pocket_no) throws Exception {
+		log.info("deletePocket..................");
+		pocketService.deletePocket(pocket_no);
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="uploadAjax",method =RequestMethod.POST,produces="text/plain;chartset=UTF-8")	

@@ -38,5 +38,52 @@ FROM aws.DATA
 WHERE DATA_SEQ='5'
 </select>
 
+<!-- 월 별 가입자 수 -->
+<select id="joinCount" resultType="java.util.HashMap">
+select substring(REG_DT, 6,2) as month, count(*) as count from aws.USER_INFO group by month
+</select>
 
+<!-- 성별 가입자 수 -->
+<select id="genderCount" resultType="java.util.HashMap">
+select GENDER as gender , count(*) as count from aws.USER_INFO group by gender
+</select>
+
+<!-- 성별에 따른 월별 가입자수 -->
+<select id="genderCountByMonth" resultType="java.util.HashMap">
+select 
+substring(REG_DT, 6,2) as month, 
+GENDER as gender,
+count(*) as count
+from aws.USER_INFO group by month, GENDER
+</select>
+
+<!--수입별 가입자 수 -->
+<select id="incomeCount" resultType="java.util.HashMap">
+select INCOME , count(*) as COUNT from aws.USER_INFO group by INCOME
+</select>
+
+<!-- 업종별 가입자 수 -->
+<select id="jobCount" resultType="java.util.HashMap">
+select JOB , count(*) as COUNT from aws.USER_INFO group by JOB
+</select>
+
+<!-- 요일별 가입자 수 -->
+<select id="dayCount" resultType="java.util.HashMap">
+select CASE WHEN DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))=1 THEN '일'
+WHEN DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))=2 THEN '월'
+WHEN DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))=3 THEN '화'
+WHEN DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))=4 THEN '수'
+WHEN DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))=5 THEN '목'
+WHEN DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))=6 THEN '금'
+WHEN DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))=7 THEN '토'
+ELSE '오류' END WEEK_NAME,
+count(*) as COUNT
+from aws.USER_INFO
+group by DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))
+</select>
+
+<!-- 성별, 수입에 따른 카운드 -->
+<select id="incomeGenderCount" resultType="java.util.HashMap">
+select INCOME,GENDER, count(*) as COUNT from aws.USER_INFO group by INCOME,GENDER
+</select>
 </mapper>
