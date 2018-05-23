@@ -1,6 +1,10 @@
 package com.pocket.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.pocket.DTO.DataDTO;
+import com.pocket.DTO.TestDTO;
 
 public interface IDataService {
 
@@ -9,4 +13,9 @@ public interface IDataService {
 	DataDTO getAgeForty()throws Exception;
 	DataDTO getAgeFiFty()throws Exception;
 	DataDTO getAgeSixty()throws Exception;
+	List<HashMap<String, String>> joinCount()throws Exception;
+	List<HashMap<String, String>> genderCountByMonth()throws Exception;
+	TestDTO countAll()throws Exception;
+	TestDTO genderCount()throws Exception;
+	List<HashMap<String, Object>> count()throws Exception;
 }

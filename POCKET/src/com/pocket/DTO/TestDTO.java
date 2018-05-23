@@ -4,45 +4,27 @@ package com.pocket.DTO;
 
 public class TestDTO {
 	
-	String expense_date;
-	String expense_detail;
-	String expense_cash;
-	String expense_card;
-	String expense_category;
-	
+	private String count;	
+	private String male;
+	private String female;
 
-	
-	
-	public String getExpense_date() {
-		return expense_date;
+	public String getCount() {
+		return count;
 	}
-	public void setExpense_date(String expense_date) {
-		this.expense_date = expense_date;
+	public void setCount(String count) {
+		this.count = count;
 	}
-	public String getExpense_detail() {
-		return expense_detail;
+	public String getMale() {
+		return male;
 	}
-	public void setExpense_detail(String expense_detail) {
-		this.expense_detail = expense_detail;
+	public void setMale(String male) {
+		this.male = male;
 	}
-	public String getExpense_cash() {
-		return expense_cash;
+	public String getFemale() {
+		return female;
 	}
-	public void setExpense_cash(String expense_cash) {
-		this.expense_cash = expense_cash;
-	}
-	public String getExpense_card() {
-		return expense_card;
-	}
-	public void setExpense_card(String expense_card) {
-		this.expense_card = expense_card;
-	}
-	public String getExpense_category() {
-		return expense_category;
-	}
-	public void setExpense_category(String expense_category) {
-		this.expense_category = expense_category;
+	public void setFemale(String female) {
+		this.female = female;
 	}
 	
-
 }

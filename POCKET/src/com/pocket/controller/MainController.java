@@ -163,6 +163,21 @@ public class MainController {
 		
 	}
 	
+	
+	//admin
+	@RequestMapping(value="/admin/index", method=RequestMethod.GET)
+	public String adminIndex(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		/*List<mainDTO>  mlist = mainService.getInfo();
+		
+		System.out.println(mlist.size());
+		
+		model.addAttribute("mList",mlist);*/
+		log.info("admin index..........................................................");
+		return "/admin/index";
+		
+	}
+	
 
 	
 }

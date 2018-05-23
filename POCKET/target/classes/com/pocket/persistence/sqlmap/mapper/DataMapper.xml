@@ -44,7 +44,7 @@ select substring(REG_DT, 6,2) as month, count(*) as count from aws.USER_INFO gro
 </select>
 
 <!-- 성별 가입자 수 -->
-<select id="genderCount" resultType="java.util.HashMap">
+<select id="genderCount" resultType="TestDTO">
 select GENDER as gender , count(*) as count from aws.USER_INFO group by gender
 </select>
 
@@ -86,4 +86,12 @@ group by DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))
 <select id="incomeGenderCount" resultType="java.util.HashMap">
 select INCOME,GENDER, count(*) as COUNT from aws.USER_INFO group by INCOME,GENDER
 </select>
+
+<!-- 전체 회원수 가져오기 -->
+<select id="countAll" resultType="TestDTO">
+select count(*) as count from aws.USER_INFO
+</select>
+
+
+
 </mapper>

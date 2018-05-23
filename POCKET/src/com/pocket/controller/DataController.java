@@ -1,18 +1,19 @@
 package com.pocket.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.httpclient.HttpConnection;
+import org.springframework.http.HttpStatus;
+//import org.apache.commons.httpclient.HttpStatus;
 import org.apache.log4j.Logger;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -128,9 +129,64 @@ public class DataController {
 		return "/apiData2";
 		
 	}
+	
+	@RequestMapping(value="/admin/joinCount", method=RequestMethod.POST)
+	public ResponseEntity<List<HashMap<String, String>>> joinCount(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		log.info("월별 가입자 수 .................");
+		
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		 try{
+		        entity = new ResponseEntity<>(dataService.joinCount(), HttpStatus.OK);
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+		 
+		return entity;
+		
+	}
+		
+	@RequestMapping(value="/admin/genderCountByMonth", method=RequestMethod.POST)
+	public ResponseEntity<List<HashMap<String, String>>> genderCountByMonth(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		log.info("성별 월별 가입자 수 .................");
+		
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		 try{
+		        entity = new ResponseEntity<>(dataService.genderCountByMonth(), HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+
+		return entity;
+		
+	}
+	
+	@RequestMapping(value="/admin/count", method=RequestMethod.POST)
+	public ResponseEntity<List<HashMap<String, Object>>> count(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		log.info("count .................");
+		
+		ResponseEntity<List<HashMap<String, Object>>> entity = null;
+		
+		
 
 		
-	
+		 try{
+		        entity = new ResponseEntity<>(dataService.count(), HttpStatus.OK);
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+		 
+		return entity;
+		
+	}
 
 
 	
