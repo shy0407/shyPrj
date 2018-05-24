@@ -43,11 +43,7 @@ public class MainController {
 	@RequestMapping(value="index", method=RequestMethod.GET)
 	public String main(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
-		/*List<mainDTO>  mlist = mainService.getInfo();
-		
-		System.out.println(mlist.size());
-		
-		model.addAttribute("mList",mlist);*/
+
 		log.info("index");
 		return "/index";
 		
@@ -56,30 +52,12 @@ public class MainController {
 	@RequestMapping(value="indexNoSignUp", method=RequestMethod.GET)
 	public String indexNoSignUp(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
-		/*List<mainDTO>  mlist = mainService.getInfo();
-		
-		System.out.println(mlist.size());
-		
-		model.addAttribute("mList",mlist);*/
 		
 		return "/indexNoSignUp";
 		
 	}
 	
-	@RequestMapping(value="all", method=RequestMethod.GET)
-	public String all(HttpServletRequest request, HttpServletResponse response, 
-					ModelMap model) throws Exception {
-		List<userDTO> uList = userService.getUser();
-		
-		
-		System.out.println("dgds"+uList.size());
-		
-		
-		model.addAttribute("uList",uList);
-		
-		return "/all";
-		
-	}
+	
 	
 	@RequestMapping(value="join", method =RequestMethod.POST)
 	public String insertPost(HttpServletRequest request, HttpServletResponse response, 
@@ -132,9 +110,6 @@ public class MainController {
 		messageHelper.setText(contents.toString(),true);	//메일 내용
 		
 		mailSender.send(message);
-		
-		
-	
 	
 		rttr.addFlashAttribute("msg", "success");		
 		
@@ -168,11 +143,6 @@ public class MainController {
 	@RequestMapping(value="/admin/index", method=RequestMethod.GET)
 	public String adminIndex(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
-		/*List<mainDTO>  mlist = mainService.getInfo();
-		
-		System.out.println(mlist.size());
-		
-		model.addAttribute("mList",mlist);*/
 		log.info("admin index..........................................................");
 		return "/admin/index";
 		

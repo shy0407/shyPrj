@@ -7,18 +7,19 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpStatus;
+
 //import org.apache.commons.httpclient.HttpStatus;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pocket.DTO.DataDTO;
+import com.pocket.DTO.TestDTO;
 import com.pocket.service.IDataService;
 
 	
@@ -148,7 +149,7 @@ public class DataController {
 		
 	}
 		
-	@RequestMapping(value="/admin/genderCountByMonth", method=RequestMethod.POST)
+	/*@RequestMapping(value="/admin/genderCountByMonth", method=RequestMethod.POST)
 	public ResponseEntity<List<HashMap<String, String>>> genderCountByMonth(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
 		log.info("성별 월별 가입자 수 .................");
@@ -165,29 +166,43 @@ public class DataController {
 
 		return entity;
 		
-	}
+	}*/
 	
-	@RequestMapping(value="/admin/count", method=RequestMethod.POST)
-	public ResponseEntity<List<HashMap<String, Object>>> count(HttpServletRequest request, HttpServletResponse response, 
+	@RequestMapping(value="/admin/userAnalysis", method=RequestMethod.POST)
+	public ResponseEntity<List<HashMap<String, String>>> userAnalysis(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
-		log.info("count .................");
+		log.info("userAnalysis .................");
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		HashMap<String, String>hash1=dataService.incomeByGender();		
+		HashMap<String, String>hash2=dataService.jobCount();
+		HashMap<String, String>hash3=dataService.userAnalysis();
+		HashMap<String, String>hash4=dataService.genderCountByMonth();
 		
-		ResponseEntity<List<HashMap<String, Object>>> entity = null;
-		
-		
-
+		List<HashMap<String,String>> list= new ArrayList<HashMap<String,String>>();
+		list.add(hash1);
+		list.add(hash2);
+		list.add(hash3);
+		list.add(hash4);
 		
 		 try{
-		        entity = new ResponseEntity<>(dataService.count(), HttpStatus.OK);
+		        entity = new ResponseEntity<>(list, HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
 		    } catch(Exception e){
 		        e.printStackTrace();
 		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
 		    }
-		 
+
 		return entity;
+
+	}
+	
+	@RequestMapping(value="/admin/userChart", method=RequestMethod.GET)
+	public String userChart(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		
+		log.info("dayCount..!!!");
+		return "/admin/userChart";
 		
 	}
-
-
 	
 }

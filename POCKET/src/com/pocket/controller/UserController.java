@@ -1,11 +1,16 @@
 package com.pocket.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,8 +72,23 @@ public class UserController {
 		userDTO userDTO =userService.emailDuple(email);
 		String emaill = userDTO.getEmail();
 		return emaill;
+
+	}
+	
+
+	
+	@RequestMapping(value="/admin/userList", method=RequestMethod.GET)
+	public String all(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		List<userDTO> uList = userService.getUser();
 		
 		
+		System.out.println("dgds"+uList.size());
+	
+		
+		model.addAttribute("uList",uList);
+		
+		return "/admin/userList";
 		
 	}
 	

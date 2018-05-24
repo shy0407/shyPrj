@@ -43,18 +43,55 @@ WHERE DATA_SEQ='5'
 select substring(REG_DT, 6,2) as month, count(*) as count from aws.USER_INFO group by month
 </select>
 
-<!-- 성별 가입자 수 -->
-<select id="genderCount" resultType="TestDTO">
-select GENDER as gender , count(*) as count from aws.USER_INFO group by gender
-</select>
+
 
 <!-- 성별에 따른 월별 가입자수 -->
 <select id="genderCountByMonth" resultType="java.util.HashMap">
-select 
+<!-- select 
 substring(REG_DT, 6,2) as month, 
 GENDER as gender,
 count(*) as count
-from aws.USER_INFO group by month, GENDER
+from aws.USER_INFO group by month, GENDER -->
+
+select 
+count(case when substring(REG_DT, 6, 2)=1 and GENDER ='M' then 1 end)as JanM,
+count(case when substring(REG_DT, 6, 2)=1 and GENDER ='F' then 1 end)as JanF,
+count(case when substring(REG_DT, 6, 2)=2 and GENDER ='M' then 1 end)as FebM,
+count(case when substring(REG_DT, 6, 2)=3 and GENDER ='F' then 1 end)as FebF,
+count(case when substring(REG_DT, 6, 2)=3 and GENDER ='M' then 1 end)as MarM,
+count(case when substring(REG_DT, 6, 2)=3 and GENDER ='F' then 1 end)as MarF,
+count(case when substring(REG_DT, 6, 2)=4 and GENDER ='M' then 1 end)as ApiM,
+count(case when substring(REG_DT, 6, 2)=4 and GENDER ='F' then 1 end)as ApiF,
+count(case when substring(REG_DT, 6, 2)=5 and GENDER ='M' then 1 end)as MayM,
+count(case when substring(REG_DT, 6, 2)=5 and GENDER ='F' then 1 end)as MayF,
+count(case when substring(REG_DT, 6, 2)=6 and GENDER ='M' then 1 end)as JunM,
+count(case when substring(REG_DT, 6, 2)=6 and GENDER ='F' then 1 end)as JunF,
+count(case when substring(REG_DT, 6, 2)=7 and GENDER ='M' then 1 end)as JulM,
+count(case when substring(REG_DT, 6, 2)=7 and GENDER ='F' then 1 end)as JulF,
+count(case when substring(REG_DT, 6, 2)=8 and GENDER ='M' then 1 end)as AugM,
+count(case when substring(REG_DT, 6, 2)=8 and GENDER ='F' then 1 end)as AugF,
+count(case when substring(REG_DT, 6, 2)=9 and GENDER ='M' then 1 end)as SepM,
+count(case when substring(REG_DT, 6, 2)=9 and GENDER ='F' then 1 end)as SepF,
+count(case when substring(REG_DT, 6, 2)=10 and GENDER ='M' then 1 end)as OctM,
+count(case when substring(REG_DT, 6, 2)=10 and GENDER ='F' then 1 end)as OctF,
+count(case when substring(REG_DT, 6, 2)=11 and GENDER ='M' then 1 end)as NovM,
+count(case when substring(REG_DT, 6, 2)=11 and GENDER ='F' then 1 end)as NovF,
+count(case when substring(REG_DT, 6, 2)=12 and GENDER ='M' then 1 end)as DecM,
+count(case when substring(REG_DT, 6, 2)=12 and GENDER ='F' then 1 end)as DecF,
+count(case when substring(REG_DT, 6, 2)=1 then 1 end)as Jan,
+count(case when substring(REG_DT, 6, 2)=2 then 1 end)as Feb,
+count(case when substring(REG_DT, 6, 2)=3 then 1 end)as Mar,
+count(case when substring(REG_DT, 6, 2)=4 then 1 end)as Api,
+count(case when substring(REG_DT, 6, 2)=5 then 1 end)as May,
+count(case when substring(REG_DT, 6, 2)=6 then 1 end)as Jun,
+count(case when substring(REG_DT, 6, 2)=7 then 1 end)as Jul,
+count(case when substring(REG_DT, 6, 2)=8 then 1 end)as Aug,
+count(case when substring(REG_DT, 6, 2)=9 then 1 end)as Sep,
+count(case when substring(REG_DT, 6, 2)=10 then 1 end)as Oct,
+count(case when substring(REG_DT, 6, 2)=11 then 1 end)as Nov,
+count(case when substring(REG_DT, 6, 2)=12 then 1 end)as DecM
+from aws.USER_INFO
+
 </select>
 
 <!--수입별 가입자 수 -->
@@ -64,7 +101,21 @@ select INCOME , count(*) as COUNT from aws.USER_INFO group by INCOME
 
 <!-- 업종별 가입자 수 -->
 <select id="jobCount" resultType="java.util.HashMap">
-select JOB , count(*) as COUNT from aws.USER_INFO group by JOB
+<!-- select JOB , count(*) as COUNT from aws.USER_INFO group by JOB -->
+select
+count(case when a.job='build' then 1 end) as build,
+count(case when a.job='design' then 1 end) as design,
+count(case when a.job='education' then 1 end) as education,
+count(case when a.job='it' then 1 end) as it,
+count(case when a.job='management' then 1 end) as management,
+count(case when a.job='manufacture' then 1 end) as manufacture,
+count(case when a.job='medical' then 1 end) as medical,
+count(case when a.job='pro' then 1 end) as pro,
+count(case when a.job='sales' then 1 end) as sales,
+count(case when a.job='service' then 1 end) as service,
+count(case when a.job='student' then 1 end) as student,
+count(case when a.job='trade' then 1 end) as trade
+from aws.USER_INFO a
 </select>
 
 <!-- 요일별 가입자 수 -->
@@ -84,14 +135,41 @@ group by DAYOFWEEK(STR_TO_DATE(REG_DT, '%Y-%m-%d'))
 
 <!-- 성별, 수입에 따른 카운드 -->
 <select id="incomeGenderCount" resultType="java.util.HashMap">
-select INCOME,GENDER, count(*) as COUNT from aws.USER_INFO group by INCOME,GENDER
+select INCOME,GENDER, count(1) as COUNT from aws.USER_INFO group by INCOME,GENDER
 </select>
 
 <!-- 전체 회원수 가져오기 -->
 <select id="countAll" resultType="TestDTO">
-select count(*) as count from aws.USER_INFO
+select count(1) as count from aws.USER_INFO
 </select>
 
+<select id="userAnalysis" resultType="java.util.HashMap">
+SELECT  
+COUNT(CASE WHEN A.GENDER = 'F' THEN 1 END) AS FEMALE,
+COUNT(CASE WHEN A.GENDER = 'M' THEN 1 END) AS MALE,
+COUNT(1) AS ALL_USER
+FROM aws.USER_INFO A
+</select>
 
+<select id="incomeByGender" resultType="java.util.HashMap">
+<!-- select GENDER as gender , count(*) as count from aws.USER_INFO group by gender -->
+select count(1),
+	(select count(1) from aws.USER_INFO where INCOME='100' and GENDER='F') as 100F,
+	(select count(1) from aws.USER_INFO where INCOME='100' and GENDER='M') as 100M,
+	(select count(1) from aws.USER_INFO where INCOME='200' and GENDER='F') as 200F,
+	(select count(1) from aws.USER_INFO where INCOME='200' and GENDER='M') as 200M,
+	(select count(1) from aws.USER_INFO where INCOME='300' and GENDER='F') as 300F,
+	(select count(1) from aws.USER_INFO where INCOME='300' and GENDER='M') as 300M,
+	(select count(1) from aws.USER_INFO where INCOME='400' and GENDER='F') as 400F,
+	(select count(1) from aws.USER_INFO where INCOME='400' and GENDER='M') as 400M,
+	(select count(1) from aws.USER_INFO where INCOME='500' and GENDER='F') as 500F,
+	(select count(1) from aws.USER_INFO where INCOME='500' and GENDER='M') as 500M,
+	(select count(1) from aws.USER_INFO where INCOME='600' and GENDER='F') as 600F,
+	(select count(1) from aws.USER_INFO where INCOME='600' and GENDER='M') as 600M,
+	(select count(1) from aws.USER_INFO where INCOME='700' and GENDER='F') as 700F,
+	(select count(1) from aws.USER_INFO where INCOME='700' and GENDER='M') as 700M
+from aws.USER_INFO
+
+</select>
 
 </mapper>

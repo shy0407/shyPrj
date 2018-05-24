@@ -2533,20 +2533,20 @@ table.dataTable thead .sorting_desc_disabled {
   background: transparent none repeat scroll 0 0;
 }
 table.dataTable thead .sorting_asc::after {
-  content: "�깯";
+  content: "▼";
   cursor: pointer;
   font-family: fontawesome;
   margin-left: 10px;
 }
 table.dataTable thead .sorting_desc::after {
-  content: "�깮";
+  content: "▼";
   cursor: pointer;
   font-family: fontawesome;
   margin-left: 10px;
 }
 table.dataTable thead .sorting::after {
   color: rgba(50, 50, 50, 0.5);
-  content: "�깭";
+  content: "▼";
   cursor: pointer;
   font-family: fontawesome !important;
   margin-left: 10px;

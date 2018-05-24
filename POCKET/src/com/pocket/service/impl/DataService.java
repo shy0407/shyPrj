@@ -50,7 +50,7 @@ public class DataService implements IDataService {
 	}
 
 	@Override
-	public List<HashMap<String, String>> genderCountByMonth() throws Exception {
+	public HashMap<String, String> genderCountByMonth() throws Exception {
 		return dataMapper.genderCountByMonth();
 	}
 
@@ -66,14 +66,24 @@ public class DataService implements IDataService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> count() throws Exception {
-		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
-		TestDTO hash1=countAll();
-		TestDTO hash2=genderCount();
+	public HashMap<String, String> userAnalysis() throws Exception {
 		
-		
-		return list;
+		return dataMapper.userAnalysis();
 	}
+
+	@Override
+	public HashMap<String, String> incomeByGender() throws Exception {
+		// TODO Auto-generated method stub
+		return dataMapper.incomeByGender();
+	}
+
+	@Override
+	public HashMap<String, String> jobCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dataMapper.jobCount();
+	}
+
+	
 	
 		
 }

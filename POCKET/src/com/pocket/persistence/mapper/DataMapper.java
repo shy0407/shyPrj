@@ -17,8 +17,12 @@ public interface DataMapper {
 	DataDTO getAgeFiFty()throws Exception;
 	DataDTO getAgeSixty()throws Exception;
 	List<HashMap<String, String>> joinCount()throws Exception;
-	List<HashMap<String, String>> genderCountByMonth()throws Exception;
+	HashMap<String, String> genderCountByMonth()throws Exception;
 	TestDTO countAll()throws Exception;
 	TestDTO genderCount()throws Exception;
-	List<HashMap<String, Object>> count()throws Exception;
+	HashMap<String, String> userAnalysis()throws Exception;
+	HashMap<String, String> incomeByGender()throws Exception;
+	HashMap<String, String> jobCount()throws Exception;
+	
+	
 }
