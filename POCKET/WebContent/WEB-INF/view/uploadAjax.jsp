@@ -27,12 +27,16 @@
 <![endif]-->
 
 <style>
-
 .fileDrop {
-	width:100%;
-	height:200px;
-	border:1px dotted blue;
+	width: 100%;
+	height: 200px;
+	border: 1px dotted blue;
+}
 
+small {
+	margin-left: 3px;
+	font-weight: bold;
+	color: gray;
 }
 </style>
 </head>
@@ -197,7 +201,7 @@
     <!-- End Wrapper -->
     <!-- All Jquery -->
     <!-- <script src="/ElaAdmin-master/js/lib/jquery/jquery.min.js"></script> -->
-    <script src="/jquery-3.3.1.min.js"></script>
+   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -211,40 +215,179 @@
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
 
 
-   <!--  <script src="/ElaAdmin-master/js/lib/dropzone/dropzone.js"></script> -->
-    <script>
-    $(".fileDrop").on("dragenter dragover",function(event){
-    	event.preventDefault();
-    	
-    });
-    $(".fileDrop").on("drop",function(event){
-    	event.preventDefault();
-    	var files=event.originalEvent.dataTransfer.files;
-    	var file=files[0];
-    	console.log(file);
-    	var formData=new FormData();
-    	formData.append("file",file);
-    	
-    	$.ajax({
-    		url:"uploadAjax.do",
-    		data:formData,
-    		dataType:"text",
-    		processData:false,
-    		contentType:false,
-    		method:"POST",
-    		success:function(data){
-    			alert(data);
-    		}
-    		
-    	});
-    });
-    
-    function checkImageType(fileName){
-    	var pattern=/jpg|gif|png|jpeg/i;
-    	return fileName.match(pattern);
-    }
-    
-    </script>
+     <!-- <script src="/ElaAdmin-master/js/lib/dropzone/dropzone.js"></script>  -->
+    	<script>
+		$(".fileDrop").on("dragenter dragover", function(event) {
+			event.preventDefault();
+		});
+
+		$(".fileDrop").on("drop", function(event){
+			event.preventDefault();
+			
+			var files = event.originalEvent.dataTransfer.files;
+			
+			var file = files[0];
+
+			//console.log(file);
+			
+			var formData = new FormData();
+			
+			formData.append("file", file);
+			
+			$.ajax({
+				  url: 'uploadAjax.do',
+				  data: formData,
+				  dataType:'text',
+				  processData: false,
+				  contentType: false,
+				  type: 'POST',
+				  success: function(data){
+					  
+					  var str ="";
+					  
+					  if(checkImageType(data)){
+						  str ="<div><a href=displayFile.do?fileName="+getImageLink(data)+">"
+								  +"<img src='displayFile.do?fileName="+data+"'/>"
+								  +"</a><small data-src="+data+">X</small></div>";
+					  }else{
+						  str = "<div><a href='displayFile.do?fileName="+data+"'>" 
+								  + getOriginalName(data)+"</a>"
+								  +"<small data-src="+data+">X</small></div></div>";
+					  }
+					  
+					  $(".uploadList").append(str);
+				  }
+				});	
+		});
+
+
+		$(".uploadList").on("click", "small", function(event){
+			
+				 var that = $(this);
+			
+			   $.ajax({
+				   url:"deleteFile.do",
+				   type:"post",
+				   data: {fileName:$(this).attr("data-src")},
+				   dataType:"text",
+				   success:function(result){
+					   if(result == 'deleted'){
+						   that.parent("div").remove();
+					   }
+				   }
+			   });
+		});
+		
+		
+/* 		
+$(".fileDrop").on("drop", function(event) {
+	event.preventDefault();
+	
+	var files = event.originalEvent.dataTransfer.files;
+	
+	var file = files[0];
+
+	//console.log(file);
+	var formData = new FormData();
+	
+	formData.append("file", file);
+
+	
+	$.ajax({
+		  url: '/uploadAjax',
+		  data: formData,
+		  dataType:'text',
+		  processData: false,
+		  contentType: false,
+		  type: 'POST',
+		  success: function(data){
+			  
+			  var str ="";
+			  
+			  console.log(data);
+			  console.log(checkImageType(data));
+			  
+			  if(checkImageType(data)){
+				  str ="<div><a href='displayFile?fileName="+getImageLink(data)+"'>"
+						  +"<img src='displayFile?fileName="+data+"'/></a>"
+						  +data +"</div>";
+			  }else{
+				  str = "<div><a href='displayFile?fileName="+data+"'>" 
+						  + getOriginalName(data)+"</a></div>";
+			  }
+			  
+			  $(".uploadedList").append(str);
+		  }
+		});			
+});	 */
+
+
+function getOriginalName(fileName){	
+
+	if(checkImageType(fileName)){
+		return;
+	}
+	
+	var idx = fileName.indexOf("_") + 1 ;
+	return fileName.substr(idx);
+	
+}
+
+
+function getImageLink(fileName){
+	
+	if(!checkImageType(fileName)){
+		return;
+	}
+	var front = fileName.substr(0,12);
+	var end = fileName.substr(14);
+	
+	return front + end;
+	
+}
+
+
+
+
+/* 		$(".fileDrop").on("drop", function(event) {
+			event.preventDefault();
+			
+			var files = event.originalEvent.dataTransfer.files;
+			
+			var file = files[0];
+
+			//console.log(file);
+			var formData = new FormData();
+			
+			formData.append("file", file);
+			
+			$.ajax({
+				  url: '/uploadAjax',
+				  data: formData,
+				  dataType:'text',
+				  processData: false,
+				  contentType: false,
+				  type: 'POST',
+				  success: function(data){
+					 	
+					  alert(data);
+					 
+				  }
+				});
+			
+		}); */
+		
+
+	function checkImageType(fileName){
+		
+		var pattern = /jpg|gif|png|jpeg/i;
+		
+		return fileName.match(pattern);
+		
+	}
+		
+		
+	</script>
 
 </body>
 

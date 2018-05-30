@@ -332,9 +332,7 @@
 	<script src="login-signup-form/js/index.js"></script>
 	<script>
 		$(document).ready(function(){
-			
-			
-			
+		
 			//.log(inEmail)
 			
 			$("#signup-email").focusout(function(){
@@ -347,9 +345,9 @@
 						//console.log(typeof(data));
 						if(inEmail==data){
 							
-							$("#error-massage").text("중복입니다");
+							$("#error-massage").html("중복입니다");
 						}else{
-							$("#error-massage").append("사용합니다");
+							$("#error-massage").html("사용합니다");
 						}
 						
 					}

@@ -7,7 +7,7 @@
 
 
 <insert id ="insert">
-INSERT INTO USER (ID, PASSWORD, USER_NO)
+INSERT aws.INTO USER (ID, PASSWORD, USER_NO)
 VALUES (#{id},#{password},#{user_no})	
 </insert>
 
@@ -35,7 +35,7 @@ VALUES (#{id},#{password},#{user_no})
 <!-- 로그인 -->
 <select id="login" resultType="userDTO" > 
 	SELECT USER_ID, EMAIL,PASSWORD,USER_AUTH 
-	FROM USER_INFO 
+	FROM aws.USER_INFO 
 	WHERE EMAIL=#{email} and PASSWORD=#{password}
 </select>
 

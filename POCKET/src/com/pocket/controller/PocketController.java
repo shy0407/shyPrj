@@ -1,8 +1,10 @@
 package com.pocket.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -149,29 +152,42 @@ public class PocketController {
 		pocketService.deletePocket(pocket_no);
 	}
 	
+	@RequestMapping(value = "uploadAjax", method = RequestMethod.GET)
+	  public void uploadAjax() {
+	  }
+
+	  private String uploadFile(String originalName, byte[] fileData) throws Exception {
+
+	    UUID uid = UUID.randomUUID();
+
+	    String savedName = uid.toString() + "_" + originalName;
+
+	    File target = new File(uploadPath, savedName);
+
+	    FileCopyUtils.copy(fileData, target);
+
+	    return savedName;
+
+	  }
+	  
+	  @ResponseBody
+	  @RequestMapping(value ="uploadAjax", method=RequestMethod.POST, 
+	                  produces = "text/plain;charset=UTF-8")
+	  public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
+	    
+	    log.info("originalName: " + file.getOriginalFilename());
+	    
+	   
+	    return 
+	      new ResponseEntity<>(
+	          UploadFileUtils.uploadFile(uploadPath, 
+	                file.getOriginalFilename(), 
+	                file.getBytes()), 
+	          HttpStatus.CREATED);
+	  }
+	
 	@ResponseBody
-	@RequestMapping(value="uploadAjax",method =RequestMethod.POST,produces="text/plain;chartset=UTF-8")	
-	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
-		log.info("orginalName............ ....."+file.getOriginalFilename());
-		log.info("size: "+file.getSize());
-		log.info("contentType"+file.getContentType());
-		
-		return new ResponseEntity<>(
-				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),HttpStatus.CREATED);
-		
-	}
-	
-	@RequestMapping(value="uploadAjax", method=RequestMethod.GET)
-	
-	public String uploadAjaxGet(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
-		log.info("account Book............ .....");
-		
-		return "/uploadAjax";
-		
-	}
-	
-	@ResponseBody
-	  @RequestMapping("/displayFile")
+	  @RequestMapping("displayFile")
 	  public ResponseEntity<byte[]>  displayFile(String fileName)throws Exception{
 	    
 	    InputStream in = null; 
@@ -210,6 +226,57 @@ public class PocketController {
 	    }
 	      return entity;    
 	  }
+	  
+	  @ResponseBody
+	  @RequestMapping(value="deleteFile", method=RequestMethod.POST)
+	  public ResponseEntity<String> deleteFile(String fileName){
+	    
+	    log.info("delete file: "+ fileName);
+	    
+	    String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+	    
+	    MediaType mType = MediaUtils.getMediaType(formatName);
+	    
+	    if(mType != null){      
+	      
+	      String front = fileName.substring(0,12);
+	      String end = fileName.substring(14);
+	      new File(uploadPath + (front+end).replace('/', File.separatorChar)).delete();
+	    }
+	    
+	    new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+	    
+	    
+	    return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	  }  
+	  
+	  @ResponseBody
+	  @RequestMapping(value="deleteAllFiles", method=RequestMethod.POST)
+	  public ResponseEntity<String> deleteFile(@RequestParam("files[]") String[] files){
+	    
+	    log.info("delete all files: "+ files);
+	    
+	    if(files == null || files.length == 0) {
+	      return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	    }
+	    
+	    for (String fileName : files) {
+	      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+	      
+	      MediaType mType = MediaUtils.getMediaType(formatName);
+	      
+	      if(mType != null){      
+	        
+	        String front = fileName.substring(0,12);
+	        String end = fileName.substring(14);
+	        new File(uploadPath + (front+end).replace('/', File.separatorChar)).delete();
+	      }
+	      
+	      new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+	      
+	    }
+	    return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	  }  
 	
 	
 }
