@@ -156,4 +156,12 @@ public class MainController {
 		
 	}
 	
+	@RequestMapping(value="/Calender", method=RequestMethod.GET)
+	public String Calender(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		log.info("/calTest.........................................................");
+		return "/Calender";
+		
+	}
+	
 }

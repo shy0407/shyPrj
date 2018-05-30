@@ -45,8 +45,8 @@
         	$.datepicker.regional['kr'] = {
         	    closeText: 'close', // 닫기 버튼 텍스트 변경
         	    currentText: '오늘', // 오늘 텍스트 변경
-        	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], // 개월 텍스트 설정
-        	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], // 개월 텍스트 설정
+        	    monthNames: ['01','02','03','04','05','06','07','08','09','10','11','12'], // 개월 텍스트 설정
+        	    monthNamesShort: ['01','02','03','04','05','06','07','08','09','10','11','12'], // 개월 텍스트 설정
         	    dayNames: ['월요일','화요일','수요일','목요일','금요일','토요일','일요일'], // 요일 텍스트 설정
         	    dayNamesShort: ['월','화','수','목','금','토','일'], // 요일 텍스트 축약 설정&nbsp;   dayNamesMin: ['월','화','수','목','금','토','일'], // 요일 최소 축약 텍스트 설정
         	    dateFormat: 'dd/mm/yy' // 날짜 포맷 설정
@@ -97,7 +97,7 @@
                             dataInit: function (element) {
                                 $(element).datepicker({
                                     id: 'expense_date_datePicker',
-                                   dateFormat: 'yy/MM/dd',
+                                   dateFormat: 'yy-MM-dd',
                                     //minDate: new Date(2010, 0, 1),
                                     maxDate: new Date(2020, 0, 1),
                                     showOn: 'focus'

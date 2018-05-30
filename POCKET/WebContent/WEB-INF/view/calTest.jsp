@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <!-- FullCalendar -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 <link href="/ElaAdmin-master/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/calendar/fullcalendar.min.css" rel="stylesheet">
     <link href="/calendar/fullcalendar.print.css" rel="stylesheet" media="print">
 
@@ -19,7 +20,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/calendar/moment.min.js"></script>
     <script src="/calendar/fullcalendar.min.js"></script>
-
+  
    
    <script>
    var date_last_clicked = null;
@@ -40,8 +41,11 @@
     	    
     	  date_last_clicked = $(this);
     	  $('#CalenderModalNew').modal();
+    	  //$('#myModal').modal();
+			
 
     	  },
+    	  
     	  eventClick: function(event, jsEvent, view) {
 
     		    //alert('Event: ' + calEvent.title);
@@ -51,7 +55,10 @@
     		    // change the border color just for fun
     		    //$(this).css('border-color', 'red');
     		  $('#CalenderModalEdit').modal();
-    		  $('#title2').val(event.title);
+    		  //$('#title2').val(event.title);
+    		 
+    		  
+    		  
     		  },
      
     		  events: {
@@ -67,16 +74,41 @@
     			    color: 'yellow',   // a non-ajax option
     			    textColor: 'black' // a non-ajax option
     			  }
+    		  
+    		  
     });
+    
+
   });
+
+  
 </script>
     
 <title>Insert title here</title>
 </head>
 <body>
  <div id='calendar'></div>
- 
-  <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
 
@@ -143,7 +175,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> 
 
 </body>
 </html>
