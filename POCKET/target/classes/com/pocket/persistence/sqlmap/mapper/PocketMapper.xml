@@ -9,6 +9,14 @@
 	
 </select>
 
+<select resultType="PocketDTO" id="expenseCal"> 
+	SELECT EXPENSE_DATE, EXPENSE_CATEGORY 
+	FROM aws.POCKET_INFO
+	
+</select>
+
+
+
 <update id ="edit">
 	UPDATE aws.POCKET_INFO
 	SET EXPENSE_DATE = #{expense_date}, EXPENSE_DETAIL =#{expense_detail}, 
