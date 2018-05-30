@@ -148,6 +148,12 @@ public class MainController {
 		
 	}
 	
-
+	@RequestMapping(value="/calTest", method=RequestMethod.GET)
+	public String calTest(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		log.info("/calTest.........................................................");
+		return "/calTest";
+		
+	}
 	
 }

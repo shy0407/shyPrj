@@ -83,6 +83,11 @@ public class DataService implements IDataService {
 		return dataMapper.jobCount();
 	}
 
+	@Override
+	public List<HashMap<String, String>> allData() throws Exception {		
+		return dataMapper.allData();
+	}
+
 	
 	
 		

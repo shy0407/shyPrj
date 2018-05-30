@@ -92,5 +92,12 @@ public class UserController {
 		
 	}
 	
-	
+	@RequestMapping(value="storeRegister", method=RequestMethod.GET)
+	public String loginGet(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("storeRegister GET!!!!!!..............");
+		return "/storeRegister";
+
+	}
 }

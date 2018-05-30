@@ -18,12 +18,29 @@
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
-    <!--[if lt IE 9]>
-    <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+	<style>
+		.chart1{display: inline-block;
+				width:70%;}
+		.chart2{display: inline-block;
+				width:20%;
+				position: absolute;
+				top:78px;
+				right:50px;}
+		.genderPie{display: inline-block;
+				width:20%;
+				position: absolute;
+				top:78px;
+				right:50px;}
+		.hline{display: inline-block;
+			   width:48%;
+			   }
+		#chart_div{display:inline-block;
+					width:48%;
+					height:90%;}
+				
+  				
+				
+	</style>
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -40,11 +57,11 @@
                 <!-- Logo -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                        <b><img src="images/logo.png" alt="homepage" class="dark-logo" /></b>
+                       <!-- Logo icon -->
+                        <b><img src="/ElaAdmin-master/images/logo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="images/logo-text.png" alt="homepage" class="dark-logo" /></span>
+                        <span><img src="/ElaAdmin-master/images/logo (1).png" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -55,61 +72,7 @@
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <!-- Messages -->
-                        <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i></a>
-                            <div class="dropdown-menu animated zoomIn">
-                                <ul class="mega-dropdown-menu row">
-
-
-                                    <li class="col-lg-3  m-b-30">
-                                        <h4 class="m-b-20">CONTACT US</h4>
-                                        <!-- Contact -->
-                                        <form>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter Name"> </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" placeholder="Enter email"> </div>
-                                            <div class="form-group">
-                                                <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Message"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-info">Submit</button>
-                                        </form>
-                                    </li>
-                                    <li class="col-lg-3 col-xlg-3 m-b-30">
-                                        <h4 class="m-b-20">List style</h4>
-                                        <!-- List style -->
-                                        <ul class="list-style-none">
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="col-lg-3 col-xlg-3 m-b-30">
-                                        <h4 class="m-b-20">List style</h4>
-                                        <!-- List style -->
-                                        <ul class="list-style-none">
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="col-lg-3 col-xlg-3 m-b-30">
-                                        <h4 class="m-b-20">List style</h4>
-                                        <!-- List style -->
-                                        <ul class="list-style-none">
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        
                         <!-- End Messages -->
                     </ul>
                     <!-- User profile and search -->
@@ -120,104 +83,7 @@
                             <form class="app-search">
                                 <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
                         </li>
-                        <!-- Comment -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
-								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-							</a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Notifications</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-danger btn-circle m-r-10"><i class="fa fa-link"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is title</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-success btn-circle m-r-10"><i class="ti-calendar"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is another title</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-info btn-circle m-r-10"><i class="ti-settings"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is title</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-primary btn-circle m-r-10"><i class="ti-user"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is another title</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- End Comment -->
-                        <!-- Messages -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-envelope"></i>
-								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-							</a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">You have 4 new messages</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="user-img"> <img src="images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="user-img"> <img src="images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>John Doe</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="user-img"> <img src="images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="user-img"> <img src="images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>See all e-Mails</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- End Messages -->
+
                         <!-- Profile -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="profile-pic" /></a>
@@ -237,7 +103,7 @@
         </div>
         <!-- End header header -->
         <!-- Left Sidebar  -->
-        <div class="left-sidebar">
+     	  <div class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
@@ -245,16 +111,15 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard <span class="label label-rouded label-primary pull-right">2</span></span></a>
+                        <li> <a   href="/idex.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.html">Ecommerce </a></li>
-                                <li><a href="index1.html">Analytics </a></li>
+                               
                             </ul>
                         </li>
                         <li class="nav-label">Apps</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Email</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">Email</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="email-compose.html">Compose</a></li>
+                                <li><a href="jqgridTest.do">가계부</a></li>
                                 <li><a href="email-read.html">Read</a></li>
                                 <li><a href="email-inbox.html">Inbox</a></li>
                             </ul>
@@ -271,94 +136,14 @@
                                 <li><a href="chart-peity.html">Peity</a></li>
                             </ul>
                         </li>
-                        <li class="nav-label">Features</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Bootstrap UI <span class="label label-rouded label-warning pull-right">6</span></span></a>
+                        <li class="nav-label">가맹점</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES <span class="label label-rouded label-warning pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-alert.html">Alert</a></li>
-                                <li><a href="ui-button.html">Button</a></li>
-                                <li><a href="ui-dropdown.html">Dropdown</a></li>
-                                <li><a href="ui-progressbar.html">Progressbar</a></li>
-                                <li><a href="ui-tab.html">Tab</a></li>
-                                <li><a href="ui-typography.html">Typography</a></li>
+                                <li><a href="ui-alert.html">SEE ALL</a></li>
+                                <li><a href="ui-button.html">NEAR ME</a></li>             
                             </ul>
                         </li>
-						<li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Components <span class="label label-rouded label-danger pull-right">6</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="uc-calender.html">Calender</a></li>
-                                <li><a href="uc-datamap.html">Datamap</a></li>
-                                <li><a href="uc-nestedable.html">Nestedable</a></li>
-                                <li><a href="uc-sweetalert.html">Sweetalert</a></li>
-                                <li><a href="uc-toastr.html">Toastr</a></li>
-                                <li><a href="uc-weather.html">Weather</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="form-basic.html">Basic Forms</a></li>
-                                <li><a href="form-layout.html">Form Layout</a></li>
-                                <li><a href="form-validation.html">Form Validation</a></li>
-                                <li><a href="form-editor.html">Editor</a></li>
-                                <li><a href="form-dropzone.html">Dropzone</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="table-bootstrap.html">Basic Tables</a></li>
-                                <li><a href="table-datatable.html">Data Tables</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-label">Layout</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-columns"></i><span class="hide-menu">Layout</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="layout-blank.html">Blank</a></li>
-                                <li><a href="layout-boxed.html">Boxed</a></li>
-                                <li><a href="layout-fix-header.html">Fix Header</a></li>
-                                <li><a href="layout-fix-sidebar.html">Fix Sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-label">EXTRA</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Pages <span class="label label-rouded label-success pull-right">8</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-
-                                <li><a href="#" class="has-arrow">Authentication <span class="label label-rounded label-success">6</span></a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="page-login.html">Login</a></li>
-                                        <li><a href="page-register.html">Register</a></li>
-                                        <li><a href="page-invoice.html">Invoice</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#" class="has-arrow">Error Pages</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="page-error-400.html">400</a></li>
-                                        <li><a href="page-error-403.html">403</a></li>
-                                        <li><a href="page-error-404.html">404</a></li>
-                                        <li><a href="page-error-500.html">500</a></li>
-                                        <li><a href="page-error-503.html">503</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-map-marker"></i><span class="hide-menu">Maps</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="map-google.html">Google</a></li>
-                                <li><a href="map-vector.html">Vector</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-level-down"></i><span class="hide-menu">Multi level dd</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">item 1.1</a></li>
-                                <li><a href="#">item 1.2</a></li>
-                                <li> <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="#">item 1.3.1</a></li>
-                                        <li><a href="#">item 1.3.2</a></li>
-                                        <li><a href="#">item 1.3.3</a></li>
-                                        <li><a href="#">item 1.3.4</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">item 1.4</a></li>
-                            </ul>
-                        </li>
+						
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -371,11 +156,11 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Dashboard</h3> </div>
+                    <h3 class="text-primary">회원정보 시각화</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">회원정보 시각화</li>
                     </ol>
                 </div>
             </div>
@@ -389,16 +174,27 @@
 			                           
                             <div class="card-body">
 								<!--chart 1  -->
-								
-									<canvas id="canvas"></canvas>
-								
-		
+								<div class="chart1"><canvas id="weekChart"></canvas></div>
+								<div class="chart2"><canvas id="weekPieChart"></canvas></div>
 							</div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-body"> This is some text within a card block. </div>
+                            <div class="card-body">
+                            	<div style="width:70%"><canvas id="line"></canvas></div>
+                            	<div class="genderPie"><canvas id="genderPie"></canvas></div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="card">
+                            <div style="height:450px"class="card-body">
+                            	<div class="hline" style="height:90%"><canvas id="hline"></canvas></div>
+                            	<div id="chart_div"></div>               
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -406,7 +202,7 @@
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com"><img src="/image/insta.png"><img src="/image/twit.png"><img src="/image/facebook.png"></a></footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
@@ -426,27 +222,373 @@
     <!--Custom JavaScript -->
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
 	<!--stickey kit -->
-	<script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
 	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script>
-
+	var job=[]; //직업별
 $(document).ready(function(){
-
+	var ctx = document.getElementById("weekChart");
+	var pie = document.getElementById("weekPieChart");
+	var genderPie = document.getElementById("genderPie");
+	var hline = document.getElementById("hline");
+	
+	var week=[]; //요일별
+	
+	var monthF=[]; //여자 월별
+	var monthM=[]; //남자 월별
+	var monthA=[]; //모두 월별
+	var genderCount=[]; //성별 카운트
+	
+	var income=[]; //수입별 카운트
+	var fIncome=[];//여자 수입별
+	var mIncome=[];  //남자 수입별
+	
+	
 	$.ajax({
-		url: "/admin/userAnalysis.do",
+		url: "/admin/allData.do",
 		method: "POST",
 		success: function(data) {
 			console.log(data);
-			
-			
-		
+			$.each(data,function(key,val){
+				week.push(val.sun);
+				week.push(val.mon);
+				week.push(val.tue);
+				week.push(val.wed);
+				week.push(val.thur);
+				week.push(val.fri);
+				week.push(val.sat);
+				
+				job.push(val.build);
+				job.push(val.design);
+				job.push(val.education);
+				job.push(val.it);
+				job.push(val.management);
+				job.push(val.manufacture);
+				job.push(val.medical);
+				job.push(val.pro);
+				job.push(val.sales);
+				job.push(val.service);
+				job.push(val.student);
+				job.push(val.trade);
+				
+				income.push(val.oneA);				
+				income.push(val.twoA);
+				income.push(val.threeA);
+				income.push(val.fourA);
+				income.push(val.fiveA);
+				income.push(val.sixA);
+				income.push(val.sevA);
+				
+				fIncome.push(val.oneF);
+				fIncome.push(val.twoF);
+				fIncome.push(val.threeF);
+				fIncome.push(val.fourF);
+				fIncome.push(val.fiveF);
+				fIncome.push(val.sixF);
+				fIncome.push(val.sevF);
+				
+				mIncome.push(val.oneM);
+				mIncome.push(val.towM);
+				mIncome.push(val.threeM);
+				mIncome.push(val.fourM);
+				mIncome.push(val.fiveM);
+				mIncome.push(val.sixM);
+				mIncome.push(val.sevM); 
+				
+				monthA.push(val.Jan);
+				monthA.push(val.Feb);
+				monthA.push(val.Mar);
+				monthA.push(val.Api);
+				monthA.push(val.May);
+				monthA.push(val.Jun);
+				monthA.push(val.Jul);
+				monthA.push(val.Aug);
+				monthA.push(val.Sep);
+				monthA.push(val.Oct);
+				monthA.push(val.Nov);
+				monthA.push(val.DecA);
+				
+				monthF.push(val.JanF);
+				monthF.push(val.FebF);
+				monthF.push(val.MarF);
+				monthF.push(val.ApiF);
+				monthF.push(val.MayF);
+				monthF.push(val.JunF);
+				monthF.push(val.JulF);
+				monthF.push(val.AugF);
+				monthF.push(val.SepF);
+				monthF.push(val.OctF);
+				monthF.push(val.NovF);
+				monthF.push(val.DecF);
+				
+				
+				monthM.push(val.JanM);
+				monthM.push(val.FebM);
+				monthM.push(val.MarM);
+				monthM.push(val.ApiM);
+				monthM.push(val.MayM);
+				monthM.push(val.JunM);
+				monthM.push(val.JulM);
+				monthM.push(val.AugM);
+				monthM.push(val.SepM);
+				monthM.push(val.OctM);
+				monthM.push(val.NovM);
+				monthM.push(val.DecM); 
+				
+				genderCount.push(val.FEMALE);
+				genderCount.push(val.MALE); 
+				
+				
+				
+				
+			});
+			console.log(job);
+			var weekdata={
+					labels:['일','월','화','수','목','금','토'],
+					datasets:[{
+								
+								backgroundColor: "rgba(179,181,198,0.2)",
+								borderColor: "rgba(179,181,198,1)",
+								borderWidth:1,
+								data:week
+					
+							}]
+						}; //hline chart data setting end
+					//ctx.height=300;
+					myhLineChart  = new Chart(ctx, {
+									type: 'bar',
+									data: weekdata,
+									options: {
+										// Elements options apply to all of the options unless overridden in a dataset
+										// In this case, we are setting the border of each horizontal bar to be 2px wide
+										elements: {
+											rectangle: {
+												borderWidth: 2,
+											}
+										},
+										responsive: true,
+										legend: {
+											//position: 'right',
+											display:false,
+										},
+										title: {
+											display: true,
+											text: 'Chart.js Horizontal Bar Chart'
+										}
+									}
+							}); //bar chart drwa end
+							
+							var pieweekdata={
+									labels:['일','월','화','수','목','금','토'],
+									datasets:[{
+												
+												backgroundColor: ["#FFD6D3","#F1C7D3","#D1BCCF","#F0EACA","#B6DDDC","#C59ECA","#C1DFF7"],
+												data:week
+									
+											}]
+										};
+							
+							//pie.height=70;
+							myPieChart  = new Chart(pie, {
+								type: 'pie',
+								data: pieweekdata,
+								options: {
+									responsive: true,
+									legend: {
+										//position: 'right',
+										display:false,
+									},
+									title: {
+										display: true,
+										text: 'Chart.js Pie Chart'
+									}
+								}
+						}); //pie week chart draw end
+						
+						
+						
+							var linedata={
+			    					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December'],
+			    					datasets: [{
+			    						label: '전체',
+			    						borderColor:"rgba(0, 123, 255, 0.9)",
+			    						borderWidth: "1",
+			    						backgroundColor: "rgba(0, 123, 255, 0.5)",
+			    						//pointHighlightStroke: "rgba(26,179,148,1)",
+			    						data: monthA,
+			    						fill: false,
+			    					},{
+			    						label: '남성',
+			    						borderColor:"#ffb64d",
+			    						borderWidth: "1",
+			    						backgroundColor: "#ffb64d",
+			    						//pointHighlightStroke: "rgba(26,179,148,1)",
+			    						data: monthM,
+			    						fill: false,
+			    	
+			    					},{
+			    						label: '여성',
+			    						borderColor:"#fc6180",
+			    						borderWidth: "1",
+			    						backgroundColor: "#fc6180",
+			    						//pointHighlightStroke: "rgba(26,179,148,1)",
+			    						data: monthF,
+			    						fill: false,
+			    					}
+			    					]
+			    					
+			    			};
+			    		
+			    			myLineChart  = new Chart(line, {
+								type: 'line',
+								data: linedata,
+								options: {
+									responsive: true,
+									title: {
+										display: true,
+										text: '월 별 가입자 수 변화 추이'
+									},
+									scales: {
+										yAxes: [{
+											ticks: {
+												// the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
+												suggestedMin: 10,
+												// the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
+												suggestedMax: 50
+											}
+										}]
+									}
+								}	
+							}); //월별 회원수 변화 추이 그래프 그리기 끝
+							
+							var piegenderdata={
+									labels:['여성','남성'],
+									datasets:[{
+												
+												backgroundColor: ["#FFD6D3","#F1C7D3"],
+												data:genderCount
+									
+											}]
+										};
+							
+							//pie.height=70;
+							myPieChart  = new Chart(genderPie, {
+								type: 'pie',
+								data: piegenderdata,
+								options: {
+									responsive: true,
+									legend: {
+										position: 'right',
+										display:true,
+									},
+									title: {
+										display: true,
+										text: '회원 수 성비'
+									}
+								}
+						}); //pie gender chart draw end
+						
+						
+						var incomedata={
+								labels:['100미만','100~200미만','200~300미만','300~400미만','400~500미만','500~600미만','600이상'],
+								datasets:[
+										{
+											label:'전체',
+											backgroundColor: "#A4BFFA",
+											borderColor: "#87AAF7",
+											borderWidth:1,
+											data:income
+								
+										},
+										{
+											label:'여자',
+											backgroundColor: "#FAD9AA",
+											borderColor: "#FAD9AA",
+											borderWidth:1,
+											data:fIncome
+										},
+										{
+											label:'남자',
+											backgroundColor: "#FABBC8",
+											borderColor: "#FABBC8",
+											borderWidth:1,
+											data:mIncome
+										}
+										
+										
+										]
+									}; //hline chart data setting end
+								hline.height=260;
+								myLineChart  = new Chart(hline, {
+												type: 'horizontalBar',
+												data: incomedata,
+												options: {
+													// Elements options apply to all of the options unless overridden in a dataset
+													// In this case, we are setting the border of each horizontal bar to be 2px wide
+													elements: {
+														rectangle: {
+															borderWidth: 2,
+														}
+													},
+													responsive: true,
+													legend: {
+														position: 'right',
+														display:true,
+													},
+													title: {
+														display: true,
+														text: '수입별 회원 수'
+													}
+												}
+										}); //horizontalBar chart drwa end
+						
+								//google chart.....!!!!!!!										
+								google.charts.load('current', {'packages':['treemap']});
+							    google.charts.setOnLoadCallback(drawChart);
+							    function drawChart() {
+							      var data = google.visualization.arrayToDataTable([
+							        ['ITEM', 'Parent', 'size'],
+							        ['JOB',null,0],
+							        ['build','JOB',job[0]],
+							        ['design','JOB',job[1]], 
+							        ['education','JOB',job[2]], 
+							        ['it','JOB',job[3]], 
+							        ['management','JOB',job[4]], 
+							        ['manufacture','JOB',job[5]],
+							        ['medical','JOB',job[6]], 
+							        ['pro','JOB',job[7]], 
+							        ['sales','JOB',job[8]], 
+							        ['service','JOB',job[9]], 
+							        ['student','JOB',job[10]],
+							        ['trade','JOB',job[11]]
+							        
+							      ]);
+
+							      tree = new google.visualization.TreeMap(document.getElementById('chart_div'));
+
+							      tree.draw(data, {
+							    	title:"직종별 회원 수 비율",
+							        minColor: '#A4BFFA',
+							        midColor: '#FAD9AA',
+							        maxColor: '#33ccff',
+							        headerHeight: 15,
+							        fontColor: 'black',
+							        showScale: true
+							      });
+
+							    }				
 	
-		}
-		
-	 // ajax
+		}//success function end
+
 		});
 
 });
+
+
+
+				
+				
 
 
 

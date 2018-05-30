@@ -1080,7 +1080,7 @@ h6.h1 {
 .header {
   position: relative;
   z-index: 50;
-  background: #fff;
+  background: #b7d2a9;
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
 }
 .header .top-navbar {
@@ -1093,7 +1093,7 @@ h6.h1 {
 .header .top-navbar .navbar-header {
   line-height: 45px;
   text-align: center;
-  background: #fff;
+  background: #b7d2a9;
 }
 .header .top-navbar .navbar-header .navbar-brand {
   margin-right: 0;

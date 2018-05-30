@@ -20,4 +20,5 @@ public interface IDataService {
 	HashMap<String, String> userAnalysis()throws Exception;
 	HashMap<String, String> incomeByGender()throws Exception;
 	HashMap<String, String> jobCount()throws Exception;
+	List<HashMap<String, String>> allData()throws Exception;
 }
