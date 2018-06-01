@@ -13,5 +13,5 @@ public interface IUserService {
 	String getUserNo(String email)throws Exception;
 	int updateAuth(String user_no)throws Exception;
 	userDTO login(LoginDTO loginDTO)throws Exception;
-	userDTO emailDuple(String email)throws Exception;
+	int emailDuple(String email)throws Exception;
 }

@@ -69,7 +69,7 @@
 	
 	<!-- 파일 업로드 경로 -->
 	<bean id="uploadPath" class="java.lang.String">
-		<constructor-arg value="C:\\shy\\shy\\shyPrj\\POCKET\\upload"></constructor-arg>	
+		<constructor-arg value="C:\\Users\\user\\git\\shyPrj2\\shyPrj\\POCKET\\upload"></constructor-arg>	
 	</bean>
 		
 

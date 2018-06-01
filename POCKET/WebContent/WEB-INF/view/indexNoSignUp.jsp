@@ -213,14 +213,15 @@
 					<p class="fieldset">
 						<label class="image-replace email" for="signup-email">E-mail</label>
 						<input class="full-width has-padding has-border" id="signup-email" name="email" type="email" placeholder="E-mail">
-						<!-- <span class="error-message">Enter a valid email address!</span>  -->
+						 <span class="error-message-email"></span>
 					</p>
 
 					<p class="fieldset">
 						<label class="image-replace password" for="signup-password">Password</label>
 						<input class="full-width has-padding has-border" id="signup-password" name="password" type="password"  placeholder="Password">
 						<a href="#0" class="hide-password">Show</a>
-						<span class="error-message">Your password has to be at least 6 characters long!</span>
+						<span class="error-message-pwd">비밀번호를 확인하세요.(문자, 숫자, 특수문자를 혼합하여 6~15자 이내)</span>
+						<span class="error-message-pwd1">이 비밀번호를 사용합니다</span>
 					</p>
 					 <p class="fieldset">
                         M:
@@ -229,7 +230,7 @@
                       </p>
 					
 					<p class="fieldset" id="custom-select">
-						<select id="AGE" name="age" class="form-control" required>
+						<select id="age" name="age" class="form-control" required >
                             <option value="">Choose..</option>
                             <option value="10">10대</option>
                             <option value="20">20대</option>
@@ -240,7 +241,7 @@
                           </select>
 					</p>	
 					<p class="fieldset">
-						 <select id="job" name ="job" class="form-control" required>
+						 <select id="job" name ="job" class="form-control"required>
                             <option value="">Choose..</option>
                             <option value="management">경영/사무</option>
                             <option value="sales">영업/고객상담</option>
@@ -330,39 +331,88 @@
     <!--Custom JavaScript -->
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
 	<script src="login-signup-form/js/index.js"></script>
+	
 	<script>
 		$(document).ready(function(){
-		
-			//.log(inEmail)
-			
+			$('.error-message-pwd').hide();
+			$('.error-message-pwd1').hide();
 			$("#signup-email").focusout(function(){
-				var inEmail =$('#signup-email').val();
-				$.ajax({
-					data:{email :inEmail},
-					url:"emailDuple.do",
-					method:"POST",
-					success:function(data){
-						//console.log(typeof(data));
-						if(inEmail==data){
-							
-							$("#error-massage").html("중복입니다");
-						}else{
-							$("#error-massage").html("사용합니다");
+				var inemail =$('#signup-email').val();
+				if(inemail==''||inemail==null)
+				{	
+					$('#signup-email').focus();
+					$(".error-message-email").text("이메일을 입력해주세요");					
+				}				
+				else{
+					console.log(inemail);
+					$.ajax({
+						data:{email:inemail},
+						dataType:"text",
+						url:"emailDuple.do",
+						method:"POST",
+						success:function(data){
+							console.log(data);
+							if(data!=0){
+								$(".error-message-email").text("중복입니다");
+							}else if(data==0){
+								$(".error-message-email").text("가능");
+							}														
 						}
-						
+					});								
+				}			
+			});
+				$( 'input' ).on("blur keyup", function() {
+					$(this).val( $(this).val().replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '' ) );
+				});
+				
+				$("#signup-password").focusout(function(){
+					var pwd =$("#signup-password").val();
+						console.log(pwd);
+						if(!chkPwd(pwd)){ 
+							$('.error-message-pwd').show();
+							$('signup-password').val('');
+
+							$('signup-password').focus(); 
+							$('.error-message-pwd').show();
+							return false;
+						}
+						else
+						{
+							$('.error-message-pwd1').show();
+						}
+
+				});
+				
+				function chkPwd(str){
+					var reg_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,15}$/;
+					if(!reg_pwd.test(str)){
+						return false;
+					}
+					return true;
+				}
+				
+				
+			
+				$('#job').change(function() {
+					if($('#job').val()==''){
+						alert("선택해주세용..!");
 					}
 				});
-			//$("#error-massage").append("중복입니다");
-			
-			
-			
+				
+				$('#age').change(function() {
+					if($('#age').val()==''){
+						alert("선택해주세용..!");
+					}
+				});
+				
+				$('#income').change(function() {
+					if($('#income').val()==''){
+						alert("선택해주세용..!");
+					}
+				});
+
 			});
-	
-		});
-
-
-
-</script>
+	</script>
 	
 	
 </body>

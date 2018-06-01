@@ -24,9 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pocket.DTO.PocketDTO;
 import com.pocket.service.IPocketService;
+import com.pocket.util.CmmUtil;
 import com.pocket.util.MediaUtils;
 import com.pocket.util.UploadFileUtils;
 
@@ -86,6 +89,8 @@ public class PocketController {
 		return entity;
 	}
 	
+	
+	
 	@RequestMapping(value="expenseCal", method=RequestMethod.POST)
 	public @ResponseBody List<PocketDTO> expenseCal() throws Exception {
 		log.info("expenseCal");
@@ -100,6 +105,46 @@ public class PocketController {
 		return entity;
 	}
 	
+	
+	@RequestMapping(value="insertExpense", method=RequestMethod.POST)
+	public String insertExpense(PocketDTO pDTO, ModelMap model,RedirectAttributes rttr, MultipartHttpServletRequest request, HttpServletResponse response ) throws Exception {
+		
+		/*String expense_detail= request.getParameter("expense_detail");
+		String expense_date = request.getParameter("expense_date");
+		String expense_category= request.getParameter("expense_category");
+		
+
+		
+
+		PocketDTO pDTO = new PocketDTO();
+		
+		pDTO.setExpense_category(expense_category);
+		pDTO.setExpense_date(expense_date);
+		pDTO.setExpense_detail(expense_detail);*/
+		log.info(pDTO.toString());
+		log.info(pDTO.getExpense_category());
+		pocketService.insertExpense(pDTO);
+		//log.info(expense_detail);
+		
+		//String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
+		
+		//PocketDTO pocketDTO =new PocketDTO();
+		 //model.addAttribute("savedName", savedName);
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/uploadResult";
+		
+	}
+	
+	@RequestMapping(value="uploadResult", method=RequestMethod.GET)
+	
+	public String uploadResult(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
+		log.info("uploadResult............ .....");
+		
+		return "/uploadResult";
+		
+	
+	}
 	
 	@RequestMapping(value="insertPocket", method=RequestMethod.POST)
 	public void insertPocket(HttpServletRequest request, HttpServletResponse response,
@@ -156,20 +201,6 @@ public class PocketController {
 	  public void uploadAjax() {
 	  }
 
-	  private String uploadFile(String originalName, byte[] fileData) throws Exception {
-
-	    UUID uid = UUID.randomUUID();
-
-	    String savedName = uid.toString() + "_" + originalName;
-
-	    File target = new File(uploadPath, savedName);
-
-	    FileCopyUtils.copy(fileData, target);
-
-	    return savedName;
-
-	  }
-	  
 	  @ResponseBody
 	  @RequestMapping(value ="uploadAjax", method=RequestMethod.POST, 
 	                  produces = "text/plain;charset=UTF-8")
@@ -276,7 +307,30 @@ public class PocketController {
 	      
 	    }
 	    return new ResponseEntity<String>("deleted", HttpStatus.OK);
-	  }  
+	  }
+	  
+	  
+	  @RequestMapping(value="pocketRegister", method=RequestMethod.GET)
+		
+		public String pocketRegister(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
+			log.info("pocketRegister............ .....");
+			
+			return "/pocketRegister";
+			
+		}
+	  @RequestMapping(value="pocketRegister", method=RequestMethod.POST)
+	  public String pocketRegisterPost(PocketDTO pDTO, RedirectAttributes rttr,MultipartFile file) throws Exception {
+			log.info("pocketRegister............ .....");
+			log.info(file);
+			log.info(pDTO);
+			log.info(pDTO.toString());
+			log.info(pDTO.getFiles());
+			pocketService.insertExpense(pDTO);
+			
+			rttr.addFlashAttribute("msg", "SUCCESS");
+			return "/gridServer";
+			
+		}
 	
 	
 }

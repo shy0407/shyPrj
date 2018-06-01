@@ -23,7 +23,7 @@ public interface UserMapper {
 	
 	userDTO login(LoginDTO loginDTO)throws Exception;
 	
-	userDTO emailDuple(String email)throws Exception;
+	int emailDuple(String email)throws Exception;
 
 
 	

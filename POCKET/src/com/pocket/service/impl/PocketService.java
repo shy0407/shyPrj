@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pocket.DTO.PocketDTO;
 import com.pocket.persistence.mapper.PocketMapper;
@@ -43,7 +44,24 @@ public class PocketService implements IPocketService {
 		// TODO Auto-generated method stub
 		return pocketMapper.expenseCal();
 	}
+
+	@Override
+	public void addAttach(String fullName) throws Exception {
+		 pocketMapper.addAttach(fullName);
 		
-	
+	}
+		
+	@Transactional
+	@Override
+	public void insertExpense(PocketDTO pocketDTO) throws Exception{
+		pocketMapper.insertPocket(pocketDTO);
+		
+		String[] files = pocketDTO.getFiles();
+		
+		if(files==null) {return;}
+		for(String fileName :files) {
+			pocketMapper.addAttach(fileName);
+		}
+	}
 		
 }
