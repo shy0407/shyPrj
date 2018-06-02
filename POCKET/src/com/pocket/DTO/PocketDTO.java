@@ -13,9 +13,8 @@ public class PocketDTO {
 	private String expense_category;
 	private String income_date;
 	private String income;
-	private String incone_detail;
-	
-	
+	private String income_detail;
+	private String[] files;
 	
 	public String getPocket_no() {
 		return pocket_no;
@@ -71,16 +70,17 @@ public class PocketDTO {
 	public void setIncome(String income) {
 		this.income = income;
 	}
-	public String getIncone_detail() {
-		return incone_detail;
+	public String getIncome_detail() {
+		return income_detail;
 	}
-	public void setIncone_detail(String incone_detail) {
-		this.incone_detail = incone_detail;
+	public void setIncome_detail(String income_detail) {
+		this.income_detail = income_detail;
+	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
 	}
 	
-	
-	
-	
-	
-
 }

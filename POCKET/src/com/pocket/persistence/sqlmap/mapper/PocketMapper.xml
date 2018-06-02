@@ -33,4 +33,15 @@
 	DELETE FROM aws.POCKET_INFO WHERE POCKET_NO=#{pocket_no}
 </delete>
 
+<insert id="insertExpense" parameterType="PocketDTO" >
+    INSERT INTO aws.POCKET_INFO(POCKET_NO, USER_NO,EXPENSE_DATE, EXPENSE_DETAIL, EXPENSE_CATEGORY) 
+    VALUES((SELECT IFNULL(MAX(PI.POCKET_NO),10000000)+1 FROM aws.POCKET_INFO PI), '10000001',#{expense_date}, #{expense_detail},#{expense_category})
+</insert>
+
+
+<!--첨부파일 등록 -->
+<insert id="addAttach">
+insert into aws.POCKET_IMG(FULL_NAME, POCKET_NO) values (#{fullName},(SELECT IFNULL(MAX(PI.POCKET_NO),10000000) FROM aws.POCKET_INFO PI))
+
+</insert>
 </mapper>

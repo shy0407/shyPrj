@@ -40,9 +40,8 @@ VALUES (#{id},#{password},#{user_no})
 </select>
 
 <!-- email 가져오기 -->
-<select id="emailDuple" resultType="userDTO">
-	SELECT EMAIL
-	FROM aws.USER_INFO	
+<select id="emailDuple" parameterType="String" resultType="Integer">
+	SELECT count(1) FROM aws.USER_INFO WHERE EMAIL=#{email}
 </select>
 
 

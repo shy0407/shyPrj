@@ -14,5 +14,6 @@ public interface PocketMapper {
 	void edit(PocketDTO pocketDTO)throws Exception;
 	void insertPocket(PocketDTO pocketDTO)throws Exception;
 	void deletePocket(String pocket_no)throws Exception;
+	void addAttach(String fullName)throws Exception;
 
 }

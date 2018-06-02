@@ -53,7 +53,7 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public userDTO emailDuple(String email) throws Exception {
+	public int emailDuple(String email) throws Exception {
 		return userMapper.emailDuple(email);
 	}
 	

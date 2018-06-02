@@ -67,12 +67,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="emailDuple", method=RequestMethod.POST)
-	public @ResponseBody String emailDuple(@RequestParam("email")String email,HttpSession session, Model model) throws Exception {
+	public @ResponseBody int emailDuple(HttpSession session, Model model,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		log.info("email Duple.........................................");
+		 String email = request.getParameter("email");
 		log.info(email);
-		userDTO userDTO =userService.emailDuple(email);
-		String emaill = userDTO.getEmail();
-		return emaill;
+		int result =userService.emailDuple(email);
+		
+		//String emaill = userDTO.getEmail();
+		return result;
 
 	}
 	
