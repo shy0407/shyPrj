@@ -11,5 +11,6 @@
     	<typeAlias type="com.pocket.DTO.LoginDTO" alias="LoginDTO" />
     	<typeAlias type="com.pocket.DTO.DataDTO" alias="DataDTO" />
     	<typeAlias type="com.pocket.DTO.TestDTO" alias="TestDTO" />
+    	<typeAlias type="com.pocket.DTO.TestDTO" alias="StoreDTO" />
     </typeAliases>
 </configuration>

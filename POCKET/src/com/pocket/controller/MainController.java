@@ -1,6 +1,6 @@
 package com.pocket.controller;
 
-import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
@@ -117,6 +117,58 @@ public class MainController {
 		return "redirect:/indexNoSignUp.do";
 		
 	}
+	
+	
+	@RequestMapping(value="pwdChangeEmailSend.do", method =RequestMethod.POST)
+	public String pwdChangeEmailSend(HttpServletRequest request, HttpServletResponse response, 
+					RedirectAttributes rttr) throws Exception {
+		log.info("pwdChangeEmailSend......");
+		
+		String email = CmmUtil.nvl(request.getParameter("reset-email"));
+		
+		//인증을 위한 키생성 
+		int key = new Random().nextInt(100000) + 10000; // 10000 ~ 99999
+		
+		
+				
+		System.out.println("key 일까요? ?: " +key);
+		log.info("여기야 병신아" + key); 
+		log.info("여기야 찐따야" + email);
+		String setfrom = "project.booknight@gmail.com";					//송신자 메일 주소
+		String tomail = email;					        //수신자 메일 주소
+		String title = "비밀번호 재설정 인증 이메일 입니다.";		//메일 제목
+		StringBuffer contents = new StringBuffer();
+		
+		contents.append("인증번호입니다. <br/>")
+				.append("인증번호")
+				.append(key);
+			
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+		
+		messageHelper.setFrom(setfrom);						//송신자를 생략하면 정상작동을 안함
+		messageHelper.setTo(tomail);						//수신자 메일
+		messageHelper.setSubject(title);					//메일 제목은 생략 가능
+		messageHelper.setText(contents.toString(),true);	//메일 내용
+		
+		mailSender.send(message);
+	
+			
+		
+		
+		return "/pwdChange";
+		
+	}
+	
+	@RequestMapping(value="pwdChange", method=RequestMethod.GET)
+	public String pwdChange(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		log.info("write get.....");
+		
+		return "/pwdChange";
+		
+	}
+	
 	
 	@RequestMapping(value="join", method=RequestMethod.GET)
 	public String insertGet(HttpServletRequest request, HttpServletResponse response) throws Exception {

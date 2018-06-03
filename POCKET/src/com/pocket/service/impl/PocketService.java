@@ -63,5 +63,10 @@ public class PocketService implements IPocketService {
 			pocketMapper.addAttach(fileName);
 		}
 	}
+
+	@Override
+	public List<String> pocketImgAll(String user_no) throws Exception {	
+		return pocketMapper.pocketImgAll(user_no);
+	}
 		
 }

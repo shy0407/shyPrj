@@ -31,7 +31,7 @@
     <!-- 구글 아이콘  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!--로그인 -->
-    <link rel="stylesheet" href="login-signup-form/css/style.css">
+    <link rel="stylesheet" href="/login-signup-form/css/style.css">
 
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -283,11 +283,12 @@
 			<div id="reset-password">
 				<p class="form-message">Lost your password? Please enter your email address.</br> You will receive a link to create a new password.</p>
 
-				<form class="form">
+				<form class="form" action="pwdChangeEmailSend.do" method="post">
 					<p class="fieldset">
 						<label class="image-replace email" for="reset-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-						<span class="error-message">An account with this email does not exist!</span>
+						<input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail" name="reset-email" >
+						
+						<span class="error-message"></span>
 					</p>
 
 					<p class="fieldset">
@@ -361,6 +362,35 @@
 					});								
 				}			
 			});
+			//비번 재설정 이메일 확인
+			$("#reset-email").focusout(function(){
+				var inemail =$('#reset-email').val();
+				if(inemail==''||inemail==null)
+				{	
+					$('#reset-email').focus();
+					$(".error-message").text("이메일을 입력해주세요");					
+				}				
+				else{
+					console.log(inemail);
+					$.ajax({
+						data:{email:inemail},
+						dataType:"text",
+						url:"emailDuple.do",
+						method:"POST",
+						success:function(data){
+							console.log(data);
+							if(data!=1){
+								$(".error-message").html("이메일이 존재하지 않습니다");
+							}else if(data==1){
+								$(".error-message").html("이 이메일로 인증번호를 전송합니다.");
+							}														
+						}
+					});								
+				}			
+				
+			});
+			
+			
 				$( 'input' ).on("blur keyup", function() {
 					$(this).val( $(this).val().replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '' ) );
 				});

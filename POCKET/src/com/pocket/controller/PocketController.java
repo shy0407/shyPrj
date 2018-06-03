@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -107,32 +109,18 @@ public class PocketController {
 	
 	
 	@RequestMapping(value="insertExpense", method=RequestMethod.POST)
-	public String insertExpense(PocketDTO pDTO, ModelMap model,RedirectAttributes rttr, MultipartHttpServletRequest request, HttpServletResponse response ) throws Exception {
-		
-		/*String expense_detail= request.getParameter("expense_detail");
-		String expense_date = request.getParameter("expense_date");
-		String expense_category= request.getParameter("expense_category");
-		
-
-		
-
-		PocketDTO pDTO = new PocketDTO();
-		
-		pDTO.setExpense_category(expense_category);
-		pDTO.setExpense_date(expense_date);
-		pDTO.setExpense_detail(expense_detail);*/
+	public String insertExpense(PocketDTO pDTO, ModelMap model,RedirectAttributes rttr,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String files= request.getParameter("files");
+		log.info(files);
 		log.info(pDTO.toString());
 		log.info(pDTO.getExpense_category());
+		log.info(pDTO.getFiles());
+		
 		pocketService.insertExpense(pDTO);
-		//log.info(expense_detail);
 		
-		//String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
-		
-		//PocketDTO pocketDTO =new PocketDTO();
-		 //model.addAttribute("savedName", savedName);
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
-		return "redirect:/uploadResult";
+		return "/pocketRegister";
 		
 	}
 	
@@ -329,6 +317,24 @@ public class PocketController {
 			
 			rttr.addFlashAttribute("msg", "SUCCESS");
 			return "/gridServer";
+			
+		}
+	  
+	  @RequestMapping(value="pocketGallery", method=RequestMethod.GET)		
+		public String pocketGallery(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
+			log.info("pocketGallery............ .....");
+			
+			return "/pocketGallery";
+			
+		}
+	  
+	  @RequestMapping(value="allPocketImg")	
+	  @ResponseBody
+		public List<String> allPocketImg(@RequestParam("user_no")String user_no,HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
+			log.info("allPocketImg............ .....");
+			log.info(user_no);
+			List<String> filelist =pocketService.pocketImgAll(user_no);
+			return filelist;
 			
 		}
 	

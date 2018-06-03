@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pocket.DTO.LoginDTO;
-import com.pocket.DTO.userDTO;
-import com.pocket.service.IUserService;
+import com.pocket.DTO.StoreDTO;
+import com.pocket.service.IStoreService;
 
 	
 @Controller
@@ -28,8 +27,8 @@ public class StoreController {
 	private Logger log = Logger.getLogger(this.getClass());
 		
 
-	@Resource(name = "UserService")
-	private IUserService userService;
+	@Resource(name = "StoreService")
+	private IStoreService storeService;
 
 	@RequestMapping(value="/admin/storeRegister", method=RequestMethod.GET)
 	public String loginGet(HttpServletRequest request, HttpServletResponse response, 
@@ -41,6 +40,23 @@ public class StoreController {
 	}
 	
 
+	@RequestMapping(value="/admin/storeList", method=RequestMethod.GET)
+	public String storeList(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("/admin/storeList!!!!!..............");
+		
+		List<StoreDTO> sList= storeService.getStoreList();
+		
+		model.addAttribute(sList);
+		
+		return "/admin/storeList";
+
+	}
+	
+	
+	
+	
 	
 	
 }
