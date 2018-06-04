@@ -56,6 +56,16 @@ public class UserService implements IUserService {
 	public int emailDuple(String email) throws Exception {
 		return userMapper.emailDuple(email);
 	}
+
+	@Override
+	public void tempPwdChange(LoginDTO loginDTO) throws Exception {
+		userMapper.tempPwdChange(loginDTO);
+	}
+
+	@Override
+	public LoginDTO getTempPwd(String email) throws Exception {
+		return userMapper.getTempPwd(email);
+	}
 	
 	
 

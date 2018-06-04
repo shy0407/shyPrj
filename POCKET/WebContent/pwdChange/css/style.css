@@ -4,7 +4,7 @@ html, body{
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
-  background-color: #3498db;
+  background-color: #fbfbfb;
 }
 
 h1, h2, h3, h4, h5 ,h6{
@@ -92,7 +92,8 @@ fieldset{
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  background-color: rgb(154, 185, 120, 0.7);
+  border-radius: 5px;
   text-align: center;
 }
 
@@ -100,13 +101,13 @@ fieldset{
 .steps li{
   display: inline-block;
   margin: 20px;
-  color: #ccc;
+  color: #e4e4e4;
   padding-bottom: 5px;
 }
 
 .steps li.is-active{
-  border-bottom: 1px solid #3498db;
-  color: #3498db;
+  border-bottom: 1px solid #728260;
+  color: #728260;
 }
 
 /* FORM */
@@ -117,6 +118,8 @@ fieldset{
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background-color: #fff;
+  border: 2px solid rgb(154, 185, 120, 0.7);
+  border-radius: 5px;
   opacity: 0;
   -webkit-transform: scale(1, 0);
   -ms-transform: scale(1, 0);
@@ -148,11 +151,12 @@ fieldset{
   transform: scale(1, 1);
 }
 
-.form-wrapper .button, .form-wrapper .submit{
-  background-color: #3498db;
+.form-wrapper .button, .form-wrapper .submit {
+  background-color: #9ab978;
   display: inline-block;
   padding: 8px 30px;
   color: #fff;
+  border-radius:4px;
   cursor: pointer;
   font-size: 14px !important;
   font-family: 'Open Sans', sans-serif !important;
@@ -177,7 +181,8 @@ fieldset{
   display: block;
   padding: 10px;
   margin: 10px auto;
-  background-color: #f1f1f1;
+  background-color: #f7f7f7;
+  border-radius: 4px;
   border: none;
   width: 50%;
   outline: none;

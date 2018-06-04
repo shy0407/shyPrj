@@ -86,9 +86,8 @@ public class UploadFileUtils {
 	        // 원본 파일을 메모리상에 로딩
 	        BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
 	        // 정해진 크기에 맞게 작은 이미지 파일에 원본이미지를 복사
-	        
-	        BufferedImage destImg =Scalr.resize(sourceImg, 400, 300);
-	        
+	      
+	        BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Mode.FIT_EXACT, 400, 300, Scalr.OP_ANTIALIAS);
 	        // 썸네일 이미지 파일명 생성
 	        String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
 	        // 썸네일 파일 객체 생성

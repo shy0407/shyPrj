@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+
 <html lang="en">
 
   <head>
@@ -20,7 +22,43 @@
 	
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="/pwdChange/css/style.css">
+	<style>
+	#pwd {
+		display: inline-block;
+	}
 	
+	.confirm {
+		display: inline-block;
+		
+	}
+	
+	.confirm {
+		background: #9ab978;
+		background-image: -webkit-linear-gradient(top, #9ab978, #9ab978);
+		background-image: -moz-linear-gradient(top, #9ab978, #9ab978);
+		background-image: -ms-linear-gradient(top, #9ab978, #9ab978);
+		background-image: -o-linear-gradient(top, #9ab978, #9ab978);
+		background-image: linear-gradient(to bottom, #9ab978, #9ab978);
+		-webkit-border-radius: 6;
+		-moz-border-radius: 6;
+		border-radius: 6px;
+		font-family: Arial;
+		color: #ffffff;
+		font-size: 10px;
+		padding: 10px 20px 10px 20px;
+		text-decoration: none;
+	}
+	
+	.confirm:hover {
+		background: #b3d190;
+		background-image: -webkit-linear-gradient(top, #b3d190, #9ab978);
+		background-image: -moz-linear-gradient(top, #b3d190, #9ab978);
+		background-image: -ms-linear-gradient(top, #b3d190, #9ab978);
+		background-image: -o-linear-gradient(top, #b3d190, #9ab978);
+		background-image: linear-gradient(to bottom, #b3d190, #9ab978);
+		text-decoration: none;
+	}
+</style>
   </head>
 
   <body>
@@ -65,21 +103,30 @@
         
         <li>Step 2</li>
       </ul>
-      <form class="form-wrapper">
+      <form class="form-wrapper" action="changeToNewPwd.do" method="post">
         <fieldset class="section is-active">
+          <br/>
           <h3>Please Enter Your Authentication Number</h3>
-          <input type="text" name="name" id="name" placeholder="인증번호 숫자 5자리를 입력해주세요" autocomplete="off" required />
+          <input type="text" name="name" id="pwd" placeholder="발급 받은 임시비밀번호를 입력해주세요." autocomplete="off" required />
+          <input type="button" value="확인" class ="confirm">         
+          <input type="hidden" name="email" id="email" value="${email}">
+          <div class="msg"></div>
+          <div><input type="button" class="button" value="NEXT"></div>
           
-          <div class="button">Next</div>
         </fieldset>
         
         <fieldset class="section">
+        	<br/>
           <h3>Enter New Password.</h3>
           <input type="password" name="password" id="password" placeholder="Password">
+          <div class="msgForPwd"></div>
           <input type="password" name="password2" id="password2" placeholder="Re-enter Password">
+          <input type="hidden" name="email1" id="email1" value="${email}">
+          <div class="msgForNew"></div>
           <input class="submit button" type="submit" value="Update">
         </fieldset>
         <fieldset class="section">
+        <br/><br/>
           <h3>Password Changed!</h3>
           <p>비밀번호 재설정이 완료되었습니다.</p>
           
@@ -96,6 +143,91 @@
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 
     <script src="/pwdChange/js/index.js"></script>
+    <script>
+    	$(function(){
+    		
+    		var email=$("#email").val();
+    		
+    		
+    		console.log(email);
+    		
+    		$(".confirm").click(function(){
+    			var temp=$("#pwd").val();
+    			console.log(temp);
+    			$.ajax({
+        			url:"pwdChange.do",
+        			data:{"temp":temp,"email":email},
+        			
+        			method:"POST",
+        			success:function(data){
+        				console.log(data);
+        				
+        				if (temp!=data){
+        					$("#pwd").focus();
+        					$(".button").attr("disabled", true);
+        					
+        					$(".msg").text("잘못입력하셨습니다.");
+        					
+        					
+        				}else{
+        					
+        					$(".msg").text("일치합니다.");
+        					$(".button").attr("disabled",false);
+        					
+        				}
+        			}
+        				
+        		});
+    		});
+    		
+    		
+            
+            $("#password2").change(function(){
+            	var pwd =$("#password").val();
+            	var pwd2 =$("#password2").val();
+            	if(pwd !=pwd2){
+            		$(".msgForNew").text("같은 비밀번호를 입력해주세요.");
+            		
+            	}else if(pwd ==pwd2){
+            		$(".msgForNew").text("정확히 입력하셨습니다.");
+            	}
+            });
+    		
+        	$("#password").change(function(){
+				var pwd =$("#password").val();
+					console.log(pwd);
+					if(!chkPwd(pwd)){ 
+						$('.msgForPwd').text("안됨");
+						$('#password').val('');
+
+						$('#password').focus(); 
+						
+						$('.msgForPwd').hide();
+						return false;
+					}
+					
+
+			});
+			
+			function chkPwd(str){
+				var reg_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,15}$/;
+				if(!reg_pwd.test(str)){
+					return false;
+				}
+				return true;
+			}
+            
+            $( 'input' ).on("blur keyup", function() {
+				$(this).val( $(this).val().replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '' ) );
+			});
+    		
+    	});
+    	
+    	
+    	
+    	
+    
+    </script>
   </body>
 
 </html>

@@ -44,8 +44,10 @@
 	var result ='${msg}';
 	if(result=='success'){
 		alert("가입완료");
+	}else if(result=='pwdChg'){
+		alert("비밀번호 변경 완료..!로그인해주세요");
 	}
-	
+
 </script>
 
 </head>

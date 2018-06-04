@@ -24,7 +24,10 @@ public interface UserMapper {
 	userDTO login(LoginDTO loginDTO)throws Exception;
 	
 	int emailDuple(String email)throws Exception;
-
+	
+	void tempPwdChange(LoginDTO loginDTO)throws Exception;
+	
+	LoginDTO getTempPwd(String email)throws Exception;
 
 	
 

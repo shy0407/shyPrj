@@ -18,7 +18,7 @@
   background-color: grey;
 }
 
-.row text-center text-lg-left:hover .overlay {
+#shy:hover .overlay {
   opacity: 0.5;
 }
 
