@@ -1,5 +1,6 @@
 package com.pocket.controller;
 
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -15,8 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.pocket.DTO.LoginDTO;
 import com.pocket.DTO.userDTO;
 import com.pocket.service.IMainService;
 import com.pocket.service.IUserService;
@@ -121,27 +126,57 @@ public class MainController {
 	
 	@RequestMapping(value="pwdChangeEmailSend.do", method =RequestMethod.POST)
 	public String pwdChangeEmailSend(HttpServletRequest request, HttpServletResponse response, 
-					RedirectAttributes rttr) throws Exception {
+					RedirectAttributes rttr,ModelMap model) throws Exception {
 		log.info("pwdChangeEmailSend......");
 		
 		String email = CmmUtil.nvl(request.getParameter("reset-email"));
-		
+			
 		//인증을 위한 키생성 
-		int key = new Random().nextInt(100000) + 10000; // 10000 ~ 99999
+		//int key = new Random().nextInt(100000) + 10000; // 10000 ~ 99999
+		//String password= Integer.toString(key);
+		
+		StringBuffer tmep = new StringBuffer();
+		Random rnd = new Random();
+		for (int i = 0; i < 7; i++) {
+		    int rIndex = rnd.nextInt(3);
+		    switch (rIndex) {
+		    case 0:
+		        // a-z
+		    	tmep.append((char) ((int) (rnd.nextInt(26)) + 97));
+		        break;
+		    case 1:
+		        // A-Z
+		    	tmep.append((char) ((int) (rnd.nextInt(26)) + 65));
+		        break;
+		    case 2:
+		        // 0-9
+		    	tmep.append((rnd.nextInt(10)));
+		        break;
+		    }
+		}
 		
 		
+		String pwd=tmep.toString();
+		
+		
+		LoginDTO loginDTO= new LoginDTO();
+		
+		loginDTO.setEmail(email);
+		loginDTO.setPassword(pwd);
+		
+		userService.tempPwdChange(loginDTO);
 				
-		System.out.println("key 일까요? ?: " +key);
-		log.info("여기야 병신아" + key); 
+		System.out.println("key 일까요? ?: " +pwd);
+		log.info("여기야 병신아" + pwd); 
 		log.info("여기야 찐따야" + email);
 		String setfrom = "project.booknight@gmail.com";					//송신자 메일 주소
 		String tomail = email;					        //수신자 메일 주소
 		String title = "비밀번호 재설정 인증 이메일 입니다.";		//메일 제목
 		StringBuffer contents = new StringBuffer();
 		
-		contents.append("인증번호입니다. <br/>")
-				.append("인증번호")
-				.append(key);
+		contents.append("<h3>임시 비밀번호입니다.</h3> <br/><br/>")
+				.append("임시 비밀번호  : ")
+				.append(pwd);
 			
 		
 		MimeMessage message = mailSender.createMimeMessage();
@@ -154,18 +189,78 @@ public class MainController {
 		
 		mailSender.send(message);
 	
-			
 		
+		rttr.addFlashAttribute("email", email);
 		
-		return "/pwdChange";
+		return "redirect:/pwdChange.do";
 		
 	}
 	
 	@RequestMapping(value="pwdChange", method=RequestMethod.GET)
-	public String pwdChange(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		log.info("write get.....");
+	public String pwdChange(HttpServletRequest request, HttpServletResponse response,ModelMap model) throws Exception {
+		log.info("pwdChange .....");
 		
+		
+		/*Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        String email = (String) flashMap.get("email");
+        
+        
+		log.info(email);*/
 		return "/pwdChange";
+		
+	}
+	
+	
+	@RequestMapping(value="pwdChange", method=RequestMethod.POST)
+	public @ResponseBody String pwdChangePost(HttpServletRequest request, HttpServletResponse response,ModelMap model,
+												@RequestParam("temp")String temp,
+												@RequestParam("email")String email) throws Exception {
+		log.info("pwdChangePost .....");
+		
+	
+		
+		log.info(email);
+		log.info(temp);
+      
+        
+        LoginDTO loginDTO = new LoginDTO();
+        LoginDTO loginDTO2 = new LoginDTO();
+        
+        loginDTO.setEmail(email);
+        loginDTO.setEmail(temp);
+        
+        loginDTO2=userService.getTempPwd(email);
+        
+        String find =loginDTO2.getPassword();
+        
+        log.info(find);
+        
+		
+		return find;
+		
+	}
+	
+	@RequestMapping(value="changeToNewPwd", method =RequestMethod.POST)
+	public String changeToNewPwd(HttpServletRequest request, HttpServletResponse response, 
+					RedirectAttributes rttr) throws Exception {
+		log.info("changeToNewPwd.....");
+		
+		String email = CmmUtil.nvl(request.getParameter("email1"));
+		String password = CmmUtil.nvl(request.getParameter("password"));
+		
+		log.info(email);
+		log.info(password);
+		
+		LoginDTO loginDTO = new LoginDTO();
+		
+		loginDTO.setEmail(email);
+		loginDTO.setPassword(password);
+		
+		userService.tempPwdChange(loginDTO);
+		rttr.addFlashAttribute("msg", "pwdChg");		
+		
+		
+		return "redirect:/indexNoSignUp.do";
 		
 	}
 	

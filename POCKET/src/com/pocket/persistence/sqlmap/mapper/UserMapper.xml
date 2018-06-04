@@ -45,11 +45,17 @@ VALUES (#{id},#{password},#{user_no})
 </select>
 
 <!-- 비밀번호 재설정을 위한 인증키로 비밀번호 업데이트  -->
-<update id="tempPwdChange" parameterType="userDTO">
+<update id="tempPwdChange" parameterType="LoginDTO">
 	update aws.USER_INFO
 	set PASSWORD=#{password}
 	where EMAIL=#{email}
 </update>
 
+<!-- 임시 비밀번호 가져오기 -->
+<select id ="getTempPwd" resultType="LoginDTO" parameterType="String">
+	select PASSWORD
+	from aws.USER_INFO
+	where EMAIL =#{email}
+</select>
 
 </mapper>
