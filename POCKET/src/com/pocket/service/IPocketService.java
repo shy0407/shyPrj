@@ -13,4 +13,5 @@ public interface IPocketService {
 	void deletePocket(String pocket_no)throws Exception;
 	void addAttach(String fullName)throws Exception;
 	void insertExpense(PocketDTO pocketDTO) throws Exception;
+	List<String> pocketImgAll(String user_no)throws Exception;
 }

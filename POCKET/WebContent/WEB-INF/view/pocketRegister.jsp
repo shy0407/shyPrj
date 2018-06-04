@@ -8,6 +8,11 @@
 	height: 100px;
 	border: 1px dotted gray;
 }
+#uploadedList {
+	width: 100%;
+	height: 100px;
+	border: 1px dotted gray;
+}
 
 </style>
 
@@ -166,7 +171,9 @@
                                 <h4 class="m-b-0 text-white">영수증 등록</h4>
                             </div>
                             <div class="card-body">
-                                <form id="registerForm" role="form" method="post" enctype="multipart/form-data">
+                               
+                                <form role="form" id="regForm" method="post" action="insertExpense.do">
+                                
                                     <div class="form-body">
                                       
                                         <hr>
@@ -212,15 +219,15 @@
                                                     <!-- <label>City</label>
                                                     <input type="text" class="form-control"> -->
                                                     <label for="exampleInputEmail1">File DROP Here</label>
-													<div class="fileDrop"></div>
+													<div class="fileDrop">파일을 올려주세요</div>
                                                 </div>
                                             </div>
                                             <!--/span-->
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>첨부파일</label>
-                                                   
-															<div id="uploadedList"></div>
+                                                   <div id="uploadedList"></div>
+															
 												</div>
                                             </div>
                                             <!--/span-->
@@ -229,7 +236,7 @@
                                         
                                     </div>
                                     <div class="form-actions">
-                                    	<input type="submit" class="btn btn-primary">Submit</button>
+                                    	<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
                                         <!-- <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button> -->
                                         <button type="button" class="btn btn-inverse">Cancel</button>
                                     </div>
@@ -267,151 +274,94 @@
 	<!--stickey kit -->
 	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
 	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
-	<script src="/upload/upload.js"></script>
+	<%--Handlebars JS--%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<%--파일업로드 JS--%>
+<script type="text/javascript" src="/uploadjs/upload.js"></script>
+
+<%--첨부파일 하나의 영역--%>
+<%--이미지--%>
 
 
-	<script>
-	$(".fileDrop").on("dragenter dragover", function(event) {
-		event.preventDefault();
-	});
+<script>
+    $(document).ready(function () {
+       
 
-	$(".fileDrop").on("drop", function(event){
-		event.preventDefault();
-		
-		var files = event.originalEvent.dataTransfer.files;
-		
-		var file = files[0];
-
-		//console.log(file);
-		
-		var formData = new FormData();
-		
-		formData.append("file", file);
-		
-		$.ajax({
-			  url: 'uploadAjax.do',
-			  data: formData,
-			  dataType:'text',
-			  processData: false,
-			  contentType: false,
-			  type: 'POST',
-			  success: function(data){
-				  
-				  var str ="";
-				  
-				  if(checkImageType(data)){
-					  str ="<div><a href=displayFile.do?fileName="+getImageLink(data)+">"
-							  +"<img src='displayFile.do?fileName="+data+"'/>"
-							  +"</a><small data-src="+data+">X</small></div>";
-				  }else{
-					  str = "<div><a href='displayFile.do?fileName="+data+"'>" 
-							  + getOriginalName(data)+"</a>"
-							  +"<small data-src="+data+">X</small></div></div>";
-				  }
-				  
-				  $(".uploadList").append(str);
-			  }
-			});	
-	});
-
-
-	$(".uploadList").on("click", "small", function(event){
-		
-			 var that = $(this);
-		
-		   $.ajax({
-			   url:"deleteFile.do",
-			   type:"post",
-			   data: {fileName:$(this).attr("data-src")},
-			   dataType:"text",
-			   success:function(result){
-				   if(result == 'deleted'){
-					   that.parent("div").remove();
-				   }
-			   }
-		   });
-	});
-	
-	
-/* 		
-$(".fileDrop").on("drop", function(event) {
-event.preventDefault();
-
-var files = event.originalEvent.dataTransfer.files;
-
-var file = files[0];
-
-//console.log(file);
-var formData = new FormData();
-
-formData.append("file", file);
-
-
-$.ajax({
-	  url: '/uploadAjax',
-	  data: formData,
-	  dataType:'text',
-	  processData: false,
-	  contentType: false,
-	  type: 'POST',
-	  success: function(data){
-		  
-		  var str ="";
-		  
-		  console.log(data);
-		  console.log(checkImageType(data));
-		  
-		  if(checkImageType(data)){
-			  str ="<div><a href='displayFile?fileName="+getImageLink(data)+"'>"
-					  +"<img src='displayFile?fileName="+data+"'/></a>"
-					  +data +"</div>";
-		  }else{
-			  str = "<div><a href='displayFile?fileName="+data+"'>" 
-					  + getOriginalName(data)+"</a></div>";
-		  }
-		  
-		  $(".uploadedList").append(str);
-	  }
-	});			
-});	 */
-
-
-function getOriginalName(fileName){	
-
-if(checkImageType(fileName)){
-	return;
-}
-
-var idx = fileName.indexOf("_") + 1 ;
-return fileName.substr(idx);
-
-}
-
-
-function getImageLink(fileName){
-
-if(!checkImageType(fileName)){
-	return;
-}
-var front = fileName.substr(0,12);
-var end = fileName.substr(14);
-
-return front + end;
-
-}
-	
-
-function checkImageType(fileName){
-	
-	var pattern = /jpg|gif|png|jpeg/i;
-	
-	return fileName.match(pattern);
-	
-}
+        // 전체 페이지 파일 끌어 놓기 기본 이벤트 방지 : 지정된 영역외에 파일 드래그 드랍시 페이지 이동방지
+        $(".content-wrapper").on("dragenter dragover drop", function (event) {
+            event.preventDefault();
+        });
+        // 파일 끌어 놓기 기본 이벤트 방지
+        $(".fileDrop").on("dragenter dragover", function (event) {
+            event.preventDefault();
+        });
+        // 파일 드랍 이벤트 : 파일 전송 처리
+        $(".fileDrop").on("drop", function (event) {
+            event.preventDefault();
+            var files = event.originalEvent.dataTransfer.files;
+            var file = files[0];
+            console.log(files);
+            var formData = new FormData();
+            formData.append("file", file);
+            $.ajax({
+                url: "uploadAjax.do",
+                data: formData,
+                dataType: "text",
+                processData: false,
+                contentType: false,
+                type: "POST",
+                success: function (data) {
+                	console.log(data);
+                    // 첨부 파일의 정보
+                    var fileInfo = getFileInfo(data);
+                   	var original= fileInfo.getLink;
+                 	console.log(original);
+                 	console.log(fileInfo.imgsrc);
+                    // 하이퍼링크
+                    var html = "<a href='"+fileInfo.getLink+"'>"+fileInfo.fileName+"</a><br>"+
+                    			"<img src ='"+fileInfo.imgsrc+"'>";
+                    			
+                    			
+                    			
+                    // hidden 태그 추가
+                    html += "<input type='hidden' class='file' name='files' value='"+fileInfo.fullName+"'>";
+                    // div에 추가
+                    $("#uploadedList").append(html);
+                   
+                }
+            });
+        });
+        // 글 저장 버튼 클릭 이벤트 : 파일명 DB 저장 처리
+        $("#regForm").submit(function (event) {
+            event.preventDefault();
+            var that = $(this);
+           
+            
+            that.get(0).submit();
+        });
+        // 파일 삭제 버튼 클릭 이벤트 : 파일삭제, 파일명 DB 삭제 처리
+        $(document).on("click", ".delBtn", function (event) {
+            event.preventDefault();
+            var that = $(this);
+            $.ajax({
+                url: "deleteFile.do",
+                type: "post",
+                data: {fileName:$(this).attr("href")},
+                dataType: "text",
+                success: function (result) {
+                    if (result == "DELETED") {
+                        alert("삭제되었습니다.");
+                        that.parents("li").remove();
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script>
 
 
 </script>
-
 </body>
 
 </html>

@@ -41,7 +41,15 @@
 
 <!--첨부파일 등록 -->
 <insert id="addAttach">
-insert into aws.POCKET_IMG(FULL_NAME, POCKET_NO) values (#{fullName},(SELECT IFNULL(MAX(PI.POCKET_NO),10000000) FROM aws.POCKET_INFO PI))
+insert into aws.POCKET_IMG(FULL_NAME, POCKET_NO, USER_NO,REGDATE) values (#{fullName},(SELECT IFNULL(MAX(PI.POCKET_NO),10000000) FROM aws.POCKET_INFO PI),'10000002',NOW())
 
 </insert>
+
+
+<!-- 첨부파일 가져오기 -->
+<select id="pocketImgAll" resultType="String" parameterType="String">
+select FULL_NAME from aws.POCKET_IMG
+where USER_NO=#{user_no}
+order by REGDATE
+</select>
 </mapper>

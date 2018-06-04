@@ -44,5 +44,12 @@ VALUES (#{id},#{password},#{user_no})
 	SELECT count(1) FROM aws.USER_INFO WHERE EMAIL=#{email}
 </select>
 
+<!-- 비밀번호 재설정을 위한 인증키로 비밀번호 업데이트  -->
+<update id="tempPwdChange" parameterType="userDTO">
+	update aws.USER_INFO
+	set PASSWORD=#{password}
+	where EMAIL=#{email}
+</update>
+
 
 </mapper>
