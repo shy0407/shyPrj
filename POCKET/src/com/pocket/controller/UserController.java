@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pocket.DTO.LoginDTO;
 import com.pocket.DTO.userDTO;
 import com.pocket.service.IUserService;
+import com.pocket.util.AES256Util;
+import com.pocket.util.CmmUtil;
 
 	
 @Controller
@@ -101,6 +103,52 @@ public class UserController {
 		
 		log.info("storeRegister GET!!!!!!..............");
 		return "/storeRegister";
+
+	}
+	
+	@RequestMapping(value="detailChange", method=RequestMethod.GET)
+	public String detailChange(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model,HttpSession session) throws Exception {
+		
+		log.info("detailChange GET!!!!!!..............");
+		
+	
+		
+		return "/detailChange";
+
+	}
+	
+	@RequestMapping(value="detailChange", method=RequestMethod.POST)
+	public String detailChangePost(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model,HttpSession session) throws Exception {
+		
+		log.info("detailChange POST!!!!!!..............");
+		userDTO uDTO =(userDTO) session.getAttribute("userDTO");
+		
+		String user_no=(String) session.getAttribute(uDTO.getUser_no());
+		log.info(user_no);
+		
+		String user_id = CmmUtil.nvl(AES256Util.strEncode(request.getParameter("user_id")));
+		String email = CmmUtil.nvl(request.getParameter("email"));
+		String income = CmmUtil.nvl(request.getParameter("income"));
+		String job = CmmUtil.nvl(request.getParameter("job"));
+		String gender = CmmUtil.nvl(request.getParameter("gender"));
+		String age = CmmUtil.nvl(request.getParameter("age"));
+		
+		userDTO userDTO =new userDTO();
+		
+		
+		userDTO.setUser_id(user_id);
+		userDTO.setEmail(email);
+		userDTO.setIncome(income);
+		userDTO.setJob(job);
+		userDTO.setGender(gender);
+		userDTO.setAge(age);
+		
+		userService.updateUserInfo(user_no);
+		
+
+		return "/detailChange";
 
 	}
 }

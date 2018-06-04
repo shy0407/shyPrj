@@ -114,7 +114,7 @@
                         <li class="nav-label">Apps</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">Email</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="email-compose.html">Compose</a></li>
+                                <li><a href="detailChange.do">수정</a></li>
                                 <li><a href="email-read.html">Read</a></li>
                                 <li><a href="email-inbox.html">Inbox</a></li>
                             </ul>

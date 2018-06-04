@@ -58,4 +58,10 @@ VALUES (#{id},#{password},#{user_no})
 	where EMAIL =#{email}
 </select>
 
+<!--회원정보 수정  -->
+<update id="updateUserInfo" parameterType="userDTO">
+	update aws.USER_INFO
+	set USER_ID=#{user_id}, AGE=#{age}, JOB=#{job}, INCOME=#{income}, GENDER=#{gender}
+	where USER_NO=#{user_no}
+</update>
 </mapper>

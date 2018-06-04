@@ -66,6 +66,14 @@ public class UserService implements IUserService {
 	public LoginDTO getTempPwd(String email) throws Exception {
 		return userMapper.getTempPwd(email);
 	}
+
+	@Override
+	public void updateUserInfo(String user_no) throws Exception {
+		userMapper.updateAuth(user_no);
+		
+	}
+
+	
 	
 	
 

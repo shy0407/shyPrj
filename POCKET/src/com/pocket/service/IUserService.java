@@ -16,5 +16,7 @@ public interface IUserService {
 	int emailDuple(String email)throws Exception;
 	void tempPwdChange(LoginDTO loginDTO)throws Exception;
 	LoginDTO getTempPwd(String email)throws Exception;
+	void updateUserInfo(String user_no)throws Exception;
+	
 
 }
