@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -177,6 +178,7 @@ input[type="radio"].toggle:checked + label:after {
                                 <li><a href="chart-echart.html">EChart</a></li>
                                 <li><a href="chart-sparkline.html">Sparkline</a></li>
                                 <li><a href="chart-peity.html">Peity</a></li>
+                                
                             </ul>
                         </li>
                         <li class="nav-label">가맹점</li>
@@ -224,7 +226,7 @@ input[type="radio"].toggle:checked + label:after {
                             <div class="card-body" >
                                
                                 <form role="form" id="regForm" method="post" action="detailChange.do">
-                                
+                                	
                                     <div class="form-body">
                                       
                                         <hr>
@@ -240,7 +242,7 @@ input[type="radio"].toggle:checked + label:after {
                                             <div class="col-md-12 ">
                                                 <div class="form-group">
                                                     <label>USER ID</label>
-                                                    <input type="text" name="user_id" class="form-control">
+                                                    <input type="text" name="user_id" value="${uDTO.user_id}" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -313,6 +315,7 @@ input[type="radio"].toggle:checked + label:after {
                                
                                         
                                     </div>
+                                    
                                     <div class="form-actions">
                                     	<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
                                         <!-- <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button> -->

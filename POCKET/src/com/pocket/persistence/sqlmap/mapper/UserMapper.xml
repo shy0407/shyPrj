@@ -34,7 +34,7 @@ VALUES (#{id},#{password},#{user_no})
 
 <!-- 로그인 -->
 <select id="login" resultType="userDTO" > 
-	SELECT USER_ID, EMAIL,PASSWORD,USER_AUTH 
+	SELECT USER_NO,USER_ID, EMAIL,PASSWORD,USER_AUTH 
 	FROM aws.USER_INFO 
 	WHERE EMAIL=#{email} and PASSWORD=#{password}
 </select>
@@ -64,4 +64,8 @@ VALUES (#{id},#{password},#{user_no})
 	set USER_ID=#{user_id}, AGE=#{age}, JOB=#{job}, INCOME=#{income}, GENDER=#{gender}
 	where USER_NO=#{user_no}
 </update>
+
+<select id="getUserInfo" parameterType="String" resultType="userDTO">
+	select * from aws.USER_INFO where USER_NO=#{user_no}
+</select>
 </mapper>

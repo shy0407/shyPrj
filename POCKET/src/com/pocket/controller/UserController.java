@@ -111,9 +111,16 @@ public class UserController {
 			ModelMap model,HttpSession session) throws Exception {
 		
 		log.info("detailChange GET!!!!!!..............");
+		userDTO uDTO=(userDTO)session.getAttribute("userDTO");
 		
-	
+		String user_no =uDTO.getUser_no();
+		//String user_no=(String) session.getAttribute(uDTO.getUser_no());
+		log.info(user_no);
+
 		
+		userDTO userDTO = userService.getUserInfo(user_no);
+		log.info(userDTO.getAge());
+		model.addAttribute(userDTO);
 		return "/detailChange";
 
 	}
@@ -123,9 +130,11 @@ public class UserController {
 			ModelMap model,HttpSession session) throws Exception {
 		
 		log.info("detailChange POST!!!!!!..............");
-		userDTO uDTO =(userDTO) session.getAttribute("userDTO");
 		
-		String user_no=(String) session.getAttribute(uDTO.getUser_no());
+		userDTO uDTO=(userDTO)request.getSession().getAttribute("userDTO");
+		
+		String user_no =uDTO.getUser_no();
+		//String user_no=(String) session.getAttribute(uDTO.getUser_no());
 		log.info(user_no);
 		
 		String user_id = CmmUtil.nvl(AES256Util.strEncode(request.getParameter("user_id")));
