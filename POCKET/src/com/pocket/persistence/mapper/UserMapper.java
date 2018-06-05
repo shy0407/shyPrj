@@ -31,6 +31,7 @@ public interface UserMapper {
 	
 	void updateUserInfo(String user_no)throws Exception;
 	
+	userDTO getUserInfo(String user_no)throws Exception;
 	
 	
 

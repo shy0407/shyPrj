@@ -68,7 +68,7 @@ public class MainController {
 	public String insertPost(HttpServletRequest request, HttpServletResponse response, 
 					RedirectAttributes rttr) throws Exception {
 		log.info("fasgsdgsdgsdgsd get.....");
-		String user_id = CmmUtil.nvl(AES256Util.strEncode(request.getParameter("user_id")));
+		String user_id = CmmUtil.nvl(request.getParameter("user_id"));
 		String email = CmmUtil.nvl(request.getParameter("email"));
 		String password = CmmUtil.nvl(request.getParameter("password"));
 		String income = CmmUtil.nvl(request.getParameter("income"));

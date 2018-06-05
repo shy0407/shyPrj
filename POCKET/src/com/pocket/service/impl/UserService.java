@@ -73,6 +73,11 @@ public class UserService implements IUserService {
 		
 	}
 
+	@Override
+	public userDTO getUserInfo(String user_no) throws Exception {
+		return userMapper.getUserInfo(user_no);
+	}
+
 	
 	
 	
