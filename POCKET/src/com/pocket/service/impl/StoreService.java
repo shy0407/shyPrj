@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.pocket.DTO.Criteria;
 import com.pocket.DTO.StoreDTO;
 import com.pocket.persistence.mapper.StoreMapper;
 import com.pocket.service.IStoreService;
@@ -21,6 +22,19 @@ public class StoreService implements IStoreService {
 		return storeMapper.getStoreList();
 	}
 
+	@Override
+	public List<StoreDTO> listPage(int page) throws Exception {
+		if(page<=0) {
+			page=1;
+		}
+		page =(page-1)*10;
+		return storeMapper.listPage(page);
+	}
+
+	@Override
+	public List<StoreDTO> listCriteria(Criteria cri) throws Exception {
+		return storeMapper.listCriteria(cri);
+	}
 	
 		
 	

@@ -5,14 +5,10 @@
 <style>
 .fileDrop {
 	width: 100%;
-	height: 100px;
+	height: 320px;
 	border: 1px dotted gray;
 }
-#uploadedList {
-	width: 100%;
-	height: 100px;
-	border: 1px dotted gray;
-}
+#uploadedList{margin: 0 auto;}
 
 </style>
 
@@ -214,22 +210,20 @@
                                         </div>
                                         
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <!-- <label>City</label>
                                                     <input type="text" class="form-control"> -->
                                                     <label for="exampleInputEmail1">File DROP Here</label>
-													<div class="fileDrop">파일을 올려주세요</div>
+													<div class="fileDrop">
+													<div class="initMsg">파일을 올려주세요.</div>
+													<div id="uploadedList"></div>
+													
+													</div>
                                                 </div>
                                             </div>
                                             <!--/span-->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>첨부파일</label>
-                                                   <div id="uploadedList"></div>
-													
-												</div>
-                                            </div>
+                                       
                                             <!--/span-->
                                         </div>
                                         <!--/row-->
@@ -285,7 +279,7 @@
 
 <script>
     $(document).ready(function () {
-       
+       $(".initMsg").show();
 
         // 전체 페이지 파일 끌어 놓기 기본 이벤트 방지 : 지정된 영역외에 파일 드래그 드랍시 페이지 이동방지
         $(".content-wrapper").on("dragenter dragover drop", function (event) {
@@ -298,6 +292,7 @@
         // 파일 드랍 이벤트 : 파일 전송 처리
         $(".fileDrop").on("drop", function (event) {
             event.preventDefault();
+            $(".initMsg").hide();
             var files = event.originalEvent.dataTransfer.files;
             var file = files[0];
             console.log(files);
@@ -317,9 +312,11 @@
                    	var original= fileInfo.getLink;
                  	console.log(original);
                  	console.log(fileInfo.imgsrc);
+                 	console.log(fileInfo.fullName);
                     // 하이퍼링크
-                    var html = "<a href='"+fileInfo.getLink+"'>"+fileInfo.fileName+"</a><br>"+
-                    			"<img src ='"+fileInfo.imgsrc+"'>";
+                    var html = "<div><a href="+original+">"
+					  +"<img src='displayFile.do?fileName="+data+"'/>"
+					  +"</a><small data-src="+fileInfo.fullName+">X</small></div>";
                     			
                     			
                     			
@@ -340,18 +337,19 @@
             that.get(0).submit();
         });
         // 파일 삭제 버튼 클릭 이벤트 : 파일삭제, 파일명 DB 삭제 처리
-        $(document).on("click", ".delBtn", function (event) {
-            event.preventDefault();
+        $("#uploadedList").on("click", "small", function(event){
+        	
             var that = $(this);
             $.ajax({
                 url: "deleteFile.do",
                 type: "post",
-                data: {fileName:$(this).attr("href")},
+                data: {fileName:$(this).attr("data-src")},
                 dataType: "text",
                 success: function (result) {
-                    if (result == "DELETED") {
+                    if (result == "deleted") {
                         alert("삭제되었습니다.");
-                        that.parents("li").remove();
+                        that.parent("div").remove();
+                        $(".initMsg").show();
                     }
                 }
             });

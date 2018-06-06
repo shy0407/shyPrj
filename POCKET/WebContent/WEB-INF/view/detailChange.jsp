@@ -7,64 +7,62 @@
 #shy{	width:60%;
 		margin: 0 auto;}
 
+.switch {
+    position: relative;
+    margin: 1px auto;
+    width: 219px;
+    height: 43px;
+    border: 1px solid #e7e7e7;
+    color: #222225;
+    font-size: 16px;
+    border-radius: 5px;
+}
 
-
-.btn12 {
-  border: 3px solid #1a1a1a;
-  display: inline-block;
-  padding: 10px;
+.quality {
   position: relative;
-  text-align: center;
-  -webkit-transition: background 600ms ease, color 600ms ease;
-  transition: background 600ms ease, color 600ms ease;
-}
-
-input[type="radio"].toggle {
-  display: none;
-}
-input[type="radio"].toggle + label {
-  cursor: pointer;
-  min-width: 60px;
-}
-input[type="radio"].toggle + label:hover {
-  background: none;
-  color: #1a1a1a;
-}
-input[type="radio"].toggle + label:after {
-  background: #1a1a1a;
-  content: "";
+  display: inline-block;
+  width: 50%;
   height: 100%;
+  line-height: 40px;
+}
+.quality:first-child label {
+  border-radius: 5px 0 0 5px;
+}
+.quality:last-child label {
+  border-radius: 0 5px 5px 0;
+}
+.quality label {
   position: absolute;
   top: 0;
-  -webkit-transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
-  transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
-  width: 100%;
-  z-index: -1;
-}
-input[type="radio"].toggle.toggle-left + label {
-  border-right: 0;
-}
-input[type="radio"].toggle.toggle-left + label:after {
-  left: 100%;
-}
-input[type="radio"].toggle.toggle-right + label {
-  margin-left: -5px;
-}
-input[type="radio"].toggle.toggle-right + label:after {
-  left: -100%;
-}
-input[type="radio"].toggle:checked + label {
-  cursor: default;
-  color: #fff;
-  -webkit-transition: color 200ms;
-  transition: color 200ms;
-}
-input[type="radio"].toggle:checked + label:after {
   left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-style: italic;
+  text-align: center;
+  transition: transform 0.4s, color 0.4s, background-color 0.4s;
 }
+.quality input[type="radio"] {
+  appearance: none;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.quality input[type="radio"]:focus {
+  outline: 0;
+  outline-offset: 0;
+}
+.quality input[type="radio"]:checked ~ label {
+  background-color: #e7e7e7;
+  color: #111;
+}
+.quality input[type="radio"]:active ~ label {
+  transform: scale(1.05);
+}
+
 
 </style>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 <head>
     <meta charset="utf-8">
@@ -81,9 +79,14 @@ input[type="radio"].toggle:checked + label:after {
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
-    <link href="/toggle/scss/style.scss" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    
+   
+    <script>
+	var result ='${msg}';
+	if(result=='success'){
+		alert("수정완료되었습니다.");
+	
+
+	</script>
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -195,6 +198,7 @@ input[type="radio"].toggle:checked + label:after {
             </div>
             <!-- End Sidebar scroll-->
         </div>
+    
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
@@ -220,7 +224,7 @@ input[type="radio"].toggle:checked + label:after {
                             <div class="card-body">
 								<!--chart 1  -->
 								<div class="card card-outline-primary" id= "shy">
-                            <div class="card-header">
+                            <div class="card-header" id="ss">
                                 <h4 class="m-b-0 text-white">회원 정보 수정</h4>
                             </div>
                             <div class="card-body" >
@@ -234,7 +238,7 @@ input[type="radio"].toggle:checked + label:after {
                                             <div class="col-md-12 ">
                                                 <div class="form-group">
                                                     <label>EMAIL</label>
-                                                    <input type="text" name="email" class="form-control" value="" disabled>
+                                                    <input type="text" name="email" class="form-control" value='<c:out value="${userDTO.email }"></c:out>'  disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -242,7 +246,7 @@ input[type="radio"].toggle:checked + label:after {
                                             <div class="col-md-12 ">
                                                 <div class="form-group">
                                                     <label>USER ID</label>
-                                                    <input type="text" name="user_id" value="${uDTO.user_id}" class="form-control">
+                                                    <input type="text" name="user_id" value='<c:out value="${userDTO.user_id }"></c:out>' class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -250,12 +254,16 @@ input[type="radio"].toggle:checked + label:after {
 												<div class="col-md-6 ">
 													<div class="form-group">
 														<label>성별</label> 
-														
-													  <input id="toggle-on" class="toggle toggle-left" name="gender" value="male" type="radio" checked>
-														<label for="toggle-on" class="btn12">M</label>
-														<input id="toggle-off" class="toggle toggle-right" name="gender" value="female" type="radio">
-														<label for="toggle-off" class="btn12">F</label>
-  
+														  <div class='switch'><div class='quality'>
+													    <input checked id='q1' name='M' type='radio' value="MALE" <c:if test="${userDTO.gender eq 'M'}">checked</c:if>>
+													    <label for='q1'>MALE</label>
+													  </div><div class='quality'>
+													    <input id='q2' name='F' type='radio' value='FEMALE' <c:if test="${userDTO.gender eq 'F'}">checked</c:if>>
+													    <label for='q2'>FEMALE</label>
+													  </div>
+													</div>
+																										  
+													  
 													</div>
 												</div>
 												   <div class="col-md-6">
@@ -263,12 +271,12 @@ input[type="radio"].toggle:checked + label:after {
                                                     <label>AGE</label>
                                                     <select class="form-control custom-select" name="age">
                                                         <option value="">--나이를 선택해주세요--</option>
-                                                        <option value="10">10대</option>
-							                            <option value="20">20대</option>
-							                            <option value="30">30대</option>
-							                            <option value="40">40대</option>
-							                            <option value="50">50대</option>
-							                            <option value="60">60대 이상</option>
+                                                        <option value="10" <c:if test="${userDTO.age eq '10'}">selected</c:if>>10대</option>
+							                            <option value="20" <c:if test="${userDTO.age eq '20'}">selected</c:if>>20대</option>
+							                            <option value="30" <c:if test="${userDTO.age eq '30'}">selected</c:if>>30대</option>
+							                            <option value="40" <c:if test="${userDTO.age eq '40'}">selected</c:if>>40대</option>
+							                            <option value="50" <c:if test="${userDTO.age eq '50'}">selected</c:if>>50대</option>
+							                            <option value="60" <c:if test="${userDTO.age eq '60'}">selected</c:if>>60대 이상</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -279,17 +287,17 @@ input[type="radio"].toggle:checked + label:after {
                                                     <label>JOB</label>
                                                     <select class="form-control custom-select" name="job">
                                                         <option value="">--직업을 선택해주세요--</option>
-                                                        <option value="management">경영/사무</option>
-							                            <option value="sales">영업/고객상담</option>
-							                            <option value="it">IT인터넷</option>
-							                            <option value="design">디자인</option>
-							                            <option value="service">서비스</option>
-							                            <option value="pro">전문직</option>
-							                            <option value="medical">의료</option>
-							                            <option value="manufacture">생산/제조</option>
-							                            <option value="build">건설</option>
-							                            <option value="trade">유통/무역</option>
-							                            <option value="education">교육</option>
+                                                        <option value="management" <c:if test="${userDTO.job eq 'management'}">selected</c:if>>경영/사무</option>
+							                            <option value="sales" <c:if test="${userDTO.job eq 'sales'}">selected</c:if>>영업/고객상담</option>
+							                            <option value="it" <c:if test="${userDTO.job eq 'it'}">selected</c:if>>IT인터넷</option>
+							                            <option value="design" <c:if test="${userDTO.job eq 'design'}">selected</c:if>>디자인</option>
+							                            <option value="service" <c:if test="${userDTO.job eq 'service'}">selected</c:if>>서비스</option>
+							                            <option value="pro" <c:if test="${userDTO.job eq 'pro'}">selected</c:if>>전문직</option>
+							                            <option value="medical" <c:if test="${userDTO.job eq 'medical'}">selected</c:if>>의료</option>
+							                            <option value="manufacture" <c:if test="${userDTO.job eq 'manufacture'}">selected</c:if>>생산/제조</option>
+							                            <option value="build" <c:if test="${userDTO.job eq 'build'}">selected</c:if>>건설</option>
+							                            <option value="trade" <c:if test="${userDTO.job eq 'trade'}">selected</c:if>>유통/무역</option>
+							                            <option value="education" <c:if test="${userDTO.job eq 'education'}">selected</c:if>>교육</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -299,13 +307,13 @@ input[type="radio"].toggle:checked + label:after {
                                                     <label>INCOME</label>
                                                     <select class="form-control custom-select" name="income">
                                                         <option value="">--수입을 선택해주세요--</option>
-                                                        <option value="100">100만원 미만</option>
-							                            <option value="200">100~200만원 미만</option>
-							                            <option value="300">200~300만원 미만</option>
-							                            <option value="400">300~400만원 미만</option>
-							                            <option value="500">400~500만원 미만</option>
-							                            <option value="600">500~600만원 미만</option>
-							                            <option value="700">600만원 이상</option>
+                                                        <option value="100" <c:if test="${userDTO.income eq '100'}">selected</c:if>>100만원 미만</option>
+							                            <option value="200" <c:if test="${userDTO.income eq '200'}">selected</c:if>>100~200만원 미만</option>
+							                            <option value="300" <c:if test="${userDTO.income eq '300'}">selected</c:if>>200~300만원 미만</option>
+							                            <option value="400" <c:if test="${userDTO.income eq '400'}">selected</c:if>>300~400만원 미만</option>
+							                            <option value="500" <c:if test="${userDTO.income eq '500'}">selected</c:if>>400~500만원 미만</option>
+							                            <option value="600" <c:if test="${userDTO.income eq '600'}">selected</c:if>>500~600만원 미만</option>
+							                            <option value="700" <c:if test="${userDTO.income eq '700'}">selected</c:if>>600만원 이상</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -320,6 +328,7 @@ input[type="radio"].toggle:checked + label:after {
                                     	<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
                                         <!-- <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button> -->
                                         <button type="button" class="btn btn-inverse">Cancel</button>
+                                        <button type="button" class="btn btn-inverse">탈퇴</button>
                                     </div>
                                 </form>
                             </div>
@@ -331,6 +340,7 @@ input[type="radio"].toggle:checked + label:after {
                 </div>
                 <!-- End PAge Content -->
             </div>
+            
             <!-- End Container fluid  -->
             <!-- footer -->
             <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com"><img src="/image/insta.png"><img src="/image/twit.png"><img src="/image/facebook.png"></a></footer>

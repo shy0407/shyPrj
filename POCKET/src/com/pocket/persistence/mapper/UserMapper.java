@@ -29,7 +29,7 @@ public interface UserMapper {
 	
 	LoginDTO getTempPwd(String email)throws Exception;
 	
-	void updateUserInfo(String user_no)throws Exception;
+	void updateUserInfo(userDTO userDTO)throws Exception;
 	
 	userDTO getUserInfo(String user_no)throws Exception;
 	

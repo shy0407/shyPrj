@@ -41,10 +41,13 @@ public class StoreController {
 	
 
 	@RequestMapping(value="/admin/storeList", method=RequestMethod.GET)
-	public String storeList(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
+	public String storeList(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		
 		log.info("/admin/storeList!!!!!..............");
+		
+		
+	    
+	  
 		
 		List<StoreDTO> sList= storeService.getStoreList();
 		
@@ -56,6 +59,7 @@ public class StoreController {
 	
 	
 	
+
 	
 	
 	

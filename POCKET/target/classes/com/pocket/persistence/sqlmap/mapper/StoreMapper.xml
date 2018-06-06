@@ -6,6 +6,27 @@
 select * from aws.STORE_INFO
 </select>
 
+<!--페이지 가져오는 select  -->
+<select  id ="listPage" resultType="StoreDTO">
+	<![CDATA[
+	select STORE_NO, STORE_NAME,CATEGORY,ADRRESSPOTALCODE
+	from aws.STORE_INFO
+	where STORE_NO>0
+	order by STORE_NO desc 
+	limit #{page},10
+	]]>
 
+</select>
+
+<select id="listCriteria" resultType="StoreDTO">
+	<![CDATA[
+		select STORE_NO, STORE_NAME,CATEGORY,ADRRESSPOTALCODE
+		from aws.STORE_INFO
+		where STORE_NO>10
+		order by STORE_NO
+		limit #{pageStart},#{prePageNum}
+		
+	]]>
+</select>
 
 </mapper>

@@ -46,6 +46,8 @@
 		alert("가입완료");
 	}else if(result=='pwdChg'){
 		alert("비밀번호 변경 완료..!로그인해주세요");
+	}else if(result=='loginFail'){
+		alert("로그인 실패,회원정보를 확인해주세요");
 	}
 
 </script>

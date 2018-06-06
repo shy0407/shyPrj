@@ -245,7 +245,7 @@
 			          	console.log(fileInfo.imgsrc);
 			          	
 			          	var html='<div class="col-lg-3 col-md-4 col-xs-6"><a href="#" class="d-block mb-4 h-100" id="g"><img class="img-fluid img-thumbnail" src="';
-			          	html+=fileInfo.imgsrc+'"><div class="overlay"><div class="text">삭제하시겠습니까?</div><a href="#" class="icon" title="User Profile"><i class="fa fa-remove"></i></a></div></a></div>'
+			          	html+=fileInfo.imgsrc+'"><div class="overlay"><div class="text">삭제하시겠습니까?</div><a href="#" class="icon" title="User Profile"><i class="fa fa-remove"></i></a></div></a></div>';
 			          	
 			          	
 			          	$("#shy").append(html);
@@ -254,6 +254,25 @@
 			            });
 			        }
 			    });
+			    
+			    
+			    $("#overlay").on("click", "fa fa-remove", function(event){
+		        	
+		            var that = $(this);
+		            $.ajax({
+		                url: "deleteFile.do",
+		                type: "post",
+		                data: {fileName:$(this).attr("data-src")},
+		                dataType: "text",
+		                success: function (result) {
+		                    if (result == "deleted") {
+		                        alert("삭제되었습니다.");
+		                        that.parent("div").remove();
+		                        $(".initMsg").show();
+		                    }
+		                }
+		            });
+		        });
 			
 		});
 		

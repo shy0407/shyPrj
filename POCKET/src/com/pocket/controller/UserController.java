@@ -61,7 +61,8 @@ public class UserController {
 			}
 			
 		}else {
-			//rttr.addFlashAttribute("join", "fail");
+			log.info("gdgdgd");
+			rttr.addFlashAttribute("msg", "loginFail");
 			returnURL="redirect:/indexNoSignUp.do";
 		}
 		return returnURL;
@@ -127,7 +128,7 @@ public class UserController {
 	
 	@RequestMapping(value="detailChange", method=RequestMethod.POST)
 	public String detailChangePost(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model,HttpSession session) throws Exception {
+			ModelMap model,HttpSession session,RedirectAttributes rttr) throws Exception {
 		
 		log.info("detailChange POST!!!!!!..............");
 		
@@ -137,7 +138,7 @@ public class UserController {
 		//String user_no=(String) session.getAttribute(uDTO.getUser_no());
 		log.info(user_no);
 		
-		String user_id = CmmUtil.nvl(AES256Util.strEncode(request.getParameter("user_id")));
+		String user_id = CmmUtil.nvl(request.getParameter("user_id"));
 		String email = CmmUtil.nvl(request.getParameter("email"));
 		String income = CmmUtil.nvl(request.getParameter("income"));
 		String job = CmmUtil.nvl(request.getParameter("job"));
@@ -146,7 +147,7 @@ public class UserController {
 		
 		userDTO userDTO =new userDTO();
 		
-		
+		userDTO.setUser_no(user_no);
 		userDTO.setUser_id(user_id);
 		userDTO.setEmail(email);
 		userDTO.setIncome(income);
@@ -154,10 +155,10 @@ public class UserController {
 		userDTO.setGender(gender);
 		userDTO.setAge(age);
 		
-		userService.updateUserInfo(user_no);
-		
+		userService.updateUserInfo(userDTO);
+		rttr.addFlashAttribute("msg", "success");		
 
-		return "/detailChange";
+		return "redirect:/detailChange.do";
 
 	}
 }

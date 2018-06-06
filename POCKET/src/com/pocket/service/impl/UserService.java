@@ -68,8 +68,8 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public void updateUserInfo(String user_no) throws Exception {
-		userMapper.updateAuth(user_no);
+	public void updateUserInfo(userDTO userDTO) throws Exception {
+		userMapper.updateUserInfo(userDTO);
 		
 	}
 

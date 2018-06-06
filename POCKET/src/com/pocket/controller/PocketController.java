@@ -120,7 +120,7 @@ public class PocketController {
 		
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
-		return "/pocketRegister";
+		return "/pocketGallery";
 		
 	}
 	

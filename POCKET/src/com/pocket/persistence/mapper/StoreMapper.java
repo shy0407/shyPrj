@@ -2,6 +2,7 @@ package com.pocket.persistence.mapper;
 
 import java.util.List;
 
+import com.pocket.DTO.Criteria;
 import com.pocket.DTO.StoreDTO;
 import com.pocket.config.Mapper;
 
@@ -10,8 +11,8 @@ import com.pocket.config.Mapper;
 public interface StoreMapper {
 
 	List<StoreDTO> getStoreList()throws Exception;
-	
-
+	List<StoreDTO> listPage(int page)throws Exception;
+	List<StoreDTO> listCriteria(Criteria cri) throws Exception;
 	
 
 }

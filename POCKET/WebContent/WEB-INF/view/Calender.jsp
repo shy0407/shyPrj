@@ -31,6 +31,8 @@
     <link href="/calendar/fullcalendar.min.css" rel="stylesheet">
        <link href="/calendar/fullcalendar.min.css" rel="stylesheet">
     <link href="/calendar/fullcalendar.print.css" rel="stylesheet" media="print">
+        <link href="/ElaAdmin-master/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
+    
     <!-- 그리드 -->
     <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
     <link rel="stylesheet" type="text/css" media="screen" href="/grid/css/jquery-ui.css" />
@@ -237,6 +239,9 @@
 	 <script src="/calendar/moment.min.js"></script>
     <script src="/calendar/fullcalendar.min.js"></script>
     <script src="/calendar/jquery-ui.min.js"></script>
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
     
 	 <script>
    var date_last_clicked = null;
@@ -269,9 +274,15 @@
     		  }
     	  });
       },
-      eventClick: function(event, jsEvent, view) {
-		  $('#CalenderModalEdit').modal();
-		  $('#title2').val(event.title);
+      dayClick: function(date, jsEvent, view) {
+    	  //alert('Clicked on: ' + date.format());
+    	  
+    	  swal("Write something here:", {
+    		  content: "input",
+    		})
+    		.then((value) => {
+    		  swal(`You typed: ${value}`);
+    		});
 		  },
       defaultDate: '2018-05-12',
       navLinks: true, // can click day/week names to navigate views

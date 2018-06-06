@@ -23,6 +23,11 @@
     <!-- Custom CSS -->
     <link href="ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="ElaAdmin-master/css/style.css" rel="stylesheet">
+    <link href="/calendar/fullcalendar.min.css" rel="stylesheet">
+       <link href="/calendar/fullcalendar.min.css" rel="stylesheet">
+    <link href="/calendar/fullcalendar.print.css" rel="stylesheet" media="print">
+        <link href="/ElaAdmin-master/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -211,314 +216,57 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Sales</h4>
+                                <h4>달력으로 확인</h4>
                             </div>
-                            <div class="sales-chart">
-                                <div class="ct-bar-chart" style="height:350px"></div>
-                            </div>
+                             <div class="card-body">
+                             <div id='calendar'></div>
+                             </div>
+                            
                         </div>
                         <!-- /# card -->
                     </div>
                     <!-- /# column -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Visitor in Device</h4>
-                            </div>
-                            <div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-hover ">
-										<thead>
-											<tr>
-												<th>Device</th>
-												<th>Visits</th>
-												<th>Avg. time</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Unknown</td>
-												<td>2,456</td>
-												<td>00:02:36</td>
-											</tr>
-											<tr>
-												<td>Apple iPad</td>
-												<td>1,006</td>
-												<td>00:03:41</td>
-											</tr>
-											<tr>
-												<td>Apple iPhone</td>
-												<td>68</td>
-												<td>00:04:10</td>
-											</tr>
-											<tr>
-												<td>HTC Desire</td>
-												<td>38</td>
-												<td>00:01:40</td>
-											</tr>
-											<tr>
-												<td>Samsung</td>
-												<td>20</td>
-												<td>00:04:54</td>
-											</tr>
-											<tr>
-												<td>Apple iPad</td>
-												<td>1,006</td>
-												<td>00:03:41</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-                        </div>
-                    </div>
+                    
 				</div>
 				<div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="card nestable-cart">
                             <div class="card-title">
                                 <h4>World Map</h4>
 
                             </div>
-                            <div class="datamap">
-                                <div id="world-datamap"></div>
-                            </div>
+                            <div class="card-body">
+                            <div id="map" style="width:500px;height:400px;"></div>
+							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=27bd3a5915ae76a36c4f076bc4993248"></script>
+							<script>
+								var container = document.getElementById('map');
+								var options = {
+									center: new daum.maps.LatLng(33.450701, 126.570667),
+									level: 3
+								};
+						
+								var map = new daum.maps.Map(container, options);
+							</script>
+                             </div>
+                            
                         </div>
                     </div>
-					<div class="col-lg-6">
+					<div class="col-lg-4">
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="card-title">Visitor</h4>
-                                <div class="ct-svg-chart" style="height:420px"></div>
+                                
                             </div>
                         </div>
                     </div>
                     <!-- /# column -->
                 </div>
-                <!-- /# row -->
+               
 
-                <div class="row">
-
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Project</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="current-progress">
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Website</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-                                                            40%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Android</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                                                            60%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Ios</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-70" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                                            70%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Mobile</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                                                            90%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Android</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                                                            60%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Ios</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-70" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                                            70%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="progress-text">Mobile</div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="current-progressbar">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                                                            90%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Messages</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="recent-meaasge">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#"><img alt="..." src="images/avatar/1.jpg" class="media-object"></a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">john doe</h4>
-                                            <div class="meaasge-date">15 minutes Ago</div>
-                                            <p class="f-s-12">We are happy about your service </p>
-                                        </div>
-                                    </div>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#"><img alt="..." src="images/avatar/2.jpg" class="media-object"></a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Mr. John</h4>
-                                            <div class="meaasge-date">40 minutes ago</div>
-                                            <p class="f-s-12">Quick service and good serve </p>
-                                        </div>
-                                    </div>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#"><img alt="..." src="images/avatar/3.jpg" class="media-object"></a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Mr. Michael</h4>
-                                            <div class="meaasge-date">1 minutes ago</div>
-                                            <p class="f-s-12">We like your birthday cake </p>
-                                        </div>
-                                    </div>
-                                    <div class="media no-border">
-                                        <div class="media-left">
-                                            <a href="#"><img alt="..." src="images/avatar/2.jpg" class="media-object"></a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Mr. John</h4>
-                                            <div class="meaasge-date">40 minutes ago</div>
-                                            <p class="f-s-12">Quick service and good serve </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Todo</h4>
-                            </div>
-                            <div class="todo-list">
-                                <div class="tdl-holder">
-                                    <div class="tdl-content">
-                                        <ul>
-                                            <li class="color-primary">
-                                                <label>
-                                                <input type="checkbox"><i class="bg-primary"></i><span>Post three to six times on Twitter.</span>
-                                                <a href='#' class="ti-close"></a>
-                                            </label>
-                                            </li>
-                                            <li class="color-success">
-                                                <label>
-                                                <input type="checkbox" checked><i class="bg-success"></i><span>Post one to two times on Facebook.</span>
-                                                <a href='#' class="ti-close"></a>
-                                            </label>
-                                            </li>
-                                            <li class="color-warning">
-                                                <label>
-                                                <input type="checkbox" checked><i class="bg-warning"></i><span>Follow back those who follow you</span>
-                                                <a href='#' class="ti-close"></a>
-                                            </label>
-                                            </li>
-                                            <li class="color-danger">
-                                                <label>
-                                                <input type="checkbox" checked><i class="bg-danger"></i><span>Connect with one new person</span>
-                                                <a href='#' class="ti-close"></a>
-                                            </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <input type="text" class="tdl-new form-control" placeholder="Type here">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                
 
 
                 <!-- End PAge Content -->
@@ -532,34 +280,157 @@
     </div>
     <!-- End Wrapper -->
     <!-- All Jquery -->
-    <script src="ElaAdmin-master/js/lib/jquery/jquery.min.js"></script>
+    <script src="/ElaAdmin-master/js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
-    <script src="ElaAdmin-master/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
+    <script src="/ElaAdmin-master/js/lib/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="ElaAdmin-master/js/jquery.slimscroll.js"></script>
+    <script src="/ElaAdmin-master/js/jquery.slimscroll.js"></script>
     <!--Menu sidebar -->
-    <script src="ElaAdmin-master/js/sidebarmenu.js"></script>
+    <script src="/ElaAdmin-master/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-
-    <script src="ElaAdmin-master/js/lib/datamap/d3.min.js"></script>
-    <script src="ElaAdmin-master/js/lib/datamap/topojson.js"></script>
-    <script src="ElaAdmin-master/js/lib/datamap/datamaps.world.min.js"></script>
-    <script src="ElaAdmin-master/js/lib/datamap/datamap-init.js"></script>
-
-    <script src="ElaAdmin-master/js/lib/weather/jquery.simpleWeather.min.js"></script>
-    <script src="ElaAdmin-master/js/lib/weather/weather-init.js"></script>
-    <script src="ElaAdmin-master/js/lib/owl-carousel/owl.carousel.min.js"></script>
-    <script src="ElaAdmin-master/js/lib/owl-carousel/owl.carousel-init.js"></script>
-
-
-    <script src="ElaAdmin-master/js/lib/chartist/chartist.min.js"></script>
-    <script src="ElaAdmin-master/js/lib/chartist/chartist-plugin-tooltip.min.js"></script>
-    <script src="ElaAdmin-master/js/lib/chartist/chartist-init.js"></script>
+    <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
+	 <script src="/calendar/moment.min.js"></script>
+    <script src="/calendar/fullcalendar.min.js"></script>
+    <script src="/calendar/jquery-ui.min.js"></script>   
     <!--Custom JavaScript -->
-    <script src="ElaAdmin-master/js/custom.min.js"></script>
+    <script src="/ElaAdmin-master/js/custom.min.js"></script>
+  
+ <script src="https://unpkg.com/sweetalert2"></script>
+    
+	 <script>
+   var date_last_clicked = null;
+   
+  $(document).ready(function() {
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay'
+        	
+      },
+      events: function(start, end,timezone,callback){
+    	  $.ajax({
+    		  url:'expenseCal.do',
+    		  dataType:'json',
+    		  type:'post',
+    		  data:{start:start.format()},
+    		  success:function(data){
+    			  console.log(data);
+    			  var events= [];
+    			  $(data).each(function(){
+    				  events.push({
+    					  title:$(this).attr('expense_category'),
+    					  start:$(this).attr('expense_date'),
+    					  end:$(this).attr('expense_date')
+    				  });
+    			  });
+    			  callback(events);
+    		  }
+    	  });
+      },
+      dayClick: function(date, jsEvent, view) {
+    	  //alert('Clicked on: ' + date.format());
+    	  
+    		swal.setDefaults({
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        animation: false,
+        progressSteps: ['1', '2', '3'],
+    })
+    swal.queue([{
+        title: 'New Event',
+        text: 'Event Name:',
+        input: 'text',
+        preConfirm: function(inputValue) {
+            return new Promise(function(resolve, reject) {
+                if (!inputValue) {
+                    reject('Enter a Name')
+                } else {
+                    inputName = inputValue;
+                    resolve()
+                }
+            })
+        }
+    }, {
+        title: 'New Event',
+        text: 'Event Description:',
+        input: 'text',
+        preConfirm: function(inputValue) {
+            return new Promise(function(resolve, reject) {
+                if (!inputValue) {
+                    reject('Enter a Description')
+                } else {
+                    inputDescription = inputValue;
+                    resolve()
+                }
+            })
+        }
+    }, {
+        title: 'New Event',
+        text: 'Event Time:',
+        input: 'select',
+        inputOptions: {
+            '06:00:00': '06:00 AM',
+            '07:00:00': '07:00 AM',
+            '08:00:00': '08:00 AM',
+            '09:00:00': '09:00 AM',
+            '10:00:00': '10:00 AM',
+            '11:00:00': '11:00 AM',
+            '12:00:00': '12:00 PM',
+            '13:00:00': '01:00 PM',
+            '14:00:00': '02:00 PM',
+            '15:00:00': '03:00 PM',
+            '16:00:00': '04:00 PM',
+            '17:00:00': '05:00 PM',
+            '18:00:00': '06:00 PM',
+            '19:00:00': '07:00 PM',
+            '20:00:00': '08:00 PM',
+            '21:00:00': '09:00 PM',
+            '22:00:00': '10:00 PM'
+        },
+        inputPlaceholder: 'Select Time',
+        preConfirm: function(inputValue) {
+            return new Promise(function(resolve, reject) {
+                if (!inputValue) {
+                    reject('Enter a Time')
+                } else {
+                    inputTime = inputValue;
+                    resolve()
+                }
+            })
+        }
+    }]).then(function(inputValue) {
+        $('#calendarDiv').fullCalendar('renderEvent', {
+            title: inputName,
+            description: inputDescription,
+            start: date.format() + 'T' + inputTime,
+            allDay: false,
+        }, 'stick');
+        swal.resetDefaults()
+        swal({
+            title: 'Event Created',
+            html: "Name: " + inputName + "<br>Description: " + inputDescription + "<br>Time: " + inputTime,
+            confirmButtonText: 'Done',
+            showCancelButton: false
+        })
+    }, function() {
+        swal.resetDefaults()
+    })
+		  },
+      defaultDate: '2018-05-12',
+      navLinks: true, // can click day/week names to navigate views
+      //editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      disableDragging: true
+
+    });
+
+  });
+
+
+</script>
 
 </body>
 
