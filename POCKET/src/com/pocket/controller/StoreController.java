@@ -1,23 +1,19 @@
 package com.pocket.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pocket.DTO.StoreDTO;
+import com.pocket.DTO.Criteria;
+import com.pocket.DTO.PageMaker;
 import com.pocket.service.IStoreService;
 
 	
@@ -49,15 +45,39 @@ public class StoreController {
 	    
 	  
 		
-		List<StoreDTO> sList= storeService.getStoreList();
+		/*List<StoreDTO> sList= storeService.getStoreList();
 		
-		model.addAttribute(sList);
+		model.addAttribute(sList);*/
 		
 		return "/admin/storeList";
 
 	}
 	
-	
+	@RequestMapping(value = "/admin/listCri", method = RequestMethod.GET)
+	  public void listAll(Criteria cri, Model model) throws Exception {
+
+	    log.info("show list Page with Criteria......................");
+
+	    model.addAttribute("list", storeService.listCriteria(cri));
+	  }
+
+	@RequestMapping(value = "/admin/listPage", method = RequestMethod.GET)
+	  public void listPage(@ModelAttribute("cri")Criteria cri, Model model) throws Exception {
+
+			log.info(cri.toString());
+			log.info(cri);
+	    model.addAttribute("list", storeService.listCriteria(cri));
+	    log.info(storeService.listCriteria(cri));
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	   // pageMaker.setTotalCount(131);
+
+	    pageMaker.setTotalCount(storeService.listCountCriteria(cri));
+
+	    model.addAttribute("pageMaker", pageMaker);
+	  }
+
+
 	
 
 	

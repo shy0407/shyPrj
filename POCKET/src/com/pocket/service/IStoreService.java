@@ -10,5 +10,6 @@ public interface IStoreService {
 	List<StoreDTO> getStoreList()throws Exception;
 	List<StoreDTO> listPage(int page)throws Exception;
 	List<StoreDTO> listCriteria(Criteria cri) throws Exception;
-	
+	int countPaging(Criteria cri) throws Exception;
+	int listCountCriteria(Criteria cri) throws Exception;
 }
