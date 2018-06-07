@@ -35,6 +35,17 @@ public class StoreService implements IStoreService {
 	public List<StoreDTO> listCriteria(Criteria cri) throws Exception {
 		return storeMapper.listCriteria(cri);
 	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		return storeMapper.countPaging(cri);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) throws Exception {
+
+		return storeMapper.countPaging(cri);
+	}
 	
 		
 	

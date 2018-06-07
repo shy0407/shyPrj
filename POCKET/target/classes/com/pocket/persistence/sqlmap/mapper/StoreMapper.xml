@@ -9,7 +9,7 @@ select * from aws.STORE_INFO
 <!--페이지 가져오는 select  -->
 <select  id ="listPage" resultType="StoreDTO">
 	<![CDATA[
-	select STORE_NO, STORE_NAME,CATEGORY,ADRRESSPOTALCODE
+	select STORE_NO, STORE_NAME,CATEGORY,CATEGORY_DETAIL,JIBUN_ADDR
 	from aws.STORE_INFO
 	where STORE_NO>0
 	order by STORE_NO desc 
@@ -20,13 +20,25 @@ select * from aws.STORE_INFO
 
 <select id="listCriteria" resultType="StoreDTO">
 	<![CDATA[
-		select STORE_NO, STORE_NAME,CATEGORY,ADRRESSPOTALCODE
+		select STORE_NO, STORE_NAME,CATEGORY,CATEGORY_DETAIL,JIBUN_ADDR
 		from aws.STORE_INFO
-		where STORE_NO>10
-		order by STORE_NO
-		limit #{pageStart},#{prePageNum}
+		where STORE_NO>0
+		order by STORE_NO desc
+		limit #{pageStart},#{perPageNum}
 		
 	]]>
+</select>
+
+<select id ="countPaging" resultType="int">
+<![CDATA[
+	select 
+	count(STORE_NO)
+	from aws.STORE_INFO
+	where
+	STORE_NO>0
+
+]]>
+
 </select>
 
 </mapper>

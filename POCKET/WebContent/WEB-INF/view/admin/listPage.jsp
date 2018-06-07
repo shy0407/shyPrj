@@ -156,36 +156,42 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                                <th>Price</th>
+                                                <th>NO</th>
+                                                <th>점포명</th>
+                                                <th>카테고리</th>
+                                                <th>상세 카테고리</th>
+                                                <th>주소</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <c:forEach items="${list}" var="sDTO">
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary">Sale</span></td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
+                                                <th scope="row">${sDTO.store_no}</th>
+                                                <td>${sDTO.store_name}</td>
+                                                <td>${sDTO.category}</td>
+                                                <td>${sDTO.category_detail}</td>
+                                                <td class="color-primary">${sDTO.jibun_addr}</td>
                                             </tr>
-                                            
+                                         </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
                                  <div class="pagination p12">
+								    <div class="pagination p12">
 								      <ul>
-								        <a href="#"><li>Previous</li></a>
-								        <a href="#"><li>1</li></a>
-								        <a href="#"><li>2</li></a>
-								        <a href="#"><li>3</li></a>
-								        <a href="#"><li>4</li></a>
-								        <a href="#"><li>5</li></a>
-								        <a class="is-active" href="#"><li>6</li></a>
-								        <a href="#"><li>Next</li></a>
+								        <c:if test="${pageMaker.prev}">
+								        <a href="listPage.do?page=${pageMaker.startPage -1 }"><li>Previous</li></a>
+								        </c:if>
+								         <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+								       			 <a href="listPage.do?page=${idx}"
+								       			 	<c:out value="${pageMaker.cri.page == idx?'class =is-active':''}"/>><li>${idx}</li></a>
+								        </c:forEach>
+								        
+								        <c:if test="${pageMaker.next && pageMaker.endPage>0 }">
+								        <a href="listPage.do?page=${pageMaker.endPage+1 }"><li>Next</li></a>
+								        </c:if>
 								      </ul>
+								    </div>
 								    </div>
                             </div>
                         </div>
