@@ -11,6 +11,9 @@
     	<typeAlias type="com.pocket.DTO.LoginDTO" alias="LoginDTO" />
     	<typeAlias type="com.pocket.DTO.DataDTO" alias="DataDTO" />
     	<typeAlias type="com.pocket.DTO.TestDTO" alias="TestDTO" />
-    	<typeAlias type="com.pocket.DTO.TestDTO" alias="StoreDTO" />
+    	<typeAlias type="com.pocket.DTO.StoreDTO" alias="StoreDTO" />
+    	<typeAlias type="com.pocket.DTO.Criteria" alias="Criteria" />
+    	<typeAlias type="com.pocket.DTO.PageMaker" alias="PageMaker" />
+    	
     </typeAliases>
 </configuration>

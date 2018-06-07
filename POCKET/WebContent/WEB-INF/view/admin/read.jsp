@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +11,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="/ElaAdmin-master/image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <title>Ela - Bootstrap Admin Dashboard Template</title>
     <!-- Bootstrap Core CSS -->
     <link href="/ElaAdmin-master/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/page/css/style.css">
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -149,52 +147,13 @@
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">              
+                        <div class="card">
+			                           
                             <div class="card-body">
-                                <h4 class="card-title">Data Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>NO</th>
-                                                <th>점포명</th>
-                                                <th>카테고리</th>
-                                                <th>상세 카테고리</th>
-                                                <th>주소</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${list}" var="sDTO">
-                                            <tr>
-                                                <th scope="row">${sDTO.store_no}</th>
-                                                <td>${sDTO.store_name}</td>
-                                                <td>${sDTO.category}</td>
-                                                <td>${sDTO.category_detail}</td>
-                                                <td class="color-primary">${sDTO.jibun_addr}</td>
-                                            </tr>
-                                         </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                 <div class="pagination p12">
-								    <div class="pagination p12">
-								      <ul>
-								        <c:if test="${pageMaker.prev}">
-								        <a href="listPage.do?page=${pageMaker.startPage -1 }"><li>Previous</li></a>
-								        </c:if>
-								         <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-								       			 <a href="listPage.do?page=${idx}"
-								       			 	<c:out value="${pageMaker.cri.page == idx?'class =is-active':''}"/>><li>${idx}</li></a>
-								        </c:forEach>
-								        
-								        <c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-								        <a href="listPage.do?page=${pageMaker.endPage+1 }"><li>Next</li></a>
-								        <span><button type="button" class="btn btn-success m-b-10 m-l-5">Success</button></span>
-								        </c:if>
-								      </ul>
-								    </div>
-								    </div>
-                            </div>
+								<!--chart 1  -->
+								<div></div>
+								
+							</div>
                         </div>
                     </div>
                
@@ -209,7 +168,7 @@
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
-   <!-- All Jquery -->
+    <!-- All Jquery -->
     <script src="/ElaAdmin-master/js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
@@ -222,18 +181,9 @@
     <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
-
-
-    <script src="/ElaAdmin-master/js/lib/datatables/datatables.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/datatables-init.js"></script>
-	
+	<!--stickey kit -->
+	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
+	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
 	
 
 </body>
