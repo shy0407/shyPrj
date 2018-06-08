@@ -72,5 +72,9 @@
 		<constructor-arg value="C:\\Users\\user\\git\\shyPrj\\POCKET\\upload"></constructor-arg>	
 	</bean>
 	
+	<!-- 파일업로드 경로 for store_info -->
+	<bean id="uploadPathStore" class="java.lang.String">
+		<constructor-arg value="C:\\Users\\user\\git\\shyPrj\\POCKET\\storeUpload"></constructor-arg>	
+	</bean>
 
 </beans>
