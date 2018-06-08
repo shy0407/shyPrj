@@ -167,7 +167,7 @@
                                         <c:forEach items="${list}" var="sDTO">
                                             <tr>
                                                 <th scope="row">${sDTO.store_no}</th>
-                                                <td>${sDTO.store_name}</td>
+                                                <td><a href ="/admin/read.do${pageMaker.makeQuery(pageMaker.cri.page)}&store_no=${sDTO.store_no}">${sDTO.store_name}</a></td>
                                                 <td>${sDTO.category}</td>
                                                 <td>${sDTO.category_detail}</td>
                                                 <td class="color-primary">${sDTO.jibun_addr}</td>
@@ -180,15 +180,15 @@
 								    <div class="pagination p12">
 								      <ul>
 								        <c:if test="${pageMaker.prev}">
-								        <a href="listPage.do?page=${pageMaker.startPage -1 }"><li>Previous</li></a>
+								        <a href="listPage.do${pageMaker.makeQuery(pageMaker.startPage -1) }"><li>Previous</li></a>
 								        </c:if>
 								         <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-								       			 <a href="listPage.do?page=${idx}"
+								       			 <a href="listPage.do${pageMaker.makeQuery(idx)}"
 								       			 	<c:out value="${pageMaker.cri.page == idx?'class =is-active':''}"/>><li>${idx}</li></a>
 								        </c:forEach>
 								        
 								        <c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-								        <a href="listPage.do?page=${pageMaker.endPage+1 }"><li>Next</li></a>
+								        <a href="listPage.do${pageMaker.makeQuery(pageMaker.endPage+1) }"><li>Next</li></a>
 								        <span><button type="button" class="btn btn-success m-b-10 m-l-5">Success</button></span>
 								        </c:if>
 								      </ul>

@@ -41,4 +41,42 @@ select * from aws.STORE_INFO
 
 </select>
 
+
+<select id="read" parameterType="String" resultType="StoreDTO">
+	select STORE_NO,STORE_NAME,CATEGORY,
+	CATEGORY_DETAIL,JIBUN_ADDR,LNG,LAT
+	from aws.STORE_INFO
+	where STORE_NO=#{store_no}
+</select>
+
+
+<delete id="delete" parameterType="String"> 
+	delete from aws.STORE_INFO
+	where STORE_NO=#{store_no}
+</delete>
+
+<update id="update" parameterType="StoreDTO">
+	update aws.STORE_INFO set
+	STORE_NAME=#{store_name}, CATEGORY=#{category}, 
+	CATEGORY_DETAIL=#{category_detail},JIBUN_ADDR=#{jibun_addr},
+	LNG=#{lng}, LAT=#{lat}
+	where STORE_NO=#{store_no}
+</update>
+
+
+<insert id="create" parameterType="StoreDTO">
+	insert into aws.STORE_INFO(STORE_NO, STORE_NAME, CATEGORY, CATEGORY_DETAIL, JIBUN_ADDR,LNG,LAT)
+	values((SELECT IFNULL(MAX(SI.STORE_NO),10000000)+1 FROM aws.STORE_INFO SI), #{store_name},
+			#{category},#{category_detail},#{jibun_addr},#{lng},#{lat})
+</insert>
+
+
+<!--첨부파일 등록 -->
+<insert id="addStoreAttach">
+insert into aws.STORE_IMG(FULL_NAME, STORE_NO,REGDATE) 
+values (#{fullName},(SELECT IFNULL(MAX(SI.STORE_NO),10000000)+1 FROM aws.STORE_INFO SI),NOW())
+</insert>
+
+
+
 </mapper>

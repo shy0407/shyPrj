@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.fileDrop {
+	width: 100%;
+	height: 320px;
+	border: 1px dotted gray;
+}
+#uploadedList{margin: 0 auto;}
 
+</style>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -148,10 +157,65 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-			                           
+			                   	<div class="card card-outline-primary">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">가맹점 상세보기</h4>
+                            </div>        
                             <div class="card-body">
 								<!--chart 1  -->
-								<div></div>
+								<div>
+									<form role="form" action="modifyPage.do" method="post">
+                                
+                                    <div class="form-body">
+                                      
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <!-- <label>City</label>
+                                                    <input type="text" class="form-control"> -->
+                                                    <label for="exampleInputEmail1">File DROP Here</label>
+													<div class="fileDrop">
+											<!-- 		<div class="initMsg">파일을 올려주세요.</div>
+													<div id="uploadedList"></div> -->
+													
+													</div>
+                                                </div>
+                                            </div>
+                                            
+                                             <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>점포명</label>
+                                                    <input type="text" name="store_name" class="form-control" value="${sDTO.store_name }" readonly="readonly">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>카테고리 </label>
+                                                    <input type="text" name="category" class="form-control" value="${sDTO.category }" readonly="readonly">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>카테고리상세 </label>
+                                                    <input type="text" name="category_detail" class="form-control" value="${sDTO.category_detail }" readonly="readonly">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>주소 </label>
+                                                    <input type="text" name="jibun_addr" class="form-control" value="${sDTO.jibun_addr }" readonly="readonly">
+                                                </div>
+                                            </div>
+                                            	<input type="hidden" name="page" value="${cri.page }">
+                                            	<input type="hidden" name="perPageNum" value="${cri.perPageNum }">
+                                            	<input type="hidden" name="store_no" value="${sDTO.store_no }">
+                                            	<input type="hidden" name="lng" value="${sDTO.lng }">
+                                            	<input type="hidden" name="lat" value="${sDTO.lat }">
+                                        </div>
+
+                                    </div>
+                                    <div class="form-actions">
+                                    	<button type="submit" class="btn btn-success" id="golist"><i class="fa fa-save"></i>Go List</button>	
+                                        <button type="submit" class="btn btn-success" id="modify"><i class="fa fa-save"></i> Modify</button>
+                                        <button type="submit" class="btn btn-success" id="remove"><i class="fa fa-save"></i> Remove</button>
+                                    </div>
+                                </form>
+								</div>
 								
 							</div>
                         </div>
@@ -169,7 +233,7 @@
     </div>
     <!-- End Wrapper -->
     <!-- All Jquery -->
-    <script src="/ElaAdmin-master/js/lib/jquery/jquery.min.js"></script>
+    <script src="/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -184,7 +248,34 @@
 	<!--stickey kit -->
 	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
 	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
-	
+
+	<script>
+	$(document).ready(function(){
+		alert("Gdgd");
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		$("#modify").on("click", function(){
+			formObj.attr("action", "/admin/modifyPage.do");
+			formObj.attr("method", "get");		
+			formObj.submit();
+		});
+		
+		$("#remove").on("click", function(){
+			
+			formObj.attr("action", "/admin/removePage.do");
+			formObj.submit();
+		});
+		
+		$("#golist").on("click", function(){
+			formObj.attr("method", "get");
+			formObj.attr("action", "/admin/listPage.do");
+			formObj.submit();
+		});
+		
+	});
+	</script>
 
 </body>
 

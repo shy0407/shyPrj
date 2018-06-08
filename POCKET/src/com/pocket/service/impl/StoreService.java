@@ -46,6 +46,33 @@ public class StoreService implements IStoreService {
 
 		return storeMapper.countPaging(cri);
 	}
+
+	@Override
+	public StoreDTO read(String store_no) throws Exception {
+		
+		return storeMapper.read(store_no);
+	}
+
+	@Override
+	public void update(StoreDTO storeDTO) throws Exception {
+		storeMapper.update(storeDTO);
+	}
+
+	@Override
+	public void delete(String store_no) throws Exception {
+		storeMapper.delete(store_no);
+	}
+
+	@Override
+	public void regist(StoreDTO storeDTO) throws Exception {
+		storeMapper.regist(storeDTO);
+	}
+
+	@Override
+	public void addStoreAttach(String fullName) throws Exception {
+		storeMapper.addStoreAttach(fullName);
+		
+	}
 	
 		
 	

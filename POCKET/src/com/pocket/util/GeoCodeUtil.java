@@ -16,8 +16,10 @@ public class GeoCodeUtil {
 			return null;
 
 		Geocoder geocoder = new Geocoder();
-		// setAddress : ï¿½ï¿½È¯ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ 
-		// setLanguate : ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+		// setAddress : º¯È¯ÇÏ·Á´Â ÁÖ¼Ò (°æ±âµµ ¼º³²½Ã ºÐ´ç±¸ µî)
+
+		// setLanguate : ÀÎÄÚµù ¼³Á¤
+
 		GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location).setLanguage("ko").getGeocoderRequest();
 		GeocodeResponse geocoderResponse;
 
@@ -29,8 +31,8 @@ public class GeoCodeUtil {
 				LatLng latitudeLongitude = geocoderResult.getGeometry().getLocation();
 
 				Float[] coords = new Float[2];
-				coords[0] = latitudeLongitude.getLat().floatValue();
-				coords[1] = latitudeLongitude.getLng().floatValue();
+				coords[0] = latitudeLongitude.getLat().floatValue(); //À§µµ
+				coords[1] = latitudeLongitude.getLng().floatValue(); //°æµµ
 				return coords;
 			}
 		} catch (IOException ex) {

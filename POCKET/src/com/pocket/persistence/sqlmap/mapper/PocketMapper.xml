@@ -42,7 +42,6 @@
 <!--첨부파일 등록 -->
 <insert id="addAttach">
 insert into aws.POCKET_IMG(FULL_NAME, POCKET_NO, USER_NO,REGDATE) values (#{fullName},(SELECT IFNULL(MAX(PI.POCKET_NO),10000000) FROM aws.POCKET_INFO PI),'10000002',NOW())
-
 </insert>
 
 
