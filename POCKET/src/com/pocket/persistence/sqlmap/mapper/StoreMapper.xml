@@ -29,6 +29,7 @@ select * from aws.STORE_INFO
 	]]>
 </select>
 
+<!-- 카운트 페이징 -->
 <select id ="countPaging" resultType="int">
 <![CDATA[
 	select 
@@ -41,7 +42,7 @@ select * from aws.STORE_INFO
 
 </select>
 
-
+<!--스토어 상세   -->
 <select id="read" parameterType="String" resultType="StoreDTO">
 	select STORE_NO,STORE_NAME,CATEGORY,
 	CATEGORY_DETAIL,JIBUN_ADDR,LNG,LAT
@@ -49,12 +50,14 @@ select * from aws.STORE_INFO
 	where STORE_NO=#{store_no}
 </select>
 
-
+<!-- 스토어 삭제 -->
 <delete id="delete" parameterType="String"> 
 	delete from aws.STORE_INFO
 	where STORE_NO=#{store_no}
 </delete>
 
+
+<!-- 스토어 수정 -->
 <update id="update" parameterType="StoreDTO">
 	update aws.STORE_INFO set
 	STORE_NAME=#{store_name}, CATEGORY=#{category}, 
@@ -63,7 +66,7 @@ select * from aws.STORE_INFO
 	where STORE_NO=#{store_no}
 </update>
 
-
+<!-- 스토어 등록 -->
 <insert id="create" parameterType="StoreDTO">
 	insert into aws.STORE_INFO(STORE_NO, STORE_NAME, CATEGORY, CATEGORY_DETAIL, JIBUN_ADDR,LNG,LAT)
 	values((SELECT IFNULL(MAX(SI.STORE_NO),10000000)+1 FROM aws.STORE_INFO SI), #{store_name},
@@ -74,9 +77,28 @@ select * from aws.STORE_INFO
 <!--첨부파일 등록 -->
 <insert id="addStoreAttach">
 insert into aws.STORE_IMG(FULL_NAME, STORE_NO,REGDATE) 
-values (#{fullName},(SELECT IFNULL(MAX(SI.STORE_NO),10000000)+1 FROM aws.STORE_INFO SI),NOW())
+values (#{fullName},(SELECT IFNULL(MAX(SI.STORE_NO),10000000) FROM aws.STORE_INFO SI),NOW())
 </insert>
 
+<!-- 첨부파일 읽기 -->
+<select id="getStoreAttach" resultType="String">
+	select FULL_NAME from aws.STORE_IMG where STORE_NO=#{store_no}
+</select>
 
+<!-- 첨부파일삭제 -->
+<delete id="deleteStoreAttach">
+delete from aws.STORE_IMG where STORE_NO=#{store_no}
+</delete>
 
+<!-- 첨부파일 수정 -->
+<insert id="replaceStoreAttach">
+insert into aws.STORE_IMG(FULL_NAME,STORE_NO)
+values(#{fullName},#{store_no})
+</insert>
+
+<!-- 첨부파일 가져오기 -->
+<select id="storeImgAll" resultType="String">
+select FULL_NAME from aws.STORE_IMG
+order by REGDATE
+</select>
 </mapper>

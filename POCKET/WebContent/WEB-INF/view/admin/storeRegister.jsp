@@ -174,7 +174,7 @@ height: 100%;
                                 <h4 class="m-b-0 text-white">가맹점 상세보기</h4>
                             </div>        
                             <div class="card-body">
-                               <form role="form" method="post" id="regForm">
+                               <form role="form" method="post" id="registerForm">
 								<div>
                                    <div class="form-body">
                                         <hr>
@@ -349,7 +349,7 @@ height: 100%;
 			
 			var str ="";
 			$(".uploadedList .delbtn").each(function(index){
-				 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
+				 str += "<input type='hidden' name='file' value='"+$(this).attr("href") +"'> ";
 			});
 			console.log(str);
 			that.append(str);
@@ -359,17 +359,7 @@ height: 100%;
 		
 
         
-        var formObj = $("form[role='form']");
-
-		console.log(formObj);
-
-		$("#golist").on("click",function() {
-							self.location = "/admin/listPage.do?page=${cri.page}&perPageNum=${cri.perPageNum}";
-						});
-
-		$("#modify").on("click", function() {
-			formObj.submit();
-		});
+      
         
         
     });

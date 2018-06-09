@@ -1,6 +1,8 @@
 package com.pocket.persistence.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 
 import com.pocket.DTO.Criteria;
 import com.pocket.DTO.StoreDTO;
@@ -19,4 +21,14 @@ public interface StoreMapper {
 	void delete(String store_no)throws Exception;
 	void regist(StoreDTO storeDTO)throws Exception;
 	void addStoreAttach(String fullName)throws Exception;
+	void create(StoreDTO storeDTO)throws Exception;
+	List<String> getStoreAttach(String store_no)throws Exception;
+	void deleteStoreAttach(String store_no)throws Exception;
+	void replaceStoreAttach(String fullName, String store_no)throws Exception;
+	void replaceStoreAttach(Map<String, Object> paramMap);
+	void remove(String store_no)throws Exception;
+	List<String>storeImgAll()throws Exception;
+	
+	
+	
 }

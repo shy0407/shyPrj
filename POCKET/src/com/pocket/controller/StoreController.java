@@ -3,6 +3,7 @@ package com.pocket.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -85,7 +86,14 @@ public class StoreController {
 		log.info(storeDTO);
 		String addr = storeDTO.getJibun_addr();
 		String []code =new String [2];
-
+		
+		
+		String[]arr=request.getParameterValues("files");
+		log.info(arr.length);
+		for(int i=0;i<arr.length;i++) {
+		System.out.println(arr[i]);
+		}
+		
 		Float[] coords = GeoCodeUtil.geoCoding(addr);
 		for(int i=0;i<2;i++) {
 			code[i]=Float.toString(coords[i]);
@@ -93,6 +101,7 @@ public class StoreController {
 		
 		storeDTO.setLat(code[0]);	
 		storeDTO.setLng(code[1]);
+		storeDTO.setFiles(arr);
 		storeService.update(storeDTO);
 		
 		rttr.addAttribute("page",cri.getPage());
@@ -113,7 +122,7 @@ public class StoreController {
 		log.info(store_no);
 		log.info("/admin/remove!!!!!..............");
 		
-		storeService.delete(store_no);
+		storeService.remove(store_no);
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
@@ -167,6 +176,38 @@ public class StoreController {
 	  public String storeRegister(Criteria cri, Model model) throws Exception {
 
 	    log.info("storeRegister......................");
+		return "/admin/storeRegister";
+
+	  
+	  }
+	
+	@RequestMapping(value = "/admin/storeRegister", method = RequestMethod.POST)
+	  public String storeRegisterPost(Criteria cri, Model model,StoreDTO storeDTO,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+	    log.info("storeRegister  Post......................");
+	    
+	    String addr = storeDTO.getJibun_addr();
+		String []code =new String [2];
+		
+		String[]arr=request.getParameterValues("file");
+		log.info(arr.length);
+		for(int i=0;i<arr.length;i++) {
+		System.out.println(arr[i]);
+		}
+		Float[] coords = GeoCodeUtil.geoCoding(addr);
+		for(int i=0;i<2;i++) {
+			code[i]=Float.toString(coords[i]);
+			System.out.println(code[i]);
+		}
+		
+		storeDTO.setLat(code[0]);	
+		storeDTO.setLng(code[1]);
+		storeDTO.setFiles(arr);
+		log.info(storeDTO.getFiles());
+		storeService.regist(storeDTO);
+	    
+	    
 		return "/admin/storeRegister";
 
 	  
@@ -284,7 +325,33 @@ public class StoreController {
 	    }
 	    return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	  }
+	  
+	  
+	  @RequestMapping("/admin/getStoreAttach.do")
+	  @ResponseBody
+	  public List<String> getAttach(@RequestParam("store_no")String store_no)throws Exception{
+	    log.info("get attach!!!~~~~~~~~~~~~");
+	    return storeService.getStoreAttach(store_no);
+	  }  
 	
+	  
+	  @RequestMapping(value="/admin/storeGallery", method=RequestMethod.GET)		
+		public String pocketGallery(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
+			log.info("storeGallery............ .....");
+			
+			return "/admin/storeGallery";
+			
+		}
+	  
+	  @RequestMapping(value="/admin/storeImgAll")	
+	  @ResponseBody
+		public List<String> allPocketImg(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
+			log.info("/admin/storeImgAll............ .....");
+			
+			List<String> filelist =storeService.storeImgAll();
+			return filelist;
+			
+		}
 	
 	
 }

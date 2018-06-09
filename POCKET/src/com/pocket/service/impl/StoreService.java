@@ -1,10 +1,13 @@
 package com.pocket.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pocket.DTO.Criteria;
 import com.pocket.DTO.StoreDTO;
@@ -52,26 +55,100 @@ public class StoreService implements IStoreService {
 		
 		return storeMapper.read(store_no);
 	}
-
+	
+	@Transactional
 	@Override
 	public void update(StoreDTO storeDTO) throws Exception {
 		storeMapper.update(storeDTO);
+		
+		String store_no = storeDTO.getStore_no();
+		
+		storeMapper.deleteStoreAttach(store_no);
+		
+		String[]files=storeDTO.getFiles();
+		for(String filName:files) {
+			
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+		    
+		    paramMap.put("store_no", store_no);
+		    paramMap.put("fullName", filName);
+		    
+		    System.out.println(paramMap.toString());
+			storeMapper.replaceStoreAttach(paramMap);
+			
+		}
+		
 	}
 
 	@Override
 	public void delete(String store_no) throws Exception {
 		storeMapper.delete(store_no);
 	}
-
+	
+	
+	//梅何颇老苞 汽 insert
+	@Transactional
 	@Override
 	public void regist(StoreDTO storeDTO) throws Exception {
-		storeMapper.regist(storeDTO);
+		
+		storeMapper.create(storeDTO);
+		String[]files =storeDTO.getFiles();
+		if(files==null) {return ;}
+		
+		for(String fileName : files) {
+			storeMapper.addStoreAttach(fileName);
+		}
+		
 	}
-
+	
+	
+	//梅何颇老 insert
 	@Override
 	public void addStoreAttach(String fullName) throws Exception {
 		storeMapper.addStoreAttach(fullName);
 		
+	}
+	//弊成 form insert
+	@Override
+	public void create(StoreDTO storeDTO) throws Exception {
+		storeMapper.create(storeDTO);
+	}
+
+	@Override
+	public List<String> getStoreAttach(String store_no) throws Exception {
+		return storeMapper.getStoreAttach(store_no);
+	}
+
+	@Override
+	public void deleteStoreAttach(String store_no) throws Exception {
+		storeMapper.delete(store_no);
+		
+	}
+
+	@Override
+	public void replaceStoreAttach(String fullName, String store_no) throws Exception {
+		 Map<String, Object> paramMap = new HashMap<String, Object>();
+		    
+		    paramMap.put("store_no", store_no);
+		    paramMap.put("fullName", fullName);
+		    System.out.println(paramMap.get(fullName));
+		storeMapper.replaceStoreAttach(paramMap);
+		
+		
+	}
+	
+	@Transactional
+	@Override
+	public void remove(String store_no) throws Exception {
+		storeMapper.deleteStoreAttach(store_no);
+		storeMapper.delete(store_no);
+		
+	}
+
+	@Override
+	public List<String> storeImgAll() throws Exception {
+
+		return storeMapper.storeImgAll();
 	}
 	
 		
