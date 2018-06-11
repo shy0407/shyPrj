@@ -20,12 +20,14 @@
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
-    <!--[if lt IE 9]>
-    <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+     <link rel="stylesheet" href="/page/css/style.css">
+	<script>
+	var result ='${msg}';
+	if(result=='success'){
+		alert("삭제완료");
+	}
+
+</script>
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -389,37 +391,62 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Data Export</h4>
-                                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
-                                <div class="table-responsive m-t-40">
-                                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                <h4 class="card-title">Data Table</h4>
+                                
+     						  <form name="f" id="f" method="post" action="/admin/userCheckDel.do">
+                                <div class="table-responsive">
+                                    <table class="table">
                                         <thead>
                                             <tr>
-                                            	<th><input name="select_all" value="1" type="checkbox"></th>
-                                                <th>회원번호</th>
-                                                <th>아이디</th>
+                                            	<th><input type="checkbox" name="all" id="all" onclick="allCheck(this.form);"></th>
+                                                <th>NO</th>
+                                                <th>ID</th>
+                                                <th>EMAIL</th>
                                                 <th>수입</th>
                                                 <th>직업</th>
-                                                <th>성별</th>
                                                 <th>나이</th>
+                                                <th>POINT</th>
+                                                <th>인증</th>
                                             </tr>
                                         </thead>
-                                        
                                         <tbody>
-                                        	<c:forEach items="${uList}" var="list">
+                                        <c:forEach items="${list}" var="uDTO">
                                             <tr>
-                                            	<td><input name="select" value="${list.user_no}" type="checkbox"></td>
-                                                <td>${list.user_no}</td>
-                                                <td>${list.user_id}</td>
-                                                <td>${list.income}</td>
-                                                <td>${list.job}</td>
-                                                <td>${list.gender}</td>
-                                                <td>${list.age}</td>
+                                            	<td class="center"><input type="checkbox" name="deleteSelect" id="deleteSelect" value="${uDTO.user_no}" /></td>
+                                                <th>${uDTO.user_no}</th>
+                                                <td>${uDTO.user_id}</td>
+                                                <td>${uDTO.email}</td>
+                                                <td>${uDTO.income}</td>
+                                                <td>${uDTO.job}</td>
+                                                <td>${uDTO.age}</td>
+                                                <td>${uDTO.point}</td>
+                                                <td >${uDTO.user_auth}</td> 
+                                                
+                                                
                                             </tr>
-                                            </c:forEach>
+                                         </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
+                                </form>
+                                 <div class="pagination p12">
+								    <div class="pagination p12">
+								      <ul>
+								        <c:if test="${pageMaker.prev}">
+								        <a href="userList.do${pageMaker.makeQuery(pageMaker.startPage -1) }"><li>Previous</li></a>
+								        </c:if>
+								         <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+								       			 <a href="userList.do${pageMaker.makeQuery(idx)}"
+								       			 	<c:out value="${pageMaker.cri.page == idx?'class =is-active':''}"/>><li>${idx}</li></a>
+								        </c:forEach>
+								         
+								        <c:if test="${pageMaker.next && pageMaker.endPage>0 }">
+								        <a href="userList.do${pageMaker.makeQuery(pageMaker.endPage+1) }"><li>Next</li></a>
+								        <span><button type="button" class="btn btn-success m-b-10 m-l-5" onclick="javascript:deleteConfirm();" id="delete" >DELETE</button></span>
+								        </c:if>
+								      </ul>
+								    </div>
+								    </div>
                             </div>
                         </div>
                         
@@ -460,11 +487,35 @@
     <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="/ElaAdmin-master/js/lib/datatables/datatables-init.js"></script>
-    <script>
-    
-    
-    
-    </script>
+	<script>
+	
+	//선택삭제
+	function deleteConfirm() {
+	   
+	   if (confirm("선택된 사용자를 삭제하시겠습니까?")) {
+	      document.getElementById("f").submit();
+	      return true;
+	   } else {
+	      return false;
+	   }
+	}
+
+	//전체선택
+	function allCheck(f) {
+	   cbox = f.checkbox;
+	   if (cbox.length) { // 여러 개일 경우
+	      for (var i = 0; i < cbox.length; i++) {
+	         cbox[i].checked = f.all.checked;
+	       
+	      }
+	   } else { // 한 개일 경우
+	      cbox.checked = f.all.checked;
+	   }
+	   
+	  
+	}
+	
+	</script>
   
 </body>
 

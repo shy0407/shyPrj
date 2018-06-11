@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,9 +31,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pocket.DTO.Criteria;
 import com.pocket.DTO.PocketDTO;
+import com.pocket.DTO.StoreDTO;
+import com.pocket.DTO.userDTO;
 import com.pocket.service.IPocketService;
 import com.pocket.util.CmmUtil;
+import com.pocket.util.GeoCodeUtil;
 import com.pocket.util.MediaUtils;
 import com.pocket.util.UploadFileUtils;
 
@@ -178,6 +184,17 @@ public class PocketController {
 	}
 	
 	
+	  @RequestMapping(value ="insertCal", method=RequestMethod.POST)
+	  public void insertCal(HttpServletRequest request, HttpServletResponse response,
+				@RequestParam("expense_detail")String expense_date,
+				@RequestParam("expense_card")String expense_detail,
+				@RequestParam("expense_date")String expense_cash)throws Exception{
+		
+		log.info(expense_cash);    
+	   
+	  }
+	
+	
 	@RequestMapping(value="deletePocket", method=RequestMethod.POST)
 	public void deletePocket(HttpServletRequest request, HttpServletResponse response,
 							@RequestParam("id")String pocket_no) throws Exception {
@@ -307,18 +324,29 @@ public class PocketController {
 			
 		}
 	  @RequestMapping(value="pocketRegister", method=RequestMethod.POST)
-	  public String pocketRegisterPost(PocketDTO pDTO, RedirectAttributes rttr,MultipartFile file) throws Exception {
-			log.info("pocketRegister............ .....");
-			log.info(file);
+	  public String pocketRegisterPost(PocketDTO pDTO, RedirectAttributes rttr,
+			  HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception {
+ 
+		  log.info("pocketRegister POST............ .....");
+		  userDTO uDTO=(userDTO)session.getAttribute("userDTO");
+		  
+		  String user_no= uDTO.getUser_no();
+		  
+		  log.info(user_no);
+		  String files[]=request.getParameterValues("files");
+			log.info(files);
 			log.info(pDTO);
 			log.info(pDTO.toString());
-			log.info(pDTO.getFiles());
+			
+			pDTO.setUser_no(user_no);
+			pDTO.setFiles(files);
 			pocketService.insertExpense(pDTO);
 			
 			rttr.addFlashAttribute("msg", "SUCCESS");
 			return "/gridServer";
 			
 		}
+
 	  
 	  @RequestMapping(value="pocketGallery", method=RequestMethod.GET)		
 		public String pocketGallery(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
@@ -338,5 +366,13 @@ public class PocketController {
 			
 		}
 	
+	  
+	  @RequestMapping(value="pocketRead", method=RequestMethod.GET)		
+		public String pocketRead(HttpServletRequest request, HttpServletResponse response ,ModelMap model,@RequestParam("fullName")String fullName) throws Exception {
+			log.info("pocketRead............ .....");
+			log.info(fullName);
+			return "/pocketRead";
+			
+		}
 	
 }

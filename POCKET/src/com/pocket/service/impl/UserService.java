@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.pocket.DTO.Criteria;
 import com.pocket.DTO.LoginDTO;
 import com.pocket.DTO.userDTO;
 import com.pocket.persistence.mapper.UserMapper;
@@ -76,6 +77,35 @@ public class UserService implements IUserService {
 	@Override
 	public userDTO getUserInfo(String user_no) throws Exception {
 		return userMapper.getUserInfo(user_no);
+	}
+
+	@Override
+	public List<userDTO> ulistPage(int page) throws Exception {
+		if(page<=0) {
+			page=1;
+		}
+		page =(page-1)*10;
+		return userMapper.ulistPage(page);
+	}
+
+	@Override
+	public List<userDTO> ulistCriteria(Criteria cri) throws Exception {
+		return userMapper.ulistCriteria(cri);
+	}
+
+	@Override
+	public int ucountPaging(Criteria cri) throws Exception {
+		return userMapper.ucountPaging(cri);
+	}
+
+	@Override
+	public int ulistCountCriteria(Criteria cri) throws Exception {
+		return userMapper.ucountPaging(cri);
+	}
+
+	@Override
+	public void deleteUserList(userDTO userDTO) throws Exception {
+		userMapper.deleteUserList(userDTO);
 	}
 
 	

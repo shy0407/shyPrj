@@ -46,8 +46,8 @@ public class PocketService implements IPocketService {
 	}
 
 	@Override
-	public void addAttach(String fullName) throws Exception {
-		 pocketMapper.addAttach(fullName);
+	public void addAttach(PocketDTO pocketDTO) throws Exception {
+		 pocketMapper.addAttach(pocketDTO);
 		
 	}
 		
@@ -60,7 +60,8 @@ public class PocketService implements IPocketService {
 		
 		if(files==null) {return;}
 		for(String fileName :files) {
-			pocketMapper.addAttach(fileName);
+			pocketDTO.setFullName(fileName);			
+			pocketMapper.addAttach(pocketDTO);
 		}
 	}
 

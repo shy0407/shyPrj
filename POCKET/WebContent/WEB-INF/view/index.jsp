@@ -112,7 +112,7 @@
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">Email</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="jqgridTest.do">가계부</a></li>
-                                <li><a href="email-read.html">Read</a></li>
+                                <li><a href="pocketRegister.do">사진올리기</a></li>
                                 <li><a href="email-inbox.html">Inbox</a></li>
                             </ul>
                         </li>
@@ -402,7 +402,7 @@
             })
         }
     }]).then(function(inputValue) {
-        $('#calendarDiv').fullCalendar('renderEvent', {
+        $('#calendar').fullCalendar('renderEvent', {
             title: inputName,
             description: inputDescription,
             start: date.format() + 'T' + inputTime,
@@ -417,6 +417,7 @@
         })
     }, function() {
         swal.resetDefaults()
+       
     })
 		  },
       defaultDate: '2018-05-12',

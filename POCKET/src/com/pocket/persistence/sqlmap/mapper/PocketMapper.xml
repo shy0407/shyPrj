@@ -26,7 +26,7 @@
 
 <insert id="insertPocket" parameterType="PocketDTO" >
     INSERT INTO aws.POCKET_INFO(POCKET_NO, USER_NO,EXPENSE_DATE, EXPENSE_DETAIL,EXPENSE_CASH, EXPENSE_CARD, EXPENSE_CATEGORY) 
-    VALUES((SELECT IFNULL(MAX(PI.POCKET_NO),10000000)+1 FROM aws.POCKET_INFO PI), '10000001',#{expense_date}, #{expense_detail},#{expense_cash},#{expense_card},#{expense_category})
+    VALUES((SELECT IFNULL(MAX(PI.POCKET_NO),10000000)+1 FROM aws.POCKET_INFO PI), #{user_no},#{expense_date}, #{expense_detail},#{expense_cash},#{expense_card},#{expense_category})
 </insert>
 
 <delete id="deletePocket" parameterType="String">
@@ -35,13 +35,13 @@
 
 <insert id="insertExpense" parameterType="PocketDTO" >
     INSERT INTO aws.POCKET_INFO(POCKET_NO, USER_NO,EXPENSE_DATE, EXPENSE_DETAIL, EXPENSE_CATEGORY) 
-    VALUES((SELECT IFNULL(MAX(PI.POCKET_NO),10000000)+1 FROM aws.POCKET_INFO PI), '10000001',#{expense_date}, #{expense_detail},#{expense_category})
+    VALUES((SELECT IFNULL(MAX(PI.POCKET_NO),10000000)+1 FROM aws.POCKET_INFO PI), #{user_no},#{expense_date}, #{expense_detail},#{expense_category})
 </insert>
 
 
 <!--첨부파일 등록 -->
-<insert id="addAttach">
-insert into aws.POCKET_IMG(FULL_NAME, POCKET_NO, USER_NO,REGDATE) values (#{fullName},(SELECT IFNULL(MAX(PI.POCKET_NO),10000000) FROM aws.POCKET_INFO PI),'10000002',NOW())
+<insert id="addAttach" parameterType="PocketDTO">
+insert into aws.POCKET_IMG(FULL_NAME, POCKET_NO, USER_NO,REGDATE) values (#{fullName},(SELECT IFNULL(MAX(PI.POCKET_NO),10000000) FROM aws.POCKET_INFO PI),#{user_no},NOW())
 </insert>
 
 
@@ -51,4 +51,12 @@ select FULL_NAME from aws.POCKET_IMG
 where USER_NO=#{user_no}
 order by REGDATE
 </select>
+
+<!-- 사진 클릭시 포켓 인포 가져오기 -->
+<select id="getPocketInfoImg" parameterType="String">
+select * from aws.POCkET_INFO
+where POCKET_NO=(select POCKET_NO from aws.POCKET_IMG where FULL_NAME=#{fullName})
+</select>
+
+
 </mapper>

@@ -2,47 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<style>
-
-
-.overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 17px;
-  right: 0;
-  height: 90%;
-  width: 87%;
-  opacity: 0;
-  transition: .3s ease;
-  background-color: grey;
-}
-
-#shy:hover .overlay {
-  opacity: 0.5;
-}
-
-.icon {
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  top: 90%;
-  left: 90%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
-.text{
-	color:white;
-    font-size:15px;
-    position:absolute;
-    top:41%;
-    left:20%;
-
-}
-
-
-</style>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -230,9 +189,9 @@
 	<script src="/uploadjs/upload.js"></script>
 	<script>
 		$(function(){
-			var user_no=10000002;
-			var path='C:/shy/shy/shyPrj/POCKET/upload/';
-			console.log(path);
+			var user_no=${sessionScope.userDTO.user_no};
+			
+			console.log(user_no);
 			    $.ajax({
 			        type: "post",
 			        url: "allPocketImg.do",
@@ -243,9 +202,10 @@
 			          	var fileInfo = getFileInfo(this);
 			          	console.log(fileInfo);
 			          	console.log(fileInfo.imgsrc);
-			          	
-			          	var html='<div class="col-lg-3 col-md-4 col-xs-6"><a href="#" class="d-block mb-4 h-100" id="g"><img class="img-fluid img-thumbnail" src="';
-			          	html+=fileInfo.imgsrc+'"><div class="overlay"><div class="text">삭제하시겠습니까?</div><a href="#" class="icon" title="User Profile"><i class="fa fa-remove"></i></a></div></a></div>';
+			          	console.log(fileInfo.fullName);
+			          	var fullName=fileInfo.fullName;
+			          	var html='<div class="col-lg-3 col-md-4 col-xs-6"><a href="pocketRead.do?fullName='+fullName+'"class="d-block mb-4 h-100" id="g"><img class="img-fluid img-thumbnail" src="';
+			          	html+=fileInfo.imgsrc+'"></div>';
 			          	
 			          	
 			          	$("#shy").append(html);
@@ -256,23 +216,7 @@
 			    });
 			    
 			    
-			    $("#overlay").on("click", "fa fa-remove", function(event){
-		        	
-		            var that = $(this);
-		            $.ajax({
-		                url: "deleteFile.do",
-		                type: "post",
-		                data: {fileName:$(this).attr("data-src")},
-		                dataType: "text",
-		                success: function (result) {
-		                    if (result == "deleted") {
-		                        alert("삭제되었습니다.");
-		                        that.parent("div").remove();
-		                        $(".initMsg").show();
-		                    }
-		                }
-		            });
-		        });
+			
 			
 		});
 		

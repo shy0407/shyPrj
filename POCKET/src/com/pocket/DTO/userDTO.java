@@ -3,20 +3,20 @@ package com.pocket.DTO;
 import java.sql.Date;
 
 public class userDTO {
-	String user_no;
-	String user_id;
-	String email;
-	String password;
-	String user_barcode;
-	String income;
-	String job;
-	String gender;
-	String age;
-	String point;
-	String user_auth;
-	String reg_user_no;
-	Date reg_dt;
-	
+	private String user_no;
+	private String user_id;
+	private String email;
+	private String password;
+	private String user_barcode;
+	private String income;
+	private String job;
+	private String gender;
+	private String age;
+	private String point;
+	private String user_auth;
+	private String reg_user_no;
+	private Date reg_dt;
+	private String[] allCheckSeq;
 	
 	public String getUser_no() {
 		return user_no;
@@ -95,6 +95,12 @@ public class userDTO {
 	}
 	public void setReg_dt(Date reg_dt) {
 		this.reg_dt = reg_dt;
+	}
+	public String[] getAllCheckSeq() {
+		return allCheckSeq;
+	}
+	public void setAllCheckSeq(String[] allCheckSeq) {
+		this.allCheckSeq = allCheckSeq;
 	}
 	
 	

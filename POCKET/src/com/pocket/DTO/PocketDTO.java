@@ -15,6 +15,8 @@ public class PocketDTO {
 	private String income;
 	private String income_detail;
 	private String[] files;
+	private String fullName;
+	
 	
 	public String getPocket_no() {
 		return pocket_no;
@@ -82,5 +84,12 @@ public class PocketDTO {
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	
 	
 }
