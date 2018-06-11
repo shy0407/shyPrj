@@ -17,4 +17,10 @@ public interface IStoreService {
 	void delete(String store_no)throws Exception;
 	void regist(StoreDTO storeDTO)throws Exception;
 	void addStoreAttach(String fullName)throws Exception;
+	void create(StoreDTO storeDTO)throws Exception;
+	List<String> getStoreAttach(String store_no)throws Exception;
+	void deleteStoreAttach(String store_no)throws Exception;
+	void replaceStoreAttach(String fullName, String store_no)throws Exception;
+	void remove(String store_no)throws Exception;
+	List<String>storeImgAll()throws Exception;
 }

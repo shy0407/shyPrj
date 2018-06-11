@@ -13,6 +13,7 @@ public class StoreDTO {
 	private String road_addr;
 	private String lng;
 	private String lat;
+	private String[] files; 
 	
 	public String getStore_no() {
 		return store_no;
@@ -79,6 +80,12 @@ public class StoreDTO {
 	}
 	public void setLat(String lat) {
 		this.lat = lat;
+	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
 	}
 
 	

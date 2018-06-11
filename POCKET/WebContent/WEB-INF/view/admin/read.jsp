@@ -4,13 +4,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-.fileDrop {
-	width: 100%;
-	height: 320px;
-	border: 1px dotted gray;
-}
-#uploadedList{margin: 0 auto;}
 
+
+    .popup {position: absolute;}
+    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
+    .front { 
+       z-index:1110; opacity:1; boarder:1px; margin: auto; 
+      }
+     .show{
+       position:relative;
+       max-width: 1200px; 
+       max-height: 800px; 
+       overflow: auto;       
+     } 
+     
+     
+.uploadedList{
+
+	width :100%;
+	height:308px;
+	border: 1px;
+	border-color: #e7e7e7;
+
+}
+     
 </style>
 <head>
     <meta charset="utf-8">
@@ -30,6 +47,15 @@
 </head>
 
 <body class="fix-header fix-sidebar">
+
+ <div class='popup back' style="display:none;"></div>
+    <div id="popup_front" class='popup front' style="display:none;">
+     <img id="popup_img">
+    </div>
+
+
+
+
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
@@ -162,9 +188,10 @@
                                 <h4 class="m-b-0 text-white">가맹점 상세보기</h4>
                             </div>        
                             <div class="card-body">
+                            <form role="form" action="/admin/modifyPage.do" method="post">
 								<!--chart 1  -->
 								<div>
-									<form role="form" action="modifyPage.do" method="post">
+									
                                 
                                     <div class="form-body">
                                       
@@ -174,14 +201,14 @@
                                                 <div class="form-group">
                                                     <!-- <label>City</label>
                                                     <input type="text" class="form-control"> -->
-                                                    <label for="exampleInputEmail1">File DROP Here</label>
-													<div class="fileDrop">
-											<!-- 		<div class="initMsg">파일을 올려주세요.</div>
-													<div id="uploadedList"></div> -->
+                                                    <label>첨부파일</label>
+													
+											
+													<div class="uploadedList"></div> 
 													
 													</div>
                                                 </div>
-                                            </div>
+                                           
                                             
                                              <div class="col-md-6">
                                                 <div class="form-group">
@@ -201,6 +228,7 @@
                                                     <input type="text" name="jibun_addr" class="form-control" value="${sDTO.jibun_addr }" readonly="readonly">
                                                 </div>
                                             </div>
+                                             </div>
                                             	<input type="hidden" name="page" value="${cri.page }">
                                             	<input type="hidden" name="perPageNum" value="${cri.perPageNum }">
                                             	<input type="hidden" name="store_no" value="${sDTO.store_no }">
@@ -233,7 +261,7 @@
     </div>
     <!-- End Wrapper -->
     <!-- All Jquery -->
-    <script src="/jquery-3.3.1.min.js"></script>
+    <script src="/ElaAdmin-master/js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -248,34 +276,118 @@
 	<!--stickey kit -->
 	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
 	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
-
+		<script type="text/javascript" src="/uploadjs/upload.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+<li data-src='{{fullName}}'>
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	</span>
+  </div>
+</li>                
+</script>  
 	<script>
-	$(document).ready(function(){
-		alert("Gdgd");
-		var formObj = $("form[role='form']");
-		
-		console.log(formObj);
-		
-		$("#modify").on("click", function(){
-			formObj.attr("action", "/admin/modifyPage.do");
-			formObj.attr("method", "get");		
-			formObj.submit();
-		});
-		
-		$("#remove").on("click", function(){
-			
-			formObj.attr("action", "/admin/removePage.do");
-			formObj.submit();
-		});
-		
-		$("#golist").on("click", function(){
-			formObj.attr("method", "get");
-			formObj.attr("action", "/admin/listPage.do");
-			formObj.submit();
-		});
-		
+$(document).ready(function(){
+	
+	var formObj = $("form[role='form']");
+	
+	console.log(formObj);
+	
+	$("#modify").on("click", function(){
+		formObj.attr("action", "/admin/modifyPage.do");
+		formObj.attr("method", "get");		
+		formObj.submit();
 	});
-	</script>
+ 	
+	
+	$("#remove").on("click", function(){
+		
+	
+		var arr = [];
+		$(".uploadedList li").each(function(index){
+			 arr.push($(this).attr("data-src"));
+		});
+		
+		if(arr.length > 0){
+			$.post("/admin/deleteAllFiles.do",{files:arr}, function(){
+				
+			});
+		}
+		
+		formObj.attr("action", "/admin/removePage.do");
+		formObj.submit();
+	});	
+	
+	
+	$("#goList ").on("click", function(){
+		formObj.attr("method", "get");
+		formObj.attr("action", "/admin/listPage.do");
+		formObj.submit();
+	});
+	
+	var store_no= ${sDTO.store_no};
+	console.log(store_no);
+	var template = Handlebars.compile($("#templateAttach").html());
+	
+	$.ajax({
+        
+        url: "/admin/getStoreAttach.do",
+        data:{store_no:store_no},
+        success: function(list){
+            $(list).each(function(){
+          	console.log(list);
+          	var fileInfo = getFileInfo(this);
+          	console.log(fileInfo);
+          	console.log(fileInfo.imgsrc);
+          	
+        	
+			var fileInfo = getFileInfo(this);
+			
+			var html = template(fileInfo);
+			
+			 $(".uploadedList").append(html);
+          	
+          	
+          	
+
+            });
+        }
+    });
+	
+
+
+	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
+		
+		var fileLink = $(this).attr("href");
+		
+		if(checkImageType(fileLink)){
+			
+			event.preventDefault();
+					
+			var imgTag = $("#popup_img");
+			imgTag.attr("src", fileLink);
+			
+			console.log(imgTag.attr("src"));
+					
+			$(".popup").show('slow');
+			imgTag.addClass("show");		
+		}	
+	});
+	
+	$("#popup_img").on("click", function(){
+		
+		$(".popup").hide('slow');
+		
+	});	
+	
+		
+	
+});
+</script>
+
 
 </body>
 
