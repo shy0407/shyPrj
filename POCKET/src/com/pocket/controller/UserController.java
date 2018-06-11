@@ -86,20 +86,8 @@ public class UserController {
 	
 
 	
-	/*@RequestMapping(value="/admin/userList", method=RequestMethod.GET)
-	public String all(HttpServletRequest request, HttpServletResponse response, 
-					ModelMap model) throws Exception {
-		List<userDTO> uList = userService.getUser();
-		
-		
-		System.out.println("dgds"+uList.size());
+
 	
-		
-		model.addAttribute("uList",uList);
-		
-		return "/admin/userList";
-		
-	}*/
 	
 	@RequestMapping(value="storeRegister", method=RequestMethod.GET)
 	public String loginGet(HttpServletRequest request, HttpServletResponse response, 
