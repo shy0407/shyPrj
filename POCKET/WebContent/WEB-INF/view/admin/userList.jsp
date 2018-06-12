@@ -489,30 +489,33 @@
     <script src="/ElaAdmin-master/js/lib/datatables/datatables-init.js"></script>
 	<script>
 	
-	//선택삭제
-	function deleteConfirm() {
-	   
-	   if (confirm("선택된 사용자를 삭제하시겠습니까?")) {
-	      document.getElementById("f").submit();
-	      return true;
-	   } else {
-	      return false;
-	   }
-	}
-
-	//전체선택
 	function allCheck(f) {
-	   cbox = f.checkbox;
-	   if (cbox.length) { // 여러 개일 경우
-	      for (var i = 0; i < cbox.length; i++) {
-	         cbox[i].checked = f.all.checked;
-	       
-	      }
-	   } else { // 한 개일 경우
-	      cbox.checked = f.all.checked;
-	   }
-	   
-	  
+		
+		cbox = f.deleteSelect;
+	
+		if (cbox.length) {
+	
+			for (var i = 0; i < cbox.length; i++) {
+				cbox[i].checked = f.all.checked;
+			}
+	
+		} else {
+	
+			cbox.checked = f.all.checked;
+	
+		}
+	
+	}
+	
+	//체크박스 선택된 회원 탈퇴
+	function deleteConfirm(f) {
+	
+		if (confirm("선택된 회원을 탈퇴 시키시겠습니까?")) {
+			document.getElementById("f").submit();
+		} else {
+			return;
+		}
+	
 	}
 	
 	</script>

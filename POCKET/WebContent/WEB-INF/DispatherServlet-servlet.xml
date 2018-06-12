@@ -66,15 +66,15 @@
 	<!-- 파일업로드 기능 -->		
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
 		p:maxUploadSize="104857600" p:maxInMemorySize="104857600" />
-	
+
 	<!-- 파일 업로드 경로 -->
 	<bean id="uploadPath" class="java.lang.String">
-		<constructor-arg value="C:\\shy\\shy\\shyPrj\\POCKET\\upload"></constructor-arg>	
+		<constructor-arg value="C:\\shyProject\\shyPrj\\POCKET\\upload"></constructor-arg>	
 	</bean>
 	
 	<!-- 파일업로드 경로 for store_info -->
 	<bean id="uploadPathStore" class="java.lang.String">
-		<constructor-arg value="C:\\shy\\shy\\shyPrj\\POCKET\\storeUpload"></constructor-arg>	
+		<constructor-arg value="C:\\shyProject\\shyPrj\\POCKET\\storeUpload"></constructor-arg>	
 	</bean>
 
 </beans>

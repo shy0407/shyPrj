@@ -352,6 +352,17 @@ public class StoreController {
 			return filelist;
 			
 		}
-	
+	 
+	  
+	  @RequestMapping(value="/amdin/ocr", method=RequestMethod.GET)	
+	  @ResponseBody
+		public String ocr(HttpServletRequest request, HttpServletResponse response ,
+				ModelMap model,@RequestParam("fullName")String fullName) throws Exception {
+			log.info("/admin/ocr............ .....");
+			log.info(fullName);
+			String nul="ocr";
+			return nul;
+			
+		}
 	
 }

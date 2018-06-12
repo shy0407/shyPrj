@@ -18,5 +18,8 @@ public interface INoticeService {
 
 	void deleteNoticeList(NoticeDTO noticeDTO) throws Exception;
 	
+	NoticeDTO noticeDetail(String notice_no)throws Exception;
+	void noticeModify(NoticeDTO noticeDTO)throws Exception;
+	void noticeDelete(String notice_no)throws Exception;
 
 }

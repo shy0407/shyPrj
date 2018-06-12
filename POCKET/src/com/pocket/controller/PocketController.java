@@ -100,12 +100,18 @@ public class PocketController {
 	
 	
 	@RequestMapping(value="expenseCal", method=RequestMethod.POST)
-	public @ResponseBody List<PocketDTO> expenseCal() throws Exception {
+	public @ResponseBody List<PocketDTO> expenseCal(HttpSession session) throws Exception {
 		log.info("expenseCal");
+		
+		 userDTO uDTO=(userDTO)session.getAttribute("userDTO");
+		  
+		  String user_no= uDTO.getUser_no();
+		  
+		  log.info(user_no);
 		List<PocketDTO> entity=null;
 		
 		try {
-			entity = pocketService.expenseCal();
+			entity = pocketService.expenseCal(user_no);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -142,6 +148,7 @@ public class PocketController {
 	
 	@RequestMapping(value="insertPocket", method=RequestMethod.POST)
 	public void insertPocket(HttpServletRequest request, HttpServletResponse response,
+							HttpSession session,
 							@RequestParam("expense_date")String expense_date,
 							@RequestParam("expense_detail")String expense_detail,
 							@RequestParam("expense_cash")String expense_cash,
@@ -158,6 +165,13 @@ public class PocketController {
 		log.info(oper);
 		log.info("pocket :"+pocket_no);
 		
+		
+		 userDTO uDTO=(userDTO)session.getAttribute("userDTO");
+		  
+		  String user_no= uDTO.getUser_no();
+		  
+		  log.info(user_no);
+		
 		PocketDTO pocketDTO=new PocketDTO();
 		
 		
@@ -168,6 +182,7 @@ public class PocketController {
 			pocketDTO.setExpense_cash(expense_cash);
 			pocketDTO.setExpense_card(expense_card);
 			pocketDTO.setExpense_category(expense_category);
+			pocketDTO.setUser_no(user_no);
 			
 			
 			pocketService.insertPocket(pocketDTO);

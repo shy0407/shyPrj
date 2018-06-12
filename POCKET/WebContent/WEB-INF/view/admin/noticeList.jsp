@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-     <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -390,29 +390,29 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                        <form name="f" id="f" method="post" action="/admin/noticeCheckDel.do">
                             <div class="card-body">
                                 <h4 class="card-title">Data Table</h4>
                                 
-     						  <form name="f" id="f" method="post" action="/admin/noticeCheckDel.do">
+     						  
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                            	<th><input type="checkbox" name="all" id="all" onclick="allCheck(this.form);"></th>
-                                                <th>NO</th>
+                                            	
+                                                <th>NOTICE NO</th>
                                                 <th>제목</th>
+                                                <th align="center">등록일</th>
                                                
-                                                <th>등록일</th>
-                                                
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${list}" var="nDTO">
                                             <tr>
-                                            	<td class="center"><input type="checkbox" name="deleteSelect" id="deleteSelect" value="${nDTO.notice_no}" /></td>
-                                                <td>${nDTO.notice_no}</td>
-                                                <td>${nDTO.title}</td>
-                                                <td>${nDTO.regDate}</td>
+                                            	
+                                                <th>${nDTO.notice_no}</th>
+                                                <td><a href="/admin/noticeDetail.do?notice_no=${nDTO.notice_no}">${nDTO.title}</a></td>
+                                                <td align="center">${nDTO.regDate}</td>
                                                 
                                                 
                                                 
@@ -420,13 +420,14 @@
                                          </c:forEach>
                                         </tbody>
                                     </table>
+                                       
                                 </div>
-                                </form>
-                              <div class="pagination p12">
+                             
+                                 <div class="pagination p12">
 								    <div class="pagination p12">
 								      <ul>
 								        <c:if test="${pageMaker.prev}">
-								        <a href="admin/noticeList.do${pageMaker.makeQuery(pageMaker.startPage -1) }"><li>Previous</li></a>
+								        <a href="/admin/noticeList.do${pageMaker.makeQuery(pageMaker.startPage -1) }"><li>Previous</li></a>
 								        </c:if>
 								         <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								       			 <a href="/admin/noticeList.do${pageMaker.makeQuery(idx)}"
@@ -434,13 +435,15 @@
 								        </c:forEach>
 								         
 								        <c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-								        <a href="admin/noticeList.do${pageMaker.makeQuery(pageMaker.endPage+1) }"><li>Next</li></a>
-								        <span><button type="button" class="btn btn-success m-b-10 m-l-5" onclick="javascript:deleteConfirm();" id="delete" >DELETE</button></span>
+								        <a href="/admin/noticeList.do${pageMaker.makeQuery(pageMaker.endPage+1) }"><li>Next</li></a>
+								        
 								        </c:if>
+								        <span><button type="button" class="btn btn-success m-b-10 m-l-5" onclick="javascript:deleteConfirm();" id="delete" >DELETE</button></span>
 								      </ul>
 								    </div>
 								    </div>
                             </div>
+                            </form>
                         </div>
                         
                         
@@ -456,7 +459,7 @@
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
-        <!-- All Jquery -->
+    <!-- All Jquery -->
     <script src="/ElaAdmin-master/js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
@@ -482,34 +485,36 @@
     <script src="/ElaAdmin-master/js/lib/datatables/datatables-init.js"></script>
 	<script>
 	
-	//선택삭제
-	function deleteConfirm() {
-	   
-	   if (confirm("선택된 사용자를 삭제하시겠습니까?")) {
-	      document.getElementById("f").submit();
-	      return true;
-	   } else {
-	      return false;
-	   }
-	}
-
-	//전체선택
 	function allCheck(f) {
-	   cbox = f.checkbox;
-	   if (cbox.length) { // 여러 개일 경우
-	      for (var i = 0; i < cbox.length; i++) {
-	         cbox[i].checked = f.all.checked;
-	       
-	      }
-	   } else { // 한 개일 경우
-	      cbox.checked = f.all.checked;
-	   }
-	   
-	  
+		
+		cbox = f.deleteSelect;
+	
+		if (cbox.length) {
+	
+			for (var i = 0; i < cbox.length; i++) {
+				cbox[i].checked = f.all.checked;
+			}
+	
+		} else {
+	
+			cbox.checked = f.all.checked;
+	
+		}
+	
+	}
+	
+	//체크박스 선택된 회원 탈퇴
+	function deleteConfirm(f) {
+	
+		if (confirm("선택된 공지사항을 삭제하시겠습니까?")) {
+			document.getElementById("f").submit();
+		} else {
+			return;
+		}
+	
 	}
 	
 	</script>
-  
   
 </body>
 

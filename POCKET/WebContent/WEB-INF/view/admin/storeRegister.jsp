@@ -313,10 +313,24 @@ height: 100%;
       		  success: function(data){
       			  
       			  var fileInfo = getFileInfo(data);
+      			  var fullName= fileInfo.fullName;
+      			  console.log(typeof(fullName));
       			  
+      		
       			  var html = template(fileInfo);
       			  
       			  $(".uploadedList").append(html);
+      			  
+      		/* 	  $.ajax({
+      				 url:'/amdin/ocr.do',
+      				 data:{fullName:fullName},
+      				
+      				 type:'GET',
+      				 success:function(data){
+      					 console.log(data);
+      					 alert("Gdsg");
+      				 }
+      			  }); */
       		  }
       		});	
         });

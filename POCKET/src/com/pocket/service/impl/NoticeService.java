@@ -58,5 +58,20 @@ public class NoticeService implements INoticeService {
 	public void deleteNoticeList(NoticeDTO noticeDTO) throws Exception {
 		noticeMapper.deleteNoticeList(noticeDTO);
 	}
+
+	@Override
+	public NoticeDTO noticeDetail(String notice_no) throws Exception {
+		return noticeMapper.noticeDetail(notice_no);
+	}
+
+	@Override
+	public void noticeModify(NoticeDTO noticeDTO) throws Exception {
+		noticeMapper.noticeModify(noticeDTO);
+	}
+
+	@Override
+	public void noticeDelete(String notice_no) throws Exception {
+		noticeMapper.noticeDelete(notice_no);
+	}
 		
 }

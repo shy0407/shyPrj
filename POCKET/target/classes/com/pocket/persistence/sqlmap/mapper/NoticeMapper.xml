@@ -51,4 +51,25 @@ SELECT * from aws.NOTICE
 	values((SELECT IFNULL(MAX(NI.NOTICE_NO),10000000)+1 FROM aws.NOTICE NI),#{title},#{contents},NOW())
 	
 </insert>
+
+
+<select id="noticeDetail" parameterType="String" resultType="NoticeDTO">
+	select *from 
+	aws.NOTICE
+	where NOTICE_NO=#{notice_no}
+
+</select>
+
+<update id="noticeModify" parameterType="NoticeDTO">
+	update aws.NOTICE
+	set TITLE=#{title}, CONTENTS=#{contents} 
+	where NOTICE_NO=#{notice_no}
+</update>
+
+<delete id="noticeDelete" parameterType="String">
+	delete from aws.NOTICE
+	where NOTICE_NO=#{notice_no}
+
+</delete>
+
 </mapper>

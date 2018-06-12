@@ -43,9 +43,8 @@ public class PocketService implements IPocketService {
 	}
 
 	@Override
-	public List<PocketDTO> expenseCal() throws Exception {
-		// TODO Auto-generated method stub
-		return pocketMapper.expenseCal();
+	public List<PocketDTO> expenseCal(String user_no) throws Exception {
+		return pocketMapper.expenseCal(user_no);
 	}
 
 	@Override
@@ -97,11 +96,6 @@ public class PocketService implements IPocketService {
 		return pocketMapper.getPocketAttach(pocket_no);
 	}
 
-
-
-
-	
-	
 	@Transactional
 	@Override
 	public void editPocket(PocketDTO pocketDTO) throws Exception {

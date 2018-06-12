@@ -71,7 +71,7 @@ public class NoticeController {
 	
 	
 	//공지사항 목록 체크박스
-		@RequestMapping(value="/admin/noticeCheckDel.do", method=RequestMethod.POST)
+		@RequestMapping(value="/admin/noticeCheckDel", method=RequestMethod.POST)
 		public String noticeCheckDel(HttpServletRequest request, HttpServletResponse response,
 						ModelMap model,RedirectAttributes rttr) throws Exception {
 			
@@ -80,7 +80,7 @@ public class NoticeController {
 			String[] deleteSelect = request.getParameterValues("deleteSelect");
 			String notice_no = CmmUtil.nvl(request.getParameter("notice_no"));
 			
-			log.info("user_no: "+ notice_no);
+			log.info("notice_no: "+ notice_no);
 			
 			NoticeDTO noticeDTO = new NoticeDTO();
 
@@ -96,7 +96,66 @@ public class NoticeController {
 			
 			return "redirect:/admin/noticeList.do";
 			
-		}	
+		}
+		
+		@RequestMapping(value="/admin/noticeDetail", method=RequestMethod.GET)
+		public String noticeDetail(HttpServletRequest request, HttpServletResponse response, 
+				ModelMap model,String notice_no) throws Exception {
+			
+			log.info("noticeDetail GET!!!!!!..............");
+			model.addAttribute("nDTO",noticeService.noticeDetail(notice_no));
+			
+			
+			return "/admin/noticeDetail";
+
+		}
+		
+		@RequestMapping(value="/admin/noticeModify", method=RequestMethod.GET)
+		public String noticeModify(HttpServletRequest request, HttpServletResponse response, 
+				ModelMap model,String notice_no) throws Exception {
+			
+			log.info("noticeModify GET!!!!!!..............");
+			model.addAttribute("nDTO",noticeService.noticeDetail(notice_no));
+			
+			
+			return "/admin/noticeModify";
+
+		}
+		
+		@RequestMapping(value="/admin/noticeModify", method=RequestMethod.POST)
+		public String noticeModifyPost(HttpServletRequest request, HttpServletResponse response, 
+				ModelMap model,NoticeDTO noticeDTO,RedirectAttributes rttr) throws Exception {
+			
+			log.info("noticeModify POST!!!!!!..............");
+			String url="";
+			String notice_no=noticeDTO.getNotice_no();
+			
+			noticeService.noticeModify(noticeDTO);
+			
+			
+			url = "/admin/noticeDetail.do?notice_no=" + notice_no;
+			rttr.addFlashAttribute("msg", "success");
+			
+			return "redirect:"+url;
+
+		}
+		
+		
+		@RequestMapping(value="/admin/noticeDelete", method=RequestMethod.POST)
+		public String noticeDelete(HttpServletRequest request, HttpServletResponse response, 
+				ModelMap model,NoticeDTO noticeDTO,RedirectAttributes rttr) throws Exception {
+			
+			log.info("noticeDelete POST!!!!!!..............");
+			
+			String notice_no=noticeDTO.getNotice_no();
+			
+			noticeService.noticeDelete(notice_no);
+			
+			rttr.addFlashAttribute("msg", "success");
+			
+			return "redirect:/admin/noticeList.do";
+
+		}
 
 	
 

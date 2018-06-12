@@ -9,9 +9,10 @@
 	
 </select>
 
-<select resultType="PocketDTO" id="expenseCal"> 
+<select resultType="PocketDTO" id="expenseCal" parameterType="String"> 
 	SELECT EXPENSE_DATE, EXPENSE_CATEGORY 
 	FROM aws.POCKET_INFO
+	where USER_NO=#{user_no}
 	
 </select>
 

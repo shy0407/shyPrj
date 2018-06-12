@@ -5,23 +5,44 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="/ElaAdmin-master/image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <title>Ela - Bootstrap Admin Dashboard Template</title>
+
+
+    <link rel="stylesheet" href="/ElaAdmin-master/css/lib/html5-editor/bootstrap-wysihtml5.css" />
     <!-- Bootstrap Core CSS -->
     <link href="/ElaAdmin-master/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/page/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
+<style>
+.btn{ float:right;}
 
+input[readonly='readonly'] {
+background-color: white;
+
+}
+textarea {
+
+
+    box-sizing: border-box;
+    border: 1px solid #e7e7e7;
+
+    
+    border-radius: 4px;
+    background-color: white;
+    resize: none;
+}
+</style>
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
@@ -135,11 +156,11 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">회원정보 시각화</h3> </div>
+                    <h3 class="text-primary">공지사항 상세보기</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">회원정보 시각화</li>
+                        <li class="breadcrumb-item active">공지사항</li>
                     </ol>
                 </div>
             </div>
@@ -149,48 +170,28 @@
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">              
+                        <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Data Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary">Sale</span></td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
+                                
+                                
+                                <form role="form">
+                                	<div class="form-group">
+                                		<input type="text" class="form-control input-default " name="title" value="${nDTO.title}">
+                                	</div>
+                                    <div class="form-group">
+                                        <textarea rows="15" style="height:450px; width:100%" name="contents" readonly >${nDTO.contents}</textarea>
+                                        <input type="hidden" name="notice_no" value="${nDTO.notice_no }">
+                                    </div>
+                                    
+                                	
+                                <div class="btn">
+                                	<button type="submit" class="btn btn-dark btn-outline m-b-10 m-l-5" id="modify"><i class="far fa-edit"></i> 수정</button>
+                                	<button type="button" class="btn btn-dark btn-outline m-b-10 m-l-5" id="golist"><i class="fas fa-history"></i> 목록</button>
                                 </div>
-                                 <div class="pagination p12">
-								      <ul>
-								        <a href="#"><li>Previous</li></a>
-								        <a href="#"><li>1</li></a>
-								        <a href="#"><li>2</li></a>
-								        <a href="#"><li>3</li></a>
-								        <a href="#"><li>4</li></a>
-								        <a href="#"><li>5</li></a>
-								        <a class="is-active" href="#"><li>6</li></a>
-								        <a href="#"><li>Next</li></a>
-								      </ul>
-								    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-               
                 </div>
                 <!-- End PAge Content -->
             </div>
@@ -202,7 +203,7 @@
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
-   <!-- All Jquery -->
+    <!-- All Jquery -->
     <script src="/ElaAdmin-master/js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
@@ -215,19 +216,34 @@
     <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
-
-
-    <script src="/ElaAdmin-master/js/lib/datatables/datatables.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="/ElaAdmin-master/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    
+	<!--stickey kit -->
+	<script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+	<script src="/ElaAdmin-master/js/lib/html5-editor/wysihtml5-0.3.0.js"></script>
+    <script src="/ElaAdmin-master/js/lib/html5-editor/bootstrap-wysihtml5.js"></script>
+    <script src="/ElaAdmin-master/js/lib/html5-editor/wysihtml5-init.js"></script>
+	<script>
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+	
+		$("#modify").on("click", function(){
+			formObj.attr("method", "get");
+			formObj.attr("action", "/admin/noticeModify.do");
+			formObj.submit();
+		});
+		
+		$("#golist").on("click", function(){
+			formObj.attr("method", "get");
+			formObj.attr("action", "/admin/noticeList.do");
+			formObj.submit();
+		});
+		
+		
+	});
 	
 	
+	
+	
+	</script>
 
 </body>
 
