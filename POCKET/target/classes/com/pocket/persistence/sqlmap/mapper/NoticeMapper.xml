@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pocket.persistence.mapper.NoticeMapper">
+
+<select resultType="NoticeDTO" id="getNotice"> 
+SELECT * from aws.Notice
+</select>
+
+<!--페이지 가져오는 select  -->
+<select  id ="nlistPage" resultType="NoticeDTO">
+	<![CDATA[
+	select NOTICE_NO, TITLE,CONTENTS,REGDATE
+	from aws.NOTICE
+	where NOTICE_NO>0
+	order by NOTICE_NO desc 
+	limit #{page},10
+	]]>
+
+</select>
+
+<select id="nlistCriteria" resultType="NoticeDTO">
+	<![CDATA[
+		select NOTICE_NO, TITLE,CONTENTS,REGDATE
+		from aws.NOTICE
+		where NOTICE_NO>0
+		order by NOTICE_NO desc
+		limit #{pageStart},#{perPageNum}
+		
+	]]>
+</select>
+
+<!-- 카운트 페이징 -->
+<select id ="ncountPaging" resultType="int">
+<![CDATA[
+	select 
+	count(NOTICE_NO)
+	from aws.NOTICE
+	where
+	NOTICE_NO>0
+
+]]>
+
+</select>
+
+
+
+<insert id="insertNotice" parameterType="NoticeDTO">
+	insert into aws.NOTICE 
+	(NOTICE_NO,TITLE, CONTENTS, REGDATE)
+	values((SELECT IFNULL(MAX(NI.NOTICE_NO),10000000)+1 FROM aws.NOTICE NI),#{title},#{contents},NOW())
+	
+</insert>
+</mapper>

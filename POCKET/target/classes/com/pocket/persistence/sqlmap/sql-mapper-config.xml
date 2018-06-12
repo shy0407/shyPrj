@@ -14,6 +14,7 @@
     	<typeAlias type="com.pocket.DTO.StoreDTO" alias="StoreDTO" />
     	<typeAlias type="com.pocket.DTO.Criteria" alias="Criteria" />
     	<typeAlias type="com.pocket.DTO.PageMaker" alias="PageMaker" />
+    	<typeAlias type="com.pocket.DTO.NoticeDTO" alias="NoticeDTO" />
     	
     </typeAliases>
 </configuration>

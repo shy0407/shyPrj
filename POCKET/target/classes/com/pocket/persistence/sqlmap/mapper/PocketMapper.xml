@@ -53,10 +53,28 @@ order by REGDATE
 </select>
 
 <!-- 사진 클릭시 포켓 인포 가져오기 -->
-<select id="getPocketInfoImg" parameterType="String">
-select * from aws.POCkET_INFO
+<select id="getPocketInfoImg" parameterType="String" resultType="PocketDTO">
+select * from aws.POCKET_INFO
 where POCKET_NO=(select POCKET_NO from aws.POCKET_IMG where FULL_NAME=#{fullName})
 </select>
+
+<!-- 디비에서 포켓사진 지우기  -->
+<delete id="deletePocketImg" parameterType="String">
+delete from aws.POCKET_IMG 
+where POCKET_NO=#{pocket_no}
+</delete>
+
+<!-- 포켓첨부파일 읽기 -->
+<select id="getPocketAttach" resultType="String">
+	select FULL_NAME from aws.POCKET_IMG where POCKET_NO=#{pocket_no}
+</select>
+
+<!--수정시 첨부파일 바꾸기  -->
+<insert id="replacePocketAttach" parameterType="map">
+	insert into aws.POCKET_IMG(FULL_NAME, POCKET_NO, USER_NO)
+	values(#{fullName},#{pocket_no},#{user_no})
+</insert>
+
 
 
 </mapper>

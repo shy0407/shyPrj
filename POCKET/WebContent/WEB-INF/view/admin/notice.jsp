@@ -1,45 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-<style>
-.fileDrop {
-	width: 100%;
-	height: 320px;
-	border: 1px dotted gray;
-}
-.uploadedList{margin: 0 auto;}
-
-
-
-
-    .popup {position: absolute;}
-    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
-    .front { 
-       z-index:1110; opacity:1; boarder:1px; margin: auto; 
-      }
-     .show{
-       position:relative;
-       max-width: 1200px; 
-       max-height: 800px; 
-       overflow: auto;       
-     } 
-     
-     
-.uploadedList{
-
-	width :100%;
-	height:308px;
-	border: 1px;
-	border-color: #e7e7e7;
-
-}
-     
-</style>
 
 <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,21 +13,23 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <title>Ela - Bootstrap Admin Dashboard Template</title>
+
+
+    <link rel="stylesheet" href="/ElaAdmin-master/css/lib/html5-editor/bootstrap-wysihtml5.css" />
     <!-- Bootstrap Core CSS -->
     <link href="/ElaAdmin-master/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
+<style>
+.btn{ float:right;}
 
+
+
+</style>
 <body class="fix-header fix-sidebar">
-
-
- <div class='popup back' style="display:none;"></div>
-    <div id="popup_front" class='popup front' style="display:none;">
-     <img id="popup_img">
-    </div>
-
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
@@ -190,81 +157,26 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-			                   	<div class="card card-outline-primary">
-                            <div class="card-header">
-                                <h4 class="m-b-0 text-white">가맹점 상세보기</h4>
-                            </div>        
                             <div class="card-body">
-								<!--chart 1  -->
-								<div>
-									<form role="form" action="pocketRead.do" method="post">
+                                <h4 class="card-title">공지사항 등록</h4>
                                 
-                                    <div class="form-body">
-                                      
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <!-- <label>City</label>
-                                                    <input type="text" class="form-control"> -->
-                                                    <label for="exampleInputEmail1">File DROP Here</label>
-													
-											<!-- 		<div class="initMsg">파일을 올려주세요.</div>-->
-													<div class="uploadedList"></div> 
-													
-													</div>
-                                                </div>
-                                            
-                                            
-                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>점포명</label>
-                                                    <input type="text" name="expense_detail" class="form-control" value="${pocketDTO.expense_detail }">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>카테고리 </label>
-                                                    <input type="text" name="expense_category" class="form-control" value="${pocketDTO.expense_category}" >
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>카테고리상세 </label>
-                                                    <input type="text" name="expense_cash" class="form-control" value="${pocketDTO.expense_cash }">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>주소 </label>
-                                                    <input type="text" id="expense_card" name="expense_card" class="form-control" value="${pocketDTO.expense_card}" onclick="sample4_execDaumPostcode()" >
-                                                </div>
-                                            </div>
-                                            </div>
-                                               <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                <label>파일업로드</label>
-                                                <div class="fileDrop">
-                                                </div>
-                                                </div>
-                                                </div>
-                                             
-
+                                <form action="/admin/notice.do" method="post">
+                                	<div class="form-group">
+                                		<input type="text" class="form-control input-default " name="title" placeholder="제목을 입력해주세요">
+                                	</div>
+                                    <div class="form-group">
+                                        <textarea class="textarea_editor form-control" rows="15" placeholder="Enter text ..." style="height:450px" name="contents"></textarea>
                                     </div>
-                                            
-                                            	<input type="hidden" name="page" value="${cri.page }">
-                                            	<input type="hidden" name="perPageNum" value="${cri.perPageNum }">
-                                            	<input type="hidden" name="pocket_no" value="${pocketDTO.pocket_no}">
-                                        </div>
-                                     
-                                    <div class="form-actions">
-                                    		
-                                        <button type="submit" class="btn btn-success" id="modify"><i class="fa fa-save"></i> Modify</button>
-                                        <button type="button" class="btn btn-inverse" id="golist"><i class="fa fa-history"></i>Go List</button>
-                                        <button type="submit" class="btn btn-success" id="remove"><i class="fa fa-trash-alt"></i> Remove</button>
-                                    </div>
+                                    
+                                
+                                <div class="btn">
+                                	<button type="submit" class="btn btn-dark btn-outline m-b-10 m-l-5" id="register"><i class="far fa-check-circle"></i> 등록</button>
+                                	<button type="button" class="btn btn-dark btn-outline m-b-10 m-l-5" id="golist"><i class="fas fa-history"></i> 목록</button>
+                                </div>
                                 </form>
-								</div>
-								
-							</div>
+                            </div>
                         </div>
                     </div>
-               
                 </div>
                 <!-- End PAge Content -->
             </div>
@@ -290,194 +202,17 @@
     <!--Custom JavaScript -->
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
 	<!--stickey kit -->
-	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
-	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
-		<script type="text/javascript" src="/uploadjs/upload.js"></script>
-	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+	<script src="/ElaAdmin-master/js/lib/html5-editor/wysihtml5-0.3.0.js"></script>
+    <script src="/ElaAdmin-master/js/lib/html5-editor/bootstrap-wysihtml5.js"></script>
+    <script src="/ElaAdmin-master/js/lib/html5-editor/wysihtml5-init.js"></script>
+	<script>
+	$("#register").submit(function(event){
 
-<script id="template" type="text/x-handlebars-template">
-<li>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	<a href="{{fullName}}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
-	</span>
-  </div>
-</li>                 
-</script>    
-
-<script>
-$(document).ready(function(){
-		
-	var formObj = $("form[role='form']");
-	
-	formObj.submit(function(event){
-		event.preventDefault();
-		
-		var that = $(this);
-		
-		var str ="";
-		$(".uploadedList .delbtn").each(function(index){
-			 str += "<input type='hidden' name='files' value='"+$(this).attr("href") +"'> ";
-		});
-		
-		that.append(str);
-
-		console.log(str);
-		
 		that.get(0).submit();
-	});
-	
-	
-	$("#goList ").on("click", function(){
-		formObj.attr("method", "get");
-		formObj.attr("action", "/pocketGallery.do");
-		formObj.submit();
-	});
-
-	/* $("#modify").on("click", function(){
-		formObj.attr("action", "/pocketRead.do");
-		formObj.attr("method", "post");		
-		formObj.submit();
-	}); */
-	
-	
-	$("#remove").on("click", function(){
-		
-		
-		var arr = [];
-		$(".uploadedList li").each(function(index){
-			 arr.push($(this).attr("data-src"));
 		});
-		
-		if(arr.length > 0){
-			$.post("/deleteAllFiles.do",{files:arr}, function(){
-				
-			});
-		}
-		
-		formObj.attr("action", "/removePocket.do");
-		formObj.submit();
-	});	
+	</script>
 
-
-var template = Handlebars.compile($("#template").html());
-
-
-$(".fileDrop").on("dragenter dragover", function(event){
-	event.preventDefault();
-});
-
-
-$(".fileDrop").on("drop", function(event){
-	event.preventDefault();
-	
-	var files = event.originalEvent.dataTransfer.files;
-	
-	var file = files[0];
-
-	//console.log(file);
-	
-	var formData = new FormData();
-	
-	formData.append("file", file);	
-	
-	$.ajax({
-		  url: '/uploadAjax.do',
-		  data: formData,
-		  dataType:'text',
-		  processData: false,
-		  contentType: false,
-		  type: 'POST',
-		  success: function(data){
-			  
-			  var fileInfo = getFileInfo(data);
-			  
-			  var html = template(fileInfo);
-			  
-			  $(".uploadedList").append(html);
-		  }
-		});	
-});
-
-
-$(".uploadedList").on("click", ".delbtn", function(event){
-	
-	event.preventDefault();
-	
-	var that = $(this);
-	 
-	$.ajax({
-	   url:"/deleteFile.do",
-	   type:"post",
-	   data: {fileName:$(this).attr("href")},
-	   dataType:"text",
-	   success:function(result){
-		   if(result == 'deleted'){
-			   that.closest("li").remove();
-		   }
-	   }
-   });
-});
-
-
-var pocket_no = ${pocketDTO.pocket_no};
-var template = Handlebars.compile($("#template").html());
-
-$.ajax({
-    
-    url: "/getPocketAttach.do",
-    data:{pocket_no:pocket_no},
-    success: function(list){
-        $(list).each(function(){
-      	console.log(list);
-      	var fileInfo = getFileInfo(this);
-      	console.log(fileInfo);
-      	console.log(fileInfo.imgsrc);
-      	
-    	
-		var fileInfo = getFileInfo(this);
-		
-		var html = template(fileInfo);
-		
-		 $(".uploadedList").append(html);
-      	
-      	
-      	
-
-        });
-    }
-});
-
-$(".uploadedList").on("click", ".mailbox-attachment-name", function(event){
-	
-	var fileLink = $(this).attr("href");
-	
-	if(checkImageType(fileLink)){
-		
-		event.preventDefault();
-				
-		var imgTag = $("#popup_img");
-		imgTag.attr("src", fileLink);
-		
-		console.log(imgTag.attr("src"));
-				
-		$(".popup").show('slow');
-		imgTag.addClass("show");		
-	}	
-});
-
-$("#popup_img").on("click", function(){
-	
-	$(".popup").hide('slow');
-	
-});	
-
-});
-</script>
-
-		</body>
+</body>
 
 </html>

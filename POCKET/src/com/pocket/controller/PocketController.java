@@ -371,7 +371,61 @@ public class PocketController {
 		public String pocketRead(HttpServletRequest request, HttpServletResponse response ,ModelMap model,@RequestParam("fullName")String fullName) throws Exception {
 			log.info("pocketRead............ .....");
 			log.info(fullName);
+			 
+			model.addAttribute("pocketDTO",pocketService.getPocketInfoImg(fullName));
 			return "/pocketRead";
+		
+		}
+	  
+	  @RequestMapping(value="pocketRead", method=RequestMethod.POST)		
+		public String pocketReadPost(HttpServletRequest request, HttpServletResponse response ,
+				ModelMap model,PocketDTO pocketDTO, RedirectAttributes rttr,HttpSession session) throws Exception {
+			log.info("pocketRead POST............ .....");
+			userDTO uDTO=(userDTO)session.getAttribute("userDTO");
+			String user_no = uDTO.getUser_no();
+			log.info("user_no  :" +user_no);
+			
+			
+			
+			String[]arr=request.getParameterValues("files");
+			log.info(arr.length);
+			for(int i=0;i<arr.length;i++) {
+			System.out.println(arr[i]);
+			}
+			
+			
+			pocketDTO.setUser_no(user_no);
+			pocketDTO.setFiles(arr);
+			pocketService.editPocket(pocketDTO);
+		
+			rttr.addFlashAttribute("msg","success");
+			
+		
+			return "redirect:/pocketGallery.do";
+		
+		}
+	  
+	  
+	  
+	  @RequestMapping("/getPocketAttach.do")
+	  @ResponseBody
+	  public List<String> getAttach(@RequestParam("pocket_no")String pocket_no)throws Exception{
+	    log.info("getPocketAttach!!!~~~~~~~~~~~~");
+	    return pocketService.getPocketAttach(pocket_no);
+	  }  
+	  
+	  @RequestMapping(value="removePocket", method=RequestMethod.POST)		
+		public String removePocket(HttpServletRequest request, HttpServletResponse response ,
+				RedirectAttributes rttr,ModelMap model,@RequestParam("pocket_no")String pocket_no) throws Exception {
+			log.info("removePocket............ .....");
+			log.info(pocket_no);
+			 
+			pocketService.removePocket(pocket_no);
+			rttr.addAttribute("msg", "success");
+			
+			return "redirect:/pocketGallery.do";
+			
+			
 			
 		}
 	
