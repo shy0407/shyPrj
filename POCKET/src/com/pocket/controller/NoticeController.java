@@ -51,7 +51,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/admin/noticeList", method = RequestMethod.GET)
-	  public void noticelistPage(@ModelAttribute("cri")Criteria cri, Model model) throws Exception {
+	  public String noticelistPage(@ModelAttribute("cri")Criteria cri, Model model) throws Exception {
 
 			log.info(cri.toString());
 			log.info(cri);
@@ -65,7 +65,9 @@ public class NoticeController {
 	    pageMaker.setTotalCount(noticeService.nlistCountCriteria(cri));
 
 	    model.addAttribute("pageMaker", pageMaker);
-	  }
+	    return "/admin/noticeList";
+	}
+	
 	
 	
 	//공지사항 목록 체크박스
@@ -82,7 +84,7 @@ public class NoticeController {
 			
 			NoticeDTO noticeDTO = new NoticeDTO();
 
-			noticeDTO.setNoticeNo(notice_no);
+			noticeDTO.setNotice_no(notice_no);
 			noticeDTO.setAllCheckSeq(deleteSelect);
 			
 			noticeService.deleteNoticeList(noticeDTO);

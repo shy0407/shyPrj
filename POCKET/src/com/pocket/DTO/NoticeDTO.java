@@ -2,7 +2,7 @@ package com.pocket.DTO;
 
 public class NoticeDTO {
 	
-	private String noticeNo;
+	private String notice_no;
 	private String title;
 	private String contents;
 	private String regDate;
@@ -10,12 +10,7 @@ public class NoticeDTO {
 	private String[] allCheckSeq;
 	
 	
-	public String getNoticeNo() {
-		return noticeNo;
-	}
-	public void setNoticeNo(String noticeNo) {
-		this.noticeNo = noticeNo;
-	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -45,6 +40,12 @@ public class NoticeDTO {
 	}
 	public void setAllCheckSeq(String[] allCheckSeq) {
 		this.allCheckSeq = allCheckSeq;
+	}
+	public String getNotice_no() {
+		return notice_no;
+	}
+	public void setNotice_no(String notice_no) {
+		this.notice_no = notice_no;
 	}
 
 }

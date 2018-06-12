@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -409,8 +409,8 @@
                                         <tbody>
                                         <c:forEach items="${list}" var="nDTO">
                                             <tr>
-                                            	<td class="center"><input type="checkbox" name="deleteSelect" id="deleteSelect" value="${nDTO.noticeNo}" /></td>
-                                                <td>${nDTO.noticeNo}</td>
+                                            	<td class="center"><input type="checkbox" name="deleteSelect" id="deleteSelect" value="${nDTO.notice_no}" /></td>
+                                                <td>${nDTO.notice_no}</td>
                                                 <td>${nDTO.title}</td>
                                                 <td>${nDTO.regDate}</td>
                                                 
@@ -422,11 +422,11 @@
                                     </table>
                                 </div>
                                 </form>
-                                 <div class="pagination p12">
+                              <div class="pagination p12">
 								    <div class="pagination p12">
 								      <ul>
 								        <c:if test="${pageMaker.prev}">
-								        <a href="/admin/noticeList.do${pageMaker.makeQuery(pageMaker.startPage -1) }"><li>Previous</li></a>
+								        <a href="admin/noticeList.do${pageMaker.makeQuery(pageMaker.startPage -1) }"><li>Previous</li></a>
 								        </c:if>
 								         <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								       			 <a href="/admin/noticeList.do${pageMaker.makeQuery(idx)}"
@@ -434,7 +434,7 @@
 								        </c:forEach>
 								         
 								        <c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-								        <a href="/admin/noticeList.do${pageMaker.makeQuery(pageMaker.endPage+1) }"><li>Next</li></a>
+								        <a href="admin/noticeList.do${pageMaker.makeQuery(pageMaker.endPage+1) }"><li>Next</li></a>
 								        <span><button type="button" class="btn btn-success m-b-10 m-l-5" onclick="javascript:deleteConfirm();" id="delete" >DELETE</button></span>
 								        </c:if>
 								      </ul>
@@ -456,7 +456,7 @@
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
-    <!-- All Jquery -->
+        <!-- All Jquery -->
     <script src="/ElaAdmin-master/js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/ElaAdmin-master/js/lib/bootstrap/js/popper.min.js"></script>
@@ -488,7 +488,7 @@
 	   if (confirm("선택된 사용자를 삭제하시겠습니까?")) {
 	      document.getElementById("f").submit();
 	      return true;
-	   } else { 
+	   } else {
 	      return false;
 	   }
 	}
@@ -509,6 +509,7 @@
 	}
 	
 	</script>
+  
   
 </body>
 

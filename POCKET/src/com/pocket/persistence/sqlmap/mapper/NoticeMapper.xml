@@ -4,13 +4,13 @@
 <mapper namespace="com.pocket.persistence.mapper.NoticeMapper">
 
 <select resultType="NoticeDTO" id="getNotice"> 
-SELECT * from aws.Notice
+SELECT * from aws.NOTICE
 </select>
 
 <!--페이지 가져오는 select  -->
 <select  id ="nlistPage" resultType="NoticeDTO">
 	<![CDATA[
-	select NOTICE_NO, TITLE,CONTENTS,REGDATE
+	select NOTICE_NO,TITLE,CONTENTS,REGDATE
 	from aws.NOTICE
 	where NOTICE_NO>0
 	order by NOTICE_NO desc 
@@ -21,7 +21,7 @@ SELECT * from aws.Notice
 
 <select id="nlistCriteria" resultType="NoticeDTO">
 	<![CDATA[
-		select NOTICE_NO, TITLE,CONTENTS,REGDATE
+		select NOTICE_NO,TITLE,CONTENTS,REGDATE
 		from aws.NOTICE
 		where NOTICE_NO>0
 		order by NOTICE_NO desc
