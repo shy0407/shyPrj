@@ -103,10 +103,10 @@ order by REGDATE
 </select>
 
 
-<select id="getStoreByDate" resultType="StoreDTO">
-select STORE_NAME,JIBUN_ADDR,LNG,LAT
+<select id="getStoreByDate" resultType="java.util.HashMap">
+select STORE_NAME,JIBUN_ADDR,CATEGORY,LNG,LAT
 from aws.STORE_INFO
 order by REG_DATE
-limit 30
+limit 20
 </select>
 </mapper>

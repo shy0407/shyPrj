@@ -152,7 +152,7 @@ public class StoreService implements IStoreService {
 	}
 
 	@Override
-	public List<StoreDTO> getStoreByDate() throws Exception {
+	public List<Map<String, Object>> getStoreByDate() throws Exception {
 		return storeMapper.getStoreByDate();
 	}
 	

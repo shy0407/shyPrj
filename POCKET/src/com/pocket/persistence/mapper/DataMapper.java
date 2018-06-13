@@ -26,6 +26,7 @@ public interface DataMapper {
 	List<HashMap<String, String>> allData()throws Exception;
 	List<HashMap<String, String>> dataForStoreInfo()throws Exception;
 	HashMap<String, Object> storeLocalData()throws Exception;
+	List<HashMap<String, String>> expenseUserData(String user_no)throws Exception;
 	
 	
 }

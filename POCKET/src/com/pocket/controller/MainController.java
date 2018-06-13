@@ -1,6 +1,8 @@
 package com.pocket.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -23,9 +25,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pocket.DTO.LoginDTO;
 import com.pocket.DTO.PocketDTO;
+import com.pocket.DTO.StoreDTO;
 import com.pocket.DTO.userDTO;
 import com.pocket.service.IMainService;
 import com.pocket.service.IPocketService;
+import com.pocket.service.IStoreService;
 import com.pocket.service.IUserService;
 import com.pocket.util.CmmUtil;
 
@@ -42,6 +46,9 @@ public class MainController {
 	
 	@Resource(name = "PocketService")
 	private IPocketService pocketService;
+	
+	@Resource(name = "StoreService")
+	private IStoreService storeService;
 	
 	
 	
@@ -63,6 +70,8 @@ public class MainController {
 		
 		PocketDTO pDTO =pocketService.mainExIn(user_no);
 		model.addAttribute("pDTO", pDTO);
+		
+		
 		return "/index";
 		
 	}
@@ -321,6 +330,42 @@ public class MainController {
 					ModelMap model) throws Exception {
 		log.info("/calTest.........................................................");
 		return "/Calender";
+		
+	}
+	
+	@RequestMapping(value="getPosition", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> getPosition(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> store=storeService.getStoreByDate();
+		
+		
+		Map<String, Object> map  = new HashMap<String, Object>();
+		 int index=0;
+
+		
+		  for (  Map<String, Object> map1: store) {
+
+		          System.out.println("index >> " + index);
+
+		          for (Map.Entry<String, Object> entry : map1.entrySet()) {
+
+		 	        String key = entry.getKey();
+
+		 	        Object value = entry.getValue();
+
+		 	       map.put(key,value);
+
+		 	    }
+
+		       index++;
+
+		  }
+			
+			
+	
+		
+		return map;
 		
 	}
 	

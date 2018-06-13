@@ -1,6 +1,7 @@
 package com.pocket.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.pocket.DTO.Criteria;
 import com.pocket.DTO.StoreDTO;
@@ -23,5 +24,5 @@ public interface IStoreService {
 	void replaceStoreAttach(String fullName, String store_no)throws Exception;
 	void remove(String store_no)throws Exception;
 	List<String>storeImgAll()throws Exception;
-	List<StoreDTO> getStoreByDate()throws Exception;
+	List<Map<String, Object>> getStoreByDate()throws Exception;
 }

@@ -358,4 +358,45 @@ count(case when GUNAME='도봉구' then 1 end) as dobong
 from aws.STORE_INFO
 </select>
 
+
+<select id="expenseUserData" parameterType="String" resultType="java.util.HashMap">
+select
+sum(case when substring(EXPENSE_DATE,6,2)=1 
+	then cast(EXPENSE_CASH as decimal) end) as jan,
+sum(case when substring(EXPENSE_DATE,6,2)=2
+	then cast(EXPENSE_CASH as decimal) end) as feb,
+sum(case when substring(EXPENSE_DATE,6,2)=3 
+	then cast(EXPENSE_CASH as decimal) end) as mar,
+sum(case when substring(EXPENSE_DATE,6,2)=4 
+	then cast(EXPENSE_CASH as decimal) end) as api,
+sum(case when substring(EXPENSE_DATE,6,2)=5
+	then cast(EXPENSE_CASH as decimal) end) as may,
+sum(case when substring(EXPENSE_DATE,6,2)=6 
+	then cast(EXPENSE_CASH as decimal) end) as jun,
+sum(case when EXPENSE_DATE between '2018-06-01' and '2018-06-02' 
+	then cast(EXPENSE_CASH as decimal) end) as first,
+sum(case when EXPENSE_DATE between '2018-06-03' and '2018-06-09' 
+	then cast(EXPENSE_CASH as decimal) end) as second,
+sum(case when EXPENSE_DATE between '2018-06-10' and '2018-06-16' 
+	then cast(EXPENSE_CASH as decimal) end) as third,
+sum(case when EXPENSE_DATE between '2018-06-17' and '2018-06-23' 
+	then cast(EXPENSE_CASH as decimal) end) as forth,
+sum(case when EXPENSE_DATE between '2018-06-24' and '2018-06-30' 
+	then cast(EXPENSE_CASH as decimal) end) as fifth,
+sum(case when EXPENSE_CATEGORY ='foods' then cast(EXPENSE_CASH as decimal)end) as foods,
+sum(case when EXPENSE_CATEGORY ='alcohol_cigarette' then cast(EXPENSE_CASH as decimal)end) as alcohol_cigarette,
+sum(case when EXPENSE_CATEGORY ='clothes' then cast(EXPENSE_CASH as decimal)end) as clothes,
+sum(case when EXPENSE_CATEGORY ='utility_bill' then cast(EXPENSE_CASH as decimal)end) as utility_bill,
+sum(case when EXPENSE_CATEGORY ='housewares' then cast(EXPENSE_CASH as decimal)end) as housewares,
+sum(case when EXPENSE_CATEGORY ='health' then cast(EXPENSE_CASH as decimal)end) as health,
+sum(case when EXPENSE_CATEGORY ='transportation' then cast(EXPENSE_CASH as decimal)end) as transportation,
+sum(case when EXPENSE_CATEGORY ='telephone' then cast(EXPENSE_CASH as decimal)end) as telephone,
+sum(case when EXPENSE_CATEGORY ='entertainment' then cast(EXPENSE_CASH as decimal)end) as entertainment,
+sum(case when EXPENSE_CATEGORY ='education' then cast(EXPENSE_CASH as decimal)end) as education,
+sum(case when EXPENSE_CATEGORY ='travel' then cast(EXPENSE_CASH as decimal)end) as travel
+
+from aws.POCKET_INFO
+where USER_NO=#{user_no}
+
+</select>
 </mapper>

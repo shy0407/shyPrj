@@ -2,13 +2,12 @@ package com.pocket.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //import org.apache.commons.httpclient.HttpStatus;
 import org.apache.log4j.Logger;
@@ -20,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pocket.DTO.DataDTO;
+import com.pocket.DTO.userDTO;
 import com.pocket.service.IDataService;
 
 	
@@ -254,6 +253,39 @@ public class DataController {
 		
 		model.addAttribute("hash",hash);
 		return hash;
+	 
+		
+	}
+	
+	@RequestMapping(value="/expenseUserData", method=RequestMethod.GET)
+	public ResponseEntity<List<HashMap<String, String>>> expenseUserData(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model,HttpSession session) throws Exception {
+		log.info("개인 지출 데이터가져옵니당 .................");
+		userDTO uDTO=(userDTO)session.getAttribute("userDTO");
+		
+		String user_no =uDTO.getUser_no();
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		 try{
+		        entity = new ResponseEntity<>(dataService.expenseUserData(user_no), HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+
+		return entity;
+	 
+		
+	}
+	
+	@RequestMapping(value="expenseChart", method=RequestMethod.GET)
+	public String expenseChart(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		//log.info("스토어 전체 데이터가져옵니당 .................");
+			
+		
+		return "/expenseChart";
 	 
 		
 	}

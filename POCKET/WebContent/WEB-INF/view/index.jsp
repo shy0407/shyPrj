@@ -265,34 +265,50 @@ height: auto;}
                     
 				</div>
 				<div class="row">
-                    <div class="col-lg-8">
+                    
+					<div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>최근 등록 가맹점</h4>
+                            </div>
+                            <div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-hover ">
+										<thead>
+											<tr>
+												<th>가맹점</th>
+												<th>종류</th>
+												<th>주소</th>
+											</tr>
+										</thead>
+										<tbody>
+										 <%-- <c:forEach items="${sDTO}" var="sList">
+											<tr>
+												<td>${sList.store_name }</td>
+												<td>${sList.category }</td>
+												<td>${sList.jibun_addr }</td>
+												
+											</tr>
+											</c:forEach> --%>
+										</tbody>
+									</table>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
                         <div class="card nestable-cart">
                             <div class="card-title">
                                 <h4>최근 등록된 가맹점</h4>
 
                             </div>
                             <div class="card-body">
-                            <div id="map" style="width:500px;height:400px;"></div>
+                            <div id="map" style="width:100%;height:350px;"></div>
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=27bd3a5915ae76a36c4f076bc4993248"></script>
-							<script>
-								var container = document.getElementById('map');
-								var options = {
-									center: new daum.maps.LatLng(33.450701, 126.570667),
-									level: 3
-								};
-						
-								var map = new daum.maps.Map(container, options);
-							</script>
+							
+							
                              </div>
                             
-                        </div>
-                    </div>
-					<div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="card-title">Visitor</h4>
-                                
-                            </div>
                         </div>
                     </div>
                     <!-- /# column -->
@@ -383,10 +399,69 @@ height: auto;}
       disableDragging: true
 
     });
+    var lng=[];
+    var store=[];
+    var lat=[];
+    var position = new Array();
+    var init = new Object() ;
+    var addr=[];
+    $.ajax({
+    	url:'getPosition.do',
+    	
+    	success:function(dd){
+    		console.log(dd);
+    		
+    		
+    		
+    	}
+    });
+	
+    var geocoder = new daum.maps.services.Geocoder();
+
+    for (var i = 0; i < addr.length; i++) {
+            (function(i) {                                                   
+            geocoder.addr2coord(addr[i], function (status, result) {
+           // 정상적으로 검색이 완료됐으면 
+                if (status === daum.maps.services.Status.OK) {
+
+                    var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords);
+
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new daum.maps.Marker({
+                        map: map,
+                        position: coords
+        			 });
+                }
+            });
+     })(i);
+    }
+    
+    
+    
+    
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+	    mapOption = { 
+	        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };
+	
+	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	 
+	// 마커를 표시할 위치와 title 객체 배열입니다 
+	
+	
+	var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+	    
+
 
   });
 
 
 </script>
+
+
 
 </html>

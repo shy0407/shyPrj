@@ -146,12 +146,45 @@
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="card">
 			                           
                             <div class="card-body">
 								<!--chart 1  -->
-								<div></div>
+								<div><canvas id="weekChart"></canvas></div>
+								
+							</div>
+                        </div>
+                    </div>
+                       <div class="col-6">
+                        <div class="card">
+			                           
+                            <div class="card-body">
+								<!--chart 1  -->
+								<div><canvas id="monthChart"></canvas></div>
+								
+							</div>
+                        </div>
+                    </div>
+               
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+			                           
+                            <div class="card-body">
+								<!--chart 1  -->
+								<div><canvas id="categoryChart"></canvas></div>
+								
+							</div>
+                        </div>
+                    </div>
+                       <div class="col-6">
+                        <div class="card">
+			                           
+                            <div class="card-body">
+								<!--chart 1  -->
+								<div><canvas id="hline"></canvas></div>
 								
 							</div>
                         </div>
@@ -184,7 +217,218 @@
 	<!--stickey kit -->
 	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
 	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
-	
+	<script>
+		$(document).ready(function(){
+			var weekChart = document.getElementById("weekChart");
+			var monthChart = document.getElementById("monthChart");
+			var categoryChart = document.getElementById("categoryChart");
+			var hline = document.getElementById("hline");
+			
+			var week=[];
+			var month=[];
+			var category=[];
+			
+			
+			$.ajax({
+				url:"/expenseUserData.do",
+				method:"GET",
+				success:function(data){
+					console.log(data);
+					$.each(data,function(key,val){
+						week.push(val.first);
+						week.push(val.second);
+						week.push(val.third);
+						week.push(val.forth);
+						week.push(val.fifth);
+						
+						month.push(val.jan);
+						month.push(val.feb);
+						month.push(val.mar);
+						month.push(val.api);
+						month.push(val.may);
+						month.push(val.jun);
+						
+						category.push(val.foods);
+						category.push(val.alcohol_cigarette);
+						category.push(val.clothes);
+						category.push(val.utility_bill);
+						category.push(val.housewares);
+						category.push(val.health);
+						category.push(val.transportation);
+						category.push(val.telephone);
+						category.push(val.entertainment);
+						category.push(val.education);
+						category.push(val.travel);
+						
+						
+						
+						
+						
+					});
+				console.log(week);
+				
+				console.log(category);
+				
+					var weekdata={
+							labels:["첫째","둘째","셋째","넷째","다섯째"],
+							datasets:[{
+										
+										backgroundColor: "rgba(179,181,198,0.2)",
+										borderColor: "rgba(179,181,198,1)",
+										borderWidth:1,
+										data:week
+							
+									}]
+								};
+					myhLineChart  = new Chart(weekChart, {
+						type: 'bar',
+						data: weekdata,
+						options: {
+							// Elements options apply to all of the options unless overridden in a dataset
+							// In this case, we are setting the border of each horizontal bar to be 2px wide
+							elements: {
+								rectangle: {
+									borderWidth: 2,
+								}
+							},
+							responsive: true,
+							legend: {
+								//position: 'right',
+								display:false,
+							},
+							title: {
+								display: true,
+								text: '주별 지출'
+							}
+						}
+				});
+					
+					var linedata={
+	    					labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+	    					datasets: [{
+	    						label: '전체',
+	    						borderColor:"rgba(0, 123, 255, 0.9)",
+	    						borderWidth: "1",
+	    						backgroundColor: "rgba(0, 123, 255, 0.5)",
+	    						//pointHighlightStroke: "rgba(26,179,148,1)",
+	    						data: month,
+	    						fill: false,
+	    					}
+	    					]
+	    					
+	    			};
+	    		
+	    			myLineChart  = new Chart(monthChart, {
+						type: 'line',
+						data: linedata,
+						options: {
+							responsive: true,
+							title: {
+								display: true,
+								text: '월 별 지출'
+							},
+							scales: {
+								yAxes: [{
+									ticks: {
+										// the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
+										suggestedMin: 10,
+										// the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
+										suggestedMax: 50
+									}
+								}]
+							}
+						}	
+					});
+					
+	    		
+	    			
+	    			var categorydata={
+	    					labels: ['식비','술/담배','의복','세금','가정용품','건강','교통','통신','오락','교육','여행'],
+	    					datasets: [{
+	    						label: '분류별',
+	    						backgroundColor: [
+    								"#D98880",
+    								"#C39BD3",
+    								"#A9CCE3",
+    								"#A3E4D7",
+    								"#FAD7A0",
+    								"#E74C3C",
+    								"#F9E79F",
+    								"#D7DBDD",
+    								"#2ECC71",
+    								"#F9EBEA",
+    								"#C39BD3",
+    								"#EBF5FB"		
+    								
+    							],
+	    						
+	    						data: category,
+	    						fill: true,
+	    					}
+	    					]
+	    					
+	    			};
+	    			
+	    			 polar = new Chart(categoryChart,{
+	    				 type:'polarArea',
+	    				 data:categorydata,
+	    				 options: {
+	    						responsive: true,
+	    						legend: {
+	    							position: 'right',
+	    						},
+	    						title: {
+	    							display: true,
+	    							text: '분류별 지출'
+	    						},
+	    						scale: {
+	    							ticks: {
+	    								beginAtZero: true
+	    							},
+	    							reverse: false
+	    						},
+	    						animation: {
+	    							animateRotate: false,
+	    							animateScale: true
+	    						}
+	    					}
+	    				 
+	    				 
+	    			 });
+	    			 
+	    			
+	    			hline.height=300;
+	    			 
+	 				myLineChart  = new Chart(hline, {
+						type: 'horizontalBar',
+						data: categorydata,
+						options: {
+							// Elements options apply to all of the options unless overridden in a dataset
+							// In this case, we are setting the border of each horizontal bar to be 2px wide
+							elements: {
+								rectangle: {
+									borderWidth: 2,
+								}
+							},
+							responsive: true,
+							legend: {
+								position: 'right',
+								display:true,
+							},
+							title: {
+								display: true,
+								text: '분류별 지출'
+							}
+						}
+				});
+					
+					
+					
+				}
+			});
+			
+		});
+	</script>
 
 </body>
 

@@ -100,6 +100,14 @@ public class DataService implements IDataService {
 	}
 
 	
+
+	@Override
+	public List<HashMap<String, String>> expenseUserData(String user_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dataMapper.expenseUserData(user_no);
+	}
+
+	
 	
 		
 }
