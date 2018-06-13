@@ -289,6 +289,39 @@ public class DataController {
 	 
 		
 	}
+	@RequestMapping(value="compareChart", method=RequestMethod.GET)
+	public String compareChart(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model,HttpSession session) throws Exception {
+		log.info("compareChart .................");	
+		userDTO uDTO=(userDTO)session.getAttribute("userDTO");		
+		String user_no =uDTO.getUser_no();
+		
+		
+		
+		return "/compareChart";
+	 
+		
+	}
+	
+	@RequestMapping(value="/compIncomeTwo", method=RequestMethod.GET)
+	public ResponseEntity<List<HashMap<String, String>>> compIncomeTwo(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model,HttpSession session) throws Exception {
+		log.info("compIncomeTwo .................");
+		
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		 try{
+		        entity = new ResponseEntity<>(dataService.compIncomeTwo(), HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+
+		return entity;
+	 
+		
+	}
 	
 	
 	

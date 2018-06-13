@@ -103,10 +103,16 @@ order by REGDATE
 </select>
 
 
-<select id="getStoreByDate" resultType="java.util.HashMap">
+<select id="getStoreByDate" resultType="StoreDTO">
 select STORE_NAME,JIBUN_ADDR,CATEGORY,LNG,LAT
 from aws.STORE_INFO
 order by REG_DATE
-limit 20
+limit 7
+</select>
+
+<select id="storeDetailFile" parameterType="String" resultType="StoreDTO">
+select *from aws.STORE_INFO where STORE_NO=(select STORE_NO from aws.STORE_IMG 
+ where 
+FULL_NAME=#{fullName})
 </select>
 </mapper>

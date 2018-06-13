@@ -24,4 +24,6 @@ public interface IDataService {
 	List<HashMap<String, String>> dataForStoreInfo()throws Exception;
 	HashMap<String, Object> storeLocalData()throws Exception;
 	List<HashMap<String, String>> expenseUserData(String user_no)throws Exception;
+	List<HashMap<String, String>> compIncomeTwo()throws Exception;
+
 }

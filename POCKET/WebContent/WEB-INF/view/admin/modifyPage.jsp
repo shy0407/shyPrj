@@ -255,7 +255,7 @@
                                     <div class="form-actions">
                                     		
                                         <button type="submit" class="btn btn-success" id="modify"><i class="fa fa-save"></i> Modify</button>
-                                        <button type="button" class="btn btn-inverse" id="golist">Go List</button>
+                                        <button type="submit" class="btn btn-inverse" id="goList">Go List</button>
                                     </div>
                                 </form>
 								</div>

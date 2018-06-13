@@ -107,6 +107,12 @@ public class DataService implements IDataService {
 		return dataMapper.expenseUserData(user_no);
 	}
 
+	@Override
+	public List<HashMap<String, String>> compIncomeTwo() throws Exception {
+		// TODO Auto-generated method stub
+		return dataMapper.compIncomeTwo();
+	}
+
 	
 	
 		

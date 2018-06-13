@@ -40,5 +40,5 @@ public interface UserMapper {
 	
 	void deleteUserList(userDTO userDTO) throws Exception;
 	
-
+	void deleteUser(String user_no)throws Exception;
 }

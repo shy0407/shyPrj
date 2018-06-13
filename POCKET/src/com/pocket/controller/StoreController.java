@@ -61,6 +61,20 @@ public class StoreController {
 		return "/admin/read";
 
 	}
+	@RequestMapping(value="/admin/readByFile", method=RequestMethod.GET)
+	public String storeDetailFile(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model,@RequestParam("fullName")String fullName,@ModelAttribute("cri")Criteria cri) throws Exception {
+		log.info(fullName);
+		log.info("/admin/read!!!!!..............");
+		
+		
+		model.addAttribute("sDTO",storeService.storeDetailFile(fullName));
+		
+		
+		return "/admin/read";
+
+	}
+	
 	
 	@RequestMapping(value="/admin/modifyPage", method=RequestMethod.GET)
 	public String midifyPage(HttpServletRequest request, HttpServletResponse response, 
@@ -134,8 +148,9 @@ public class StoreController {
 	}
 	
 
-	@RequestMapping(value="/admin/storeList", method=RequestMethod.GET)
-	public String storeList(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+	
+	@RequestMapping(value="/storeGallery", method=RequestMethod.GET)
+	public String storeListt(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		
 		log.info("/admin/storeList!!!!!..............");
 		
@@ -144,7 +159,7 @@ public class StoreController {
 		
 		model.addAttribute(sList);*/
 		
-		return "/admin/storeList";
+		return "/admin/storeGallery";
 
 	}
 	
@@ -327,7 +342,7 @@ public class StoreController {
 	  }
 	  
 	  
-	  @RequestMapping("/admin/getStoreAttach.do")
+	  @RequestMapping("/admin/getStoreAttach")
 	  @ResponseBody
 	  public List<String> getAttach(@RequestParam("store_no")String store_no)throws Exception{
 	    log.info("get attach!!!~~~~~~~~~~~~");

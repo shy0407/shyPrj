@@ -84,9 +84,9 @@ height: auto;}
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sessionScope.userDTO.email}</a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="ti-user"></i> Profile</a></li>                            
-                                    <li><a href="detailChange.do"><i class="ti-settings"></i> Setting</a></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="detailChange.do"><i class="ti-user"></i> Profile</a></li>                            
+                                  
+                                    <li><a href="logout.do"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -104,36 +104,31 @@ height: auto;}
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a   href="/idex.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
+                        <li> <a href="/index.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
                             <ul aria-expanded="false" class="collapse">
                                
                             </ul>
                         </li>
-                        <li class="nav-label">Apps</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">Email</span></a>
+                        <li class="nav-label">POCKET</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">가계부</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="jqgridTest.do">가계부</a></li>
-                                <li><a href="pocketRegister.do">사진올리기</a></li>
-                                <li><a href="email-inbox.html">Inbox</a></li>
+                                <li><a href="Calender.do">가계부</a></li>
+                                <li><a href="pocketRegister.do">영수증올리기</a></li>
+                               
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">Charts</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">시각화</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-flot.html">Flot</a></li>
-                                <li><a href="chart-morris.html">Morris</a></li>
-                                <li><a href="chart-chartjs.html">ChartJs</a></li>
-                                <li><a href="chart-chartist.html">Chartist </a></li>
-                                <li><a href="chart-amchart.html">AmChart</a></li>
-                                <li><a href="chart-echart.html">EChart</a></li>
-                                <li><a href="chart-sparkline.html">Sparkline</a></li>
-                                <li><a href="chart-peity.html">Peity</a></li>
+                                <li><a href="compareChart.do">대한민국 평균과비교</a></li>
+                                <li><a href="expenseChart.do">내 지출 시각화</a></li>
+                                
                             </ul>
                         </li>
                         <li class="nav-label">가맹점</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES <span class="label label-rouded label-warning pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-alert.html">SEE ALL</a></li>
-                                <li><a href="ui-button.html">NEAR ME</a></li>             
+                                <li><a href="/admin/storeGallery.do">가맹점 사진으로 보기</a></li>
+                                 <li><a href="/admin/listPage.do">리스트로보기</a></li>
                             </ul>
                         </li>
 						
@@ -266,7 +261,7 @@ height: auto;}
 				</div>
 				<div class="row">
                     
-					<div class="col-lg-8">
+					<div class="col-lg-12">
                         <div class="card">
                             <div class="card-title">
                                 <h4>최근 등록 가맹점</h4>
@@ -282,21 +277,22 @@ height: auto;}
 											</tr>
 										</thead>
 										<tbody>
-										 <%-- <c:forEach items="${sDTO}" var="sList">
+										 <c:forEach items="${sDTO}" var="sList">
+										 
 											<tr>
 												<td>${sList.store_name }</td>
 												<td>${sList.category }</td>
 												<td>${sList.jibun_addr }</td>
 												
 											</tr>
-											</c:forEach> --%>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
 							</div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                   <!--  <div class="col-lg-4">
                         <div class="card nestable-cart">
                             <div class="card-title">
                                 <h4>최근 등록된 가맹점</h4>
@@ -310,7 +306,7 @@ height: auto;}
                              </div>
                             
                         </div>
-                    </div>
+                    </div> -->
                     <!-- /# column -->
                 </div>
                

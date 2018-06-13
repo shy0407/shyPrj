@@ -71,6 +71,9 @@ public class MainController {
 		PocketDTO pDTO =pocketService.mainExIn(user_no);
 		model.addAttribute("pDTO", pDTO);
 		
+		List<StoreDTO> store=storeService.getStoreByDate();
+		
+		model.addAttribute("sDTO", store);
 		
 		return "/index";
 		
@@ -313,6 +316,9 @@ public class MainController {
 	public String adminIndex(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
 		log.info("admin index..........................................................");
+		List<StoreDTO> store=storeService.getStoreByDate();
+		
+		model.addAttribute("sDTO", store);
 		return "/admin/index";
 		
 	}
@@ -333,41 +339,54 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(value="getPosition", method=RequestMethod.GET)
-	public @ResponseBody Map<String, Object> getPosition(HttpServletRequest request, HttpServletResponse response, 
+	@RequestMapping(value="logout", method=RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpSession session, 
+					ModelMap model) throws Exception {
+		
+		log.info(this.getClass().getName() + ".logout start!");
+		
+		//log.info("user_id: " + session.getAttribute("user_id"));
+		
+		session.setAttribute("userDTO", "");
+	
+		session.invalidate();
+		
+	
+		
+		return "/indexNoSignUp";
+		
+	}
+	
+	@RequestMapping(value="deleteUser", method=RequestMethod.POST)
+	public String deleteUser(HttpServletRequest request, HttpSession session, 
+					ModelMap model) throws Exception {
+		
+		log.info("deleteUser");
+		
+		//log.info("user_id: " + session.getAttribute("user_id"));
+		userDTO uDTO=(userDTO)session.getAttribute("userDTO");		
+		String user_no =uDTO.getUser_no();
+		session.setAttribute("userDTO", "");
+	
+		session.invalidate();
+		userService.deleteUser(user_no);
+	
+		
+		return "/indexNoSignUp";
+		
+	}
+	
+	/*@RequestMapping(value="getPosition", method=RequestMethod.GET)
+	public String getPosition(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
 		
 		List<Map<String, Object>> store=storeService.getStoreByDate();
 		
+		model.addAttribute("sDTO", store);
 		
-		Map<String, Object> map  = new HashMap<String, Object>();
-		 int index=0;
-
+		return "/index.do";
 		
-		  for (  Map<String, Object> map1: store) {
-
-		          System.out.println("index >> " + index);
-
-		          for (Map.Entry<String, Object> entry : map1.entrySet()) {
-
-		 	        String key = entry.getKey();
-
-		 	        Object value = entry.getValue();
-
-		 	       map.put(key,value);
-
-		 	    }
-
-		       index++;
-
-		  }
-			
-			
-	
-		
-		return map;
-		
-	}
+	}*/
 	
 	
 	
