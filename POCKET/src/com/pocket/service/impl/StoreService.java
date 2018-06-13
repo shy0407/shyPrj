@@ -150,6 +150,11 @@ public class StoreService implements IStoreService {
 
 		return storeMapper.storeImgAll();
 	}
+
+	@Override
+	public List<StoreDTO> getStoreByDate() throws Exception {
+		return storeMapper.getStoreByDate();
+	}
 	
 		
 	

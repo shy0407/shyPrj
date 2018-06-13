@@ -1,12 +1,13 @@
 package com.pocket.controller;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.pocket.DTO.LoginDTO;
+import com.pocket.DTO.PocketDTO;
 import com.pocket.DTO.userDTO;
 import com.pocket.service.IMainService;
+import com.pocket.service.IPocketService;
 import com.pocket.service.IUserService;
-import com.pocket.util.AES256Util;
 import com.pocket.util.CmmUtil;
 
 	
@@ -39,6 +40,9 @@ public class MainController {
 	@Resource(name = "UserService")
 	private IUserService userService;
 	
+	@Resource(name = "PocketService")
+	private IPocketService pocketService;
+	
 	
 	
 	@Autowired
@@ -47,9 +51,18 @@ public class MainController {
 	
 	@RequestMapping(value="index", method=RequestMethod.GET)
 	public String main(HttpServletRequest request, HttpServletResponse response, 
-					ModelMap model) throws Exception {
+					ModelMap model,HttpSession session) throws Exception {
 
 		log.info("index");
+		
+		userDTO uDTO=(userDTO)session.getAttribute("userDTO");		
+		String user_no =uDTO.getUser_no();
+		
+		List<PocketDTO> pList=pocketService.getExpenceSeven(user_no);
+		model.addAttribute("pList", pList);
+		
+		PocketDTO pDTO =pocketService.mainExIn(user_no);
+		model.addAttribute("pDTO", pDTO);
 		return "/index";
 		
 	}
@@ -310,5 +323,7 @@ public class MainController {
 		return "/Calender";
 		
 	}
+	
+	
 	
 }

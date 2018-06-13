@@ -805,6 +805,7 @@
     <script src="/ElaAdmin-master/js/lib/chartist/chartist-init.js"></script> -->
     <!--Custom JavaScript -->
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
+    
   
     <script>
 

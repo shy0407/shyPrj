@@ -255,4 +255,107 @@ count(case when a.job='trade' then 1 end) as trade
 from aws.USER_INFO a
 </select>
 
+<select id="myExpenseMonth">
+select
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='foods'
+	then cast(EXPENSE_CASH as decimal) end) as foods,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='alcohol_cigarette'
+	then cast(EXPENSE_CASH as decimal) end) as alcohol_cigarette,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='clothes'
+	then cast(EXPENSE_CASH as decimal) end) as clothes,	
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='utility_bill'
+	then cast(EXPENSE_CASH as decimal) end) as utility_bill,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='housewares'
+	then cast(EXPENSE_CASH as decimal) end) as housewares,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='health'
+	then cast(EXPENSE_CASH as decimal) end) as health,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='transportation'
+	then cast(EXPENSE_CASH as decimal) end) as transportation,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='telephone'
+	then cast(EXPENSE_CASH as decimal) end) as telephone,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='entertainment'
+	then cast(EXPENSE_CASH as decimal) end) as entertainment,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='education'
+	then cast(EXPENSE_CASH as decimal) end) as education,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='travel'
+	then cast(EXPENSE_CASH as decimal) end) as travel,
+sum(case when substring(EXPENSE_DATE,6,2)=6 and EXPENSE_CATEGORY='etc'
+	then cast(EXPENSE_CASH as decimal) end) as etc
+from aws.POCKET_INFO
+</select>
+
+<select id="dataForStoreInfo" resultType="java.util.HashMap">
+select
+count(case when CATEGORY='음식' then 1 end) as restaurant,
+count(case when CATEGORY='생활서비스' then 1 end) as life,
+count(case when CATEGORY='소매' then 1 end) as sales,
+count(case when CATEGORY='학문/교육' then 1 end) as edu,
+count(case when CATEGORY='관광/여가/오락' then 1 end) as entertainment,
+count(case when CATEGORY='의료' then 1 end) as medi,
+count(case when CATEGORY='부동산' then 1 end) as budong,
+count(case when CATEGORY='숙박' then 1 end) as accom,
+count(case when GUNAME='강남구' then 1 end) as gangnam,
+count(case when GUNAME='금천구' then 1 end) as gemcheon,
+count(case when GUNAME='송파구' then 1 end) as songpa,
+count(case when GUNAME='강서구' then 1 end) as gangseo,
+count(case when GUNAME='중구' then 1 end) as jungu,
+count(case when GUNAME='양천구' then 1 end) as yangcheon,
+count(case when GUNAME='서대문구' then 1 end) as seodae,
+count(case when GUNAME='광진구' then 1 end) as gwangjin,
+count(case when GUNAME='영등포구' then 1 end) as youngdeng,
+count(case when GUNAME='서초구' then 1 end) as seocho,
+count(case when GUNAME='성북구' then 1 end) as seongbuk,
+count(case when GUNAME='구로구' then 1 end) as guro,
+count(case when GUNAME='관악구' then 1 end) as gwanak,
+count(case when GUNAME='마포구' then 1 end) as mapo,
+count(case when GUNAME='성동구' then 1 end) as seongdong,
+count(case when GUNAME='노원구' then 1 end) as nowon,
+count(case when GUNAME='동작구' then 1 end) as dongjak,
+count(case when GUNAME='종로구' then 1 end) as jongno,
+count(case when GUNAME='용산구' then 1 end) as yongsan,
+count(case when GUNAME='강북구' then 1 end) as gangbuk,
+count(case when GUNAME='강동구' then 1 end) as gangdong,
+count(case when GUNAME='중랑구' then 1 end) as junrang,
+count(case when GUNAME='동대문구' then 1 end) as dongdae,
+count(case when GUNAME='도봉구' then 1 end) as dobong,
+count(case when substring(REG_DATE,6,2)=1 then 1 end) as jan,
+count(case when substring(REG_DATE,6,2)=2 then 1 end) as fab,
+count(case when substring(REG_DATE,6,2)=3 then 1 end) as mar,
+count(case when substring(REG_DATE,6,2)=4 then 1 end) as api,
+count(case when substring(REG_DATE,6,2)=5 then 1 end) as may,
+count(case when substring(REG_DATE,6,2)=6 then 1 end) as jun,
+count(case when substring(REG_DATE,6,2)=7 then 1 end) as july,
+count(case when substring(REG_DATE,6,2)=8 then 1 end) as aug
+from aws.STORE_INFO
+</select>
+
+<select id="storeLocalData" resultType="java.util.HashMap">
+select
+count(case when GUNAME='강남구' then 1 end) as gangnam,
+count(case when GUNAME='금천구' then 1 end) as gemcheon,
+count(case when GUNAME='송파구' then 1 end) as songpa,
+count(case when GUNAME='강서구' then 1 end) as gangseo,
+count(case when GUNAME='중구' then 1 end) as jungu,
+count(case when GUNAME='양천구' then 1 end) as yangcheon,
+count(case when GUNAME='서대문구' then 1 end) as seodae,
+count(case when GUNAME='광진구' then 1 end) as gwangjin,
+count(case when GUNAME='영등포구' then 1 end) as youngdeng,
+count(case when GUNAME='서초구' then 1 end) as seocho,
+count(case when GUNAME='성북구' then 1 end) as seongbuk,
+count(case when GUNAME='구로구' then 1 end) as guro,
+count(case when GUNAME='관악구' then 1 end) as gwanak,
+count(case when GUNAME='마포구' then 1 end) as mapo,
+count(case when GUNAME='성동구' then 1 end) as seongdong,
+count(case when GUNAME='노원구' then 1 end) as nowon,
+count(case when GUNAME='동작구' then 1 end) as dongjak,
+count(case when GUNAME='종로구' then 1 end) as jongno,
+count(case when GUNAME='용산구' then 1 end) as yongsan,
+count(case when GUNAME='강북구' then 1 end) as gangbuk,
+count(case when GUNAME='강동구' then 1 end) as gangdong,
+count(case when GUNAME='중랑구' then 1 end) as junrang,
+count(case when GUNAME='동대문구' then 1 end) as dongdae,
+count(case when GUNAME='도봉구' then 1 end) as dobong
+from aws.STORE_INFO
+</select>
+
 </mapper>

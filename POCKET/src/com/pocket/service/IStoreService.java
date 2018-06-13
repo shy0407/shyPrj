@@ -23,4 +23,5 @@ public interface IStoreService {
 	void replaceStoreAttach(String fullName, String store_no)throws Exception;
 	void remove(String store_no)throws Exception;
 	List<String>storeImgAll()throws Exception;
+	List<StoreDTO> getStoreByDate()throws Exception;
 }

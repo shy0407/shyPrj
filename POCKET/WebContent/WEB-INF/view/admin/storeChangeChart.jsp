@@ -650,7 +650,6 @@ $(document).ready(function(){
 			url:"getAgeFiFty.do",
 			method:"POST",
 			success:function(data){
-				console.log(data);
 				var label1=[];
 				var con1=[];
 				$.each(data, function(key,value){

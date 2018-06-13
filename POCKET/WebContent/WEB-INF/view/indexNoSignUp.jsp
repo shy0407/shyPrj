@@ -69,10 +69,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
-                        <b><img src="/ElaAdmin-master/images/logo.png" class="dark-logo" /></b>
+                        <b><img src="/image/lo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="/ElaAdmin-master/images/logo (1).png" class="dark-logo" /></span>
+                        <span><img src="/image/pocket.png" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -224,8 +224,8 @@
 						<label class="image-replace password" for="signup-password">Password</label>
 						<input class="full-width has-padding has-border" id="signup-password" name="password" type="password"  placeholder="Password">
 						<a href="#0" class="hide-password">Show</a>
-						<span class="error-message-pwd">비밀번호를 확인하세요.(문자, 숫자, 특수문자를 혼합하여 6~15자 이내)</span>
-						<span class="error-message-pwd1">이 비밀번호를 사용합니다</span>
+						<span class="error-message-pwd"></span>
+						
 					</p>
 					 <p class="fieldset">
                         M:
@@ -339,8 +339,7 @@
 	
 	<script>
 		$(document).ready(function(){
-			$('.error-message-pwd').hide();
-			$('.error-message-pwd1').hide();
+			
 			$("#signup-email").focusout(function(){
 				var inemail =$('#signup-email').val();
 				if(inemail==''||inemail==null)
@@ -403,16 +402,16 @@
 					var pwd =$("#signup-password").val();
 						console.log(pwd);
 						if(!chkPwd(pwd)){ 
-							$('.error-message-pwd').show();
+							$('.error-message-pwd').text("비밀번호는 숫자 문자 8자리이상입니다.");
 							$('signup-password').val('');
 
 							$('signup-password').focus(); 
-							$('.error-message-pwd').show();
+							
 							return false;
 						}
 						else
 						{
-							$('.error-message-pwd1').show();
+							$('.error-message-pwd').text("이비밀번호를 사용합니다.");
 						}
 
 				});

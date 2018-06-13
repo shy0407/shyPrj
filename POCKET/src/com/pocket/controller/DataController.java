@@ -2,7 +2,9 @@ package com.pocket.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pocket.DTO.DataDTO;
-import com.pocket.DTO.TestDTO;
 import com.pocket.service.IDataService;
 
 	
@@ -222,5 +224,44 @@ public class DataController {
 		return entity;
 		
 	}
+	
+	@RequestMapping(value="/admin/storeChart", method=RequestMethod.GET)
+	public String storeChart(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		
+		log.info("storeChart..!!!");
+		
+		HashMap<String, Object> hash=dataService.storeLocalData();
+		String[] keys = hash.keySet().toArray(new String[0]);
+
+		for(int i=0;i<keys.length;i++){
+		 String key = keys[i];
+		 String val = hash.get(key).toString();
+		 
+		 System.out.println(key+" : "+val);
+		}
+		model.addAttribute("hash",hash);
+		return "/admin/storeChart";
+		
+	}
+	
+	@RequestMapping(value="/admin/dataForStore", method=RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> storeChartData(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		log.info("스토어 전체 데이터가져옵니당 .................");
+			
+		HashMap<String, Object> hash=dataService.storeLocalData();
+		
+		model.addAttribute("hash",hash);
+		return hash;
+	 
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 }

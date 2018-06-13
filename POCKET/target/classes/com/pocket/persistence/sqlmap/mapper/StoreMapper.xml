@@ -101,4 +101,12 @@ values(#{fullName},#{store_no})
 select FULL_NAME from aws.STORE_IMG
 order by REGDATE
 </select>
+
+
+<select id="getStoreByDate" resultType="StoreDTO">
+select STORE_NAME,JIBUN_ADDR,LNG,LAT
+from aws.STORE_INFO
+order by REG_DATE
+limit 30
+</select>
 </mapper>

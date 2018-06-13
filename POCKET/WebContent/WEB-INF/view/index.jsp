@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,13 +29,12 @@
        <link href="/calendar/fullcalendar.min.css" rel="stylesheet">
     <link href="/calendar/fullcalendar.print.css" rel="stylesheet" media="print">
         <link href="/ElaAdmin-master/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
-    <!--[if lt IE 9]>
-    <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+<style>
+.bcd{
+height: auto;}
+</style>
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -165,11 +166,11 @@
                         <div class="card bg-primary p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
-                                    <span><i class="ti-bag f-s-40"></i></span>
+                                    <span><i class="fab fa-product-hunt fa-3x"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2 class="color-white">278</h2>
-                                    <p class="m-b-0">New Posts</p>
+                                    <p class="m-b-0">POINT</p>
                                 </div>
                             </div>
                         </div>
@@ -178,11 +179,11 @@
                         <div class="card bg-pink p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
-                                    <span><i class="ti-comment f-s-40"></i></span>
+                                    <span><i class="fab fa-get-pocket fa-3x"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2 class="color-white">278</h2>
-                                    <p class="m-b-0">New Comment</p>
+                                    <h2 class="color-white">${pDTO.income }</h2>
+                                    <p class="m-b-0">INCOME</p>
                                 </div>
                             </div>
                         </div>
@@ -194,8 +195,8 @@
                                     <span><i class="ti-vector f-s-40"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2 class="color-white">$27647</h2>
-                                    <p class="m-b-0">Bounce Rate</p>
+                                    <h2 class="color-white">${pDTO.expense_cash }</h2>
+                                    <p class="m-b-0">EXPENSE</p>
                                 </div>
                             </div>
                         </div>
@@ -204,11 +205,14 @@
                         <div class="card bg-danger p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
-                                    <span><i class="ti-location-pin f-s-40"></i></span>
+                                   
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2 class="color-white">278</h2>
-                                    <p class="m-b-0">Total Visitor</p>
+                                    <div class="bcd">
+                                    <img src="http://chart.apis.google.com/chart?cht=qr&amp;chs=350x350&amp;chl=${sessionScope.userDTO.email}" width="60" height="60">
+                                    </div>
+                                    	
+										
                                 </div>
                             </div>
                         </div>
@@ -229,13 +233,42 @@
                         <!-- /# card -->
                     </div>
                     <!-- /# column -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>최근지출내역</h4>
+                            </div>
+                            <div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-hover ">
+										<thead>
+											<tr>
+												<th>지출날짜</th>
+												<th>금액</th>
+												<th>내역</th>
+											</tr>
+										</thead>
+										<tbody>
+										 <c:forEach items="${pList}" var="pList">
+											<tr>
+												<td>${pList.expense_date }</td>
+												<td>${pList.expense_cash }원</td>
+												<td align="left">${pList.expense_category }</td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+                        </div>
+                    </div>
                     
 				</div>
 				<div class="row">
                     <div class="col-lg-8">
                         <div class="card nestable-cart">
                             <div class="card-title">
-                                <h4>World Map</h4>
+                                <h4>최근 등록된 가맹점</h4>
 
                             </div>
                             <div class="card-body">
@@ -298,7 +331,7 @@
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
   
  <script src="https://unpkg.com/sweetalert2"></script>
-    
+
 	 <script>
    var date_last_clicked = null;
    
@@ -330,97 +363,20 @@
     		  }
     	  });
       },
-      dayClick: function(date, jsEvent, view) {
-    	  //alert('Clicked on: ' + date.format());
-    	  
-    		swal.setDefaults({
-        confirmButtonText: 'Next &rarr;',
-        showCancelButton: true,
-        animation: false,
-        progressSteps: ['1', '2', '3'],
-    })
-    swal.queue([{
-        title: 'New Event',
-        text: 'Event Name:',
-        input: 'text',
-        preConfirm: function(inputValue) {
-            return new Promise(function(resolve, reject) {
-                if (!inputValue) {
-                    reject('Enter a Name')
-                } else {
-                    inputName = inputValue;
-                    resolve()
-                }
-            })
-        }
-    }, {
-        title: 'New Event',
-        text: 'Event Description:',
-        input: 'text',
-        preConfirm: function(inputValue) {
-            return new Promise(function(resolve, reject) {
-                if (!inputValue) {
-                    reject('Enter a Description')
-                } else {
-                    inputDescription = inputValue;
-                    resolve()
-                }
-            })
-        }
-    }, {
-        title: 'New Event',
-        text: 'Event Time:',
-        input: 'select',
-        inputOptions: {
-            '06:00:00': '06:00 AM',
-            '07:00:00': '07:00 AM',
-            '08:00:00': '08:00 AM',
-            '09:00:00': '09:00 AM',
-            '10:00:00': '10:00 AM',
-            '11:00:00': '11:00 AM',
-            '12:00:00': '12:00 PM',
-            '13:00:00': '01:00 PM',
-            '14:00:00': '02:00 PM',
-            '15:00:00': '03:00 PM',
-            '16:00:00': '04:00 PM',
-            '17:00:00': '05:00 PM',
-            '18:00:00': '06:00 PM',
-            '19:00:00': '07:00 PM',
-            '20:00:00': '08:00 PM',
-            '21:00:00': '09:00 PM',
-            '22:00:00': '10:00 PM'
-        },
-        inputPlaceholder: 'Select Time',
-        preConfirm: function(inputValue) {
-            return new Promise(function(resolve, reject) {
-                if (!inputValue) {
-                    reject('Enter a Time')
-                } else {
-                    inputTime = inputValue;
-                    resolve()
-                }
-            })
-        }
-    }]).then(function(inputValue) {
-        $('#calendar').fullCalendar('renderEvent', {
-            title: inputName,
-            description: inputDescription,
-            start: date.format() + 'T' + inputTime,
-            allDay: false,
-        }, 'stick');
-        swal.resetDefaults()
-        swal({
-            title: 'Event Created',
-            html: "Name: " + inputName + "<br>Description: " + inputDescription + "<br>Time: " + inputTime,
-            confirmButtonText: 'Done',
-            showCancelButton: false
-        })
-    }, function() {
-        swal.resetDefaults()
-       
-    })
-		  },
-      defaultDate: '2018-05-12',
+      
+		  eventClick: function(calEvent, jsEvent, view) {
+
+			  swal({
+				  title: '지출내역입니다!',
+				  text: calEvent.title,
+				  //type: 'error',
+				  confirmButtonText: 'Cool'
+				})
+
+			  },
+		  
+	
+      //defaultDate: '2018-05-12',
       navLinks: true, // can click day/week names to navigate views
       //editable: true,
       eventLimit: true, // allow "more" link when too many events
@@ -432,7 +388,5 @@
 
 
 </script>
-
-</body>
 
 </html>

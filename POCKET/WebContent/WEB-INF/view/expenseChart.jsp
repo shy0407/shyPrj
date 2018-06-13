@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,27 +18,6 @@
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
-	<style>
-#chartdiv {
-  width: 100%;
-  height: 500px;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even){background-color: #f2f2f2}
-				
-	</style>
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -174,31 +151,12 @@ tr:nth-child(even){background-color: #f2f2f2}
 			                           
                             <div class="card-body">
 								<!--chart 1  -->
-								<div id="chartdiv"></div>
+								<div></div>
 								
-								<div>
-		
-								
-								
-								
-								</div>
 							</div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                            	
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-12">
-                        <div class="card">
-                                   
-                            </div>
-                        </div>
-                    </div>
+               
                 </div>
                 <!-- End PAge Content -->
             </div>
@@ -225,42 +183,9 @@ tr:nth-child(even){background-color: #f2f2f2}
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
 	<!--stickey kit -->
 	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
+	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
+	
 
-	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-	<script src="https://www.amcharts.com/lib/3/themes/none.js"></script>
-
-
-<script>
-$(document).ready(function(){
-var aa={};
-var arr=[];
-var arr1=[];
-
-var map = new Map();
-
-$.ajax({
-	url: "/admin/dataForStore.do",
-	method: "POST",
-	success: function(data) {
-		console.log(data);
-		$.each(data,function(key,val){
-			arr.push(key);
-			arr1.push(val);
-			
-		});
-		console.log(arr1);
-		arr.push(aa);
-		console.log(arr);
-		
-		
-	}
-	});
-
-		});
-</script>
 </body>
 
 </html>
