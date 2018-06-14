@@ -203,8 +203,9 @@
 			          	var fileInfo = getFileInfo(this);
 			          	console.log(fileInfo);
 			          	console.log(fileInfo.imgsrc);
+			          	var fullName= fileInfo.fullName;
 			          	
-			          	var html='<div class="col-lg-3 col-md-4 col-xs-6"><a href="#" class="d-block mb-4 h-100" id="g"><img class="img-fluid img-thumbnail" src="';
+			          	var html='<div class="col-lg-3 col-md-4 col-xs-6"><a href="/admin/readByFile.do?fullName='+fullName+'" class="d-block mb-4 h-100" id="g"><img class="img-fluid img-thumbnail" src="';
 			          	html+=fileInfo.imgsrc+'"></a></div>';
 			          	
 			          	

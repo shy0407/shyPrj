@@ -201,11 +201,10 @@ public class PocketController {
 	
 	  @RequestMapping(value ="insertCal", method=RequestMethod.POST)
 	  public void insertCal(HttpServletRequest request, HttpServletResponse response,
-				@RequestParam("expense_detail")String expense_date,
-				@RequestParam("expense_card")String expense_detail,
-				@RequestParam("expense_date")String expense_cash)throws Exception{
+				@RequestParam("name")String expense_date
+				)throws Exception{
 		
-		log.info(expense_cash);    
+		log.info(expense_date);    
 	   
 	  }
 	
@@ -443,5 +442,7 @@ public class PocketController {
 			
 			
 		}
+	  
+	  
 	
 }

@@ -108,6 +108,11 @@ public class UserService implements IUserService {
 		userMapper.deleteUserList(userDTO);
 	}
 
+	@Override
+	public void deleteUser(String user_no) throws Exception {
+		userMapper.deleteUser(user_no);
+	}
+
 	
 	
 	

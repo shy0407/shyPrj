@@ -28,7 +28,8 @@ public interface StoreMapper {
 	void replaceStoreAttach(Map<String, Object> paramMap);
 	void remove(String store_no)throws Exception;
 	List<String>storeImgAll()throws Exception;
-	
+	List<StoreDTO> getStoreByDate()throws Exception;
+	StoreDTO storeDetailFile(String fullName)throws Exception;
 	
 	
 }

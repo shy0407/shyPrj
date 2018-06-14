@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,26 +21,24 @@
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
 	<style>
-		.chart1{display: inline-block;
-				width:70%;}
-		.chart2{display: inline-block;
-				width:20%;
-				position: absolute;
-				top:78px;
-				right:50px;}
-		.genderPie{display: inline-block;
-				width:20%;
-				position: absolute;
-				top:78px;
-				right:50px;}
-		.hline{display: inline-block;
-			   width:48%;
-			   }
-		#chart_div{display:inline-block;
-					width:48%;
-					height:90%;}
-				
-  				
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
 				
 	</style>
 </head>
@@ -111,7 +111,7 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a   href="/idex.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
+                        <li> <a   href="/index.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
                             <ul aria-expanded="false" class="collapse">
                                
                             </ul>
@@ -174,26 +174,29 @@
 			                           
                             <div class="card-body">
 								<!--chart 1  -->
-								<div class="chart1"><canvas id="weekChart"></canvas></div>
-								<div class="chart2"><canvas id="weekPieChart"></canvas></div>
+								<!-- <div id="scategory"></div> -->
+								<canvas id="scategory"></canvas>
+								<div>
+		
+								
+								
+								
+								</div>
 							</div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                            	<div style="width:70%"><canvas id="line"></canvas></div>
-                            	<div class="genderPie"><canvas id="genderPie"></canvas></div>
-                            
+                            	<canvas id="month"></canvas>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-12">
                         <div class="card">
-                            <div style="height:450px"class="card-body">
-                            	<div class="hline" style="height:90%"><canvas id="hline"></canvas></div>
-                            	<div id="chart_div"></div>               
+                              <div class="hline" style="height:90%"><canvas id="hline"></canvas></div>
+                            	<div id="chart_div"></div>       
                             </div>
                         </div>
                     </div>
@@ -222,178 +225,92 @@
     <!--Custom JavaScript -->
     <script src="/ElaAdmin-master/js/custom.min.js"></script>
 	<!--stickey kit -->
-	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
 	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script>
-	var job=[]; //직업별
+	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
+
+	
+
+<script>
 $(document).ready(function(){
-	var ctx = document.getElementById("weekChart");
-	var pie = document.getElementById("weekPieChart");
-	var genderPie = document.getElementById("genderPie");
-	var hline = document.getElementById("hline");
-	
-	var week=[]; //요일별
-	
-	var monthF=[]; //여자 월별
-	var monthM=[]; //남자 월별
-	var monthA=[]; //모두 월별
-	var genderCount=[]; //성별 카운트
-	
-	var income=[]; //수입별 카운트
-	var fIncome=[];//여자 수입별
-	var mIncome=[];  //남자 수입별
-	
-	
-	$.ajax({
-		url: "/admin/allData.do",
-		method: "POST",
-		success: function(data) {
-			console.log(data);
-			$.each(data,function(key,val){
-				week.push(val.sun);
-				week.push(val.mon);
-				week.push(val.tue);
-				week.push(val.wed);
-				week.push(val.thur);
-				week.push(val.fri);
-				week.push(val.sat);
-				
-				job.push(val.build);
-				job.push(val.design);
-				job.push(val.education);
-				job.push(val.it);
-				job.push(val.management);
-				job.push(val.manufacture);
-				job.push(val.medical);
-				job.push(val.pro);
-				job.push(val.sales);
-				job.push(val.service);
-				job.push(val.student);
-				job.push(val.trade);
-				
-				income.push(val.oneA);				
-				income.push(val.twoA);
-				income.push(val.threeA);
-				income.push(val.fourA);
-				income.push(val.fiveA);
-				income.push(val.sixA);
-				income.push(val.sevA);
-				
-				fIncome.push(val.oneF);
-				fIncome.push(val.twoF);
-				fIncome.push(val.threeF);
-				fIncome.push(val.fourF);
-				fIncome.push(val.fiveF);
-				fIncome.push(val.sixF);
-				fIncome.push(val.sevF);
-				
-				mIncome.push(val.oneM);
-				mIncome.push(val.towM);
-				mIncome.push(val.threeM);
-				mIncome.push(val.fourM);
-				mIncome.push(val.fiveM);
-				mIncome.push(val.sixM);
-				mIncome.push(val.sevM); 
-				
-				monthA.push(val.Jan);
-				monthA.push(val.Feb);
-				monthA.push(val.Mar);
-				monthA.push(val.Api);
-				monthA.push(val.May);
-				monthA.push(val.Jun);
-				monthA.push(val.Jul);
-				monthA.push(val.Aug);
-				monthA.push(val.Sep);
-				monthA.push(val.Oct);
-				monthA.push(val.Nov);
-				monthA.push(val.DecA);
-				
-				monthF.push(val.JanF);
-				monthF.push(val.FebF);
-				monthF.push(val.MarF);
-				monthF.push(val.ApiF);
-				monthF.push(val.MayF);
-				monthF.push(val.JunF);
-				monthF.push(val.JulF);
-				monthF.push(val.AugF);
-				monthF.push(val.SepF);
-				monthF.push(val.OctF);
-				monthF.push(val.NovF);
-				monthF.push(val.DecF);
-				
-				
-				monthM.push(val.JanM);
-				monthM.push(val.FebM);
-				monthM.push(val.MarM);
-				monthM.push(val.ApiM);
-				monthM.push(val.MayM);
-				monthM.push(val.JunM);
-				monthM.push(val.JulM);
-				monthM.push(val.AugM);
-				monthM.push(val.SepM);
-				monthM.push(val.OctM);
-				monthM.push(val.NovM);
-				monthM.push(val.DecM); 
-				
-				genderCount.push(val.FEMALE);
-				genderCount.push(val.MALE); 
-				
-				
-				
-				
-			});
-			console.log(job);
-			var weekdata={
-					labels:['일','월','화','수','목','금','토'],
-					datasets:[{
-								
-								backgroundColor: "rgba(179,181,198,0.2)",
-								borderColor: "rgba(179,181,198,1)",
-								borderWidth:1,
-								data:week
-					
-							}]
-						}; //hline chart data setting end
-					//ctx.height=300;
-					myhLineChart  = new Chart(ctx, {
-									type: 'bar',
-									data: weekdata,
-									options: {
-										// Elements options apply to all of the options unless overridden in a dataset
-										// In this case, we are setting the border of each horizontal bar to be 2px wide
-										elements: {
-											rectangle: {
-												borderWidth: 2,
-											}
-										},
-										responsive: true,
-										legend: {
-											//position: 'right',
-											display:false,
-										},
-										title: {
-											display: true,
-											text: 'Chart.js Horizontal Bar Chart'
-										}
-									}
-							}); //bar chart drwa end
+	var bar = document.getElementById("scategory");
+	var line = document.getElementById("month").getContext('2d');
+
+var scategory=[];
+var local=[];
+var date=[];
+
+$.ajax({
+	url: "/admin/dataForStore.do",
+	method: "POST",
+	success: function(data) {
+		console.log(data);
+		$.each(data,function(key,val){
+			scategory.push(val.restaurant);
+			scategory.push(val.life);
+			scategory.push(val.sales);
+			scategory.push(val.edu);
+			scategory.push(val.entertainment);
+			scategory.push(val.medi);
+			scategory.push(val.budong);
+			scategory.push(val.accom); //가맹점 종류별로
+			
+			local.push(val.gangnam);
+			local.push(val.gemcheon);
+			local.push(val.songpa);
+			local.push(val.gangseo);
+			local.push(val.jungu);
+			local.push(val.seongdong);
+			local.push(val.nowon);
+			local.push(val.dongjak);
+			local.push(val.jongno);
+			local.push(val.yongsan);
+			local.push(val.gangbuk);
+			local.push(val.gangdong);
+			local.push(val.junrang);
+			local.push(val.dongdae);
+			local.push(val.dobong);//지역별
+			
+			date.push(val.jan);
+			date.push(val.feb);
+			date.push(val.mar);
+			date.push(val.api);
+			date.push(val.may);
+			date.push(val.jun);
+			date.push(val.july);
+			date.push(val.aug); 
+			//date.push(val.month);
+			
+			
+			
+		});
+		console.log(scategory);
+		console.log(local);
+		console.log(date);
+		
+		var scategorydata={
+				labels:['음식','생활','소매','교육','오락','의료','부동산','숙박'],
+				datasets:[{
 							
-							var pieweekdata={
-									labels:['일','월','화','수','목','금','토'],
-									datasets:[{
-												
-												backgroundColor: ["#FFD6D3","#F1C7D3","#D1BCCF","#F0EACA","#B6DDDC","#C59ECA","#C1DFF7"],
-												data:week
-									
-											}]
-										};
-							
-							//pie.height=70;
-							myPieChart  = new Chart(pie, {
-								type: 'pie',
-								data: pieweekdata,
+							backgroundColor: "rgba(179,181,198,0.2)",
+							borderColor: "rgba(179,181,198,1)",
+							borderWidth:1,
+							data:scategory
+				
+						}]
+					}; //hline chart data setting end
+				//ctx.height=300;
+				myhLineChart  = new Chart(bar, {
+								type: 'bar',
+								data: scategorydata,
 								options: {
+									// Elements options apply to all of the options unless overridden in a dataset
+									// In this case, we are setting the border of each horizontal bar to be 2px wide
+									elements: {
+										rectangle: {
+											borderWidth: 2,
+										}
+									},
 									responsive: true,
 									legend: {
 										//position: 'right',
@@ -401,197 +318,93 @@ $(document).ready(function(){
 									},
 									title: {
 										display: true,
-										text: 'Chart.js Pie Chart'
+										text: '업종별 가맹점'
 									}
 								}
-						}); //pie week chart draw end
-						
-						
-						
-							var linedata={
-			    					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December'],
-			    					datasets: [{
-			    						label: '전체',
-			    						borderColor:"rgba(0, 123, 255, 0.9)",
-			    						borderWidth: "1",
-			    						backgroundColor: "rgba(0, 123, 255, 0.5)",
-			    						//pointHighlightStroke: "rgba(26,179,148,1)",
-			    						data: monthA,
-			    						fill: false,
-			    					},{
-			    						label: '남성',
-			    						borderColor:"#ffb64d",
-			    						borderWidth: "1",
-			    						backgroundColor: "#ffb64d",
-			    						//pointHighlightStroke: "rgba(26,179,148,1)",
-			    						data: monthM,
-			    						fill: false,
-			    	
-			    					},{
-			    						label: '여성',
-			    						borderColor:"#fc6180",
-			    						borderWidth: "1",
-			    						backgroundColor: "#fc6180",
-			    						//pointHighlightStroke: "rgba(26,179,148,1)",
-			    						data: monthF,
-			    						fill: false,
-			    					}
-			    					]
-			    					
-			    			};
-			    		
-			    			myLineChart  = new Chart(line, {
-								type: 'line',
-								data: linedata,
-								options: {
-									responsive: true,
-									title: {
-										display: true,
-										text: '월 별 가입자 수 변화 추이'
-									},
-									scales: {
-										yAxes: [{
-											ticks: {
-												// the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
-												suggestedMin: 10,
-												// the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
-												suggestedMax: 50
-											}
-										}]
-									}
-								}	
-							}); //월별 회원수 변화 추이 그래프 그리기 끝
+						});
+				
 							
-							var piegenderdata={
-									labels:['여성','남성'],
-									datasets:[{
-												
-												backgroundColor: ["#FFD6D3","#F1C7D3"],
-												data:genderCount
-									
-											}]
-										};
-							
-							//pie.height=70;
-							myPieChart  = new Chart(genderPie, {
-								type: 'pie',
-								data: piegenderdata,
-								options: {
-									responsive: true,
-									legend: {
-										position: 'right',
-										display:true,
-									},
-									title: {
-										display: true,
-										text: '회원 수 성비'
-									}
+				//google chart.....!!!!!!!										
+				google.charts.load('current', {'packages':['treemap']});
+			    google.charts.setOnLoadCallback(drawChart);
+			    function drawChart() {
+			      var data = google.visualization.arrayToDataTable([
+			        ['ITEM', 'Parent', 'size'],
+			        ['local',null,0],
+			        ['강남구','local',local[0]],
+			        ['금천구','local',local[1]],
+			        ['송파구','local',local[2]],
+			        ['강서구','local',local[3]],
+			        ['중구','local',local[4]],
+			        ['성동구','local',local[5]],
+			        ['노원구','local',local[6]],
+			        ['동작구','local',local[7]],
+			        ['종로구','local',local[8]],
+			        ['용산구','local',local[9]],
+			        ['강북구','local',local[10]],
+			        ['강동구','local',local[11]],
+			        ['중랑구','local',local[12]],
+			        ['동대문구','local',local[13]],
+			        ['도봉구','local',local[14]]
+			        
+			      
+			        
+			      ]);
+
+			      tree = new google.visualization.TreeMap(document.getElementById('chart_div'));
+
+			      tree.draw(data, {
+			    	title:"지역별 가맹점 비율",
+			        minColor: '#A4BFFA',
+			        midColor: '#FAD9AA',
+			        maxColor: '#33ccff',
+			        headerHeight: 15,
+			        fontColor: 'black',
+			        showScale: true
+			      });
+
+			    }//이거뭐지
+			    
+				var chartdata={
+    					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August'],
+    					datasets: [{
+    						label: '월별',
+    						borderColor:"rgba(0, 123, 255, 0.9)",
+    						borderWidth: "1",
+    						backgroundColor: "rgba(0, 123, 255, 0.5)",
+    						//pointHighlightStroke: "rgba(26,179,148,1)",
+    						data: date,
+    						fill: false,
+    					}
+    					]
+    					
+    			};
+    		
+    			myLineChart  = new Chart(line, {
+					type: 'line',
+					data: chartdata,
+					options: {
+						responsive: true,
+						title: {
+							display: true,
+							text: 'Min and Max Settings'
+						},
+						scales: {
+							yAxes: [{
+								ticks: {
+									// the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
+									suggestedMin: 10,
+									// the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
+									suggestedMax: 50
 								}
-						}); //pie gender chart draw end
-						
-						
-						var incomedata={
-								labels:['100미만','100~200미만','200~300미만','300~400미만','400~500미만','500~600미만','600이상'],
-								datasets:[
-										{
-											label:'전체',
-											backgroundColor: "#A4BFFA",
-											borderColor: "#87AAF7",
-											borderWidth:1,
-											data:income
-								
-										},
-										{
-											label:'여자',
-											backgroundColor: "#FAD9AA",
-											borderColor: "#FAD9AA",
-											borderWidth:1,
-											data:fIncome
-										},
-										{
-											label:'남자',
-											backgroundColor: "#FABBC8",
-											borderColor: "#FABBC8",
-											borderWidth:1,
-											data:mIncome
-										}
-										
-										
-										]
-									}; //hline chart data setting end
-								hline.height=205;
-								myLineChart  = new Chart(hline, {
-												type: 'horizontalBar',
-												data: incomedata,
-												options: {
-													// Elements options apply to all of the options unless overridden in a dataset
-													// In this case, we are setting the border of each horizontal bar to be 2px wide
-													elements: {
-														rectangle: {
-															borderWidth: 2,
-														}
-													},
-													responsive: true,
-													legend: {
-														position: 'right',
-														display:true,
-													},
-													title: {
-														display: true,
-														text: '수입별 회원 수'
-													}
-												}
-										}); //horizontalBar chart drwa end
-						
-								//google chart.....!!!!!!!										
-								google.charts.load('current', {'packages':['treemap']});
-							    google.charts.setOnLoadCallback(drawChart);
-							    function drawChart() {
-							      var data = google.visualization.arrayToDataTable([
-							        ['ITEM', 'Parent', 'size'],
-							        ['JOB',null,0],
-							        ['build','JOB',job[0]],
-							        ['design','JOB',job[1]], 
-							        ['education','JOB',job[2]], 
-							        ['it','JOB',job[3]], 
-							        ['management','JOB',job[4]], 
-							        ['manufacture','JOB',job[5]],
-							        ['medical','JOB',job[6]], 
-							        ['pro','JOB',job[7]], 
-							        ['sales','JOB',job[8]], 
-							        ['service','JOB',job[9]], 
-							        ['student','JOB',job[10]],
-							        ['trade','JOB',job[11]]
-							        
-							      ]);
-
-							      tree = new google.visualization.TreeMap(document.getElementById('chart_div'));
-
-							      tree.draw(data, {
-							    	title:"직종별 회원 수 비율",
-							        minColor: '#A4BFFA',
-							        midColor: '#FAD9AA',
-							        maxColor: '#33ccff',
-							        headerHeight: 15,
-							        fontColor: 'black',
-							        showScale: true
-							      });
-
-							    }				
-	
-		}//success function end
+							}]
+						}
+					}	
+				});
+	}
+	});
 
 		});
-
-});
-
-
-
-				
-				
-
-
-
 </script>
 </body>
 

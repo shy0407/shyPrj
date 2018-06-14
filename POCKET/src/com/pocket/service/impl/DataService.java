@@ -88,6 +88,31 @@ public class DataService implements IDataService {
 		return dataMapper.allData();
 	}
 
+	@Override
+	public List<HashMap<String, String>> dataForStoreInfo() throws Exception {
+		return dataMapper.dataForStoreInfo();
+	}
+
+	@Override
+	public HashMap<String, Object> storeLocalData() throws Exception {
+		// TODO Auto-generated method stub
+		return dataMapper.storeLocalData();
+	}
+
+	
+
+	@Override
+	public List<HashMap<String, String>> expenseUserData(String user_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dataMapper.expenseUserData(user_no);
+	}
+
+	@Override
+	public List<HashMap<String, String>> compIncomeTwo() throws Exception {
+		// TODO Auto-generated method stub
+		return dataMapper.compIncomeTwo();
+	}
+
 	
 	
 		

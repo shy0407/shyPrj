@@ -10,10 +10,9 @@
 </select>
 
 <select resultType="PocketDTO" id="expenseCal" parameterType="String"> 
-	SELECT EXPENSE_DATE, EXPENSE_CATEGORY 
+	SELECT EXPENSE_DATE, EXPENSE_CATEGORY ,EXPENSE_CASH
 	FROM aws.POCKET_INFO
 	where USER_NO=#{user_no}
-	
 </select>
 
 
@@ -76,6 +75,23 @@ where POCKET_NO=#{pocket_no}
 	values(#{fullName},#{pocket_no},#{user_no})
 </insert>
 
+<!-- 최근 일곱개만 가져오깅 -->
+<select id="getExpenceSeven" parameterType="String" resultType="PocketDTO">
+select *from aws.POCKET_INFO 
+where USER_NO=#{user_no}
+order by EXPENSE_DATE desc limit 7;
+</select>
+
+<!-- 메인화면 지출 수입 -->
+<select id ="mainExIn" parameterType="String" resultType="PocketDTO">
+select
+sum(case when substring(EXPENSE_DATE,6,2)=6 
+	then cast(EXPENSE_CASH as decimal) end) as EXPENSE_CASH,
+sum(case when substring(INCOME_DATE,6,2)=6 
+	then cast(INCOME as decimal) end) as INCOME
+from aws.POCKET_INFO
+where USER_NO=#{user_no}
+</select>
 
 
 </mapper>

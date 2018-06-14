@@ -66,6 +66,7 @@ public class StoreService implements IStoreService {
 		storeMapper.deleteStoreAttach(store_no);
 		
 		String[]files=storeDTO.getFiles();
+		if(files ==null) {return;}
 		for(String filName:files) {
 			
 			Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -149,6 +150,17 @@ public class StoreService implements IStoreService {
 	public List<String> storeImgAll() throws Exception {
 
 		return storeMapper.storeImgAll();
+	}
+
+	@Override
+	public List<StoreDTO> getStoreByDate() throws Exception {
+		return storeMapper.getStoreByDate();
+	}
+
+	@Override
+	public StoreDTO storeDetailFile(String fullName) throws Exception {
+		// TODO Auto-generated method stub
+		return storeMapper.storeDetailFile(fullName);
 	}
 	
 		

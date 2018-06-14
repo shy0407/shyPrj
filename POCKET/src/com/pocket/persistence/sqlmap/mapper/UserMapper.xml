@@ -111,4 +111,9 @@ DELETE FROM aws.USER_INFO WHERE USER_NO IN
 <foreach item="item" index="index" collection="allCheckSeq" open="(" separator="," close=")"> #{item} </foreach>
 
 </delete>
+
+<delete id="deleteUser" parameterType="String">
+delete from aws.USER_INFO where USER_NO =#{user_no}
+
+</delete>
 </mapper>

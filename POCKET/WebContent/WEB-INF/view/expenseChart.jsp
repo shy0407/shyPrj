@@ -1,42 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-<style>
-.fileDrop {
-	width: 100%;
-	height: 320px;
-	border: 1px dotted gray;
-}
-.uploadedList{margin: 0 auto;}
-
-
-
-
-    .popup {position: absolute;}
-    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
-    .front { 
-       z-index:1110; opacity:1; boarder:1px; margin: auto; 
-      }
-     .show{
-       position:relative;
-       max-width: 1200px; 
-       max-height: 800px; 
-       overflow: auto;       
-     } 
-     
-     
-.uploadedList{
-
-	width :100%;
-	height:308px;
-	border: 1px;
-	border-color: #e7e7e7;
-
-}
-     
-</style>
 
 <head>
     <meta charset="utf-8">
@@ -175,78 +140,45 @@
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="card">
-			                   	<div class="card card-outline-primary">
-                            <div class="card-header">
-                                <h4 class="m-b-0 text-white">가맹점 상세보기</h4>
-                            </div>        
+			                           
                             <div class="card-body">
 								<!--chart 1  -->
-								<div>
-									<form role="form" action="pocketRead.do" method="post">
-                                
-                                    <div class="form-body">
-                                      
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <!-- <label>City</label>
-                                                    <input type="text" class="form-control"> -->
-                                                    <label for="exampleInputEmail1">File DROP Here</label>
-													
-											<!-- 		<div class="initMsg">파일을 올려주세요.</div>-->
-													<div class="uploadedList"></div> 
-													
-													</div>
-                                                </div>
-                                            
-                                            
-                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>점포명</label>
-                                                    <input type="text" name="expense_detail" class="form-control" value="${pocketDTO.expense_detail }">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>카테고리 </label>
-                                                    <input type="text" name="expense_category" class="form-control" value="${pocketDTO.expense_category}" >
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>카테고리상세 </label>
-                                                    <input type="text" name="expense_cash" class="form-control" value="${pocketDTO.expense_cash }">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>주소 </label>
-                                                    <input type="text" id="expense_card" name="expense_card" class="form-control" value="${pocketDTO.expense_card}" onclick="sample4_execDaumPostcode()" >
-                                                </div>
-                                            </div>
-                                            </div>
-                                               <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                <label>파일업로드</label>
-                                                <div class="fileDrop">
-                                                </div>
-                                                </div>
-                                                </div>
-                                             
-
-                                    </div>
-                                            
-                                            	<input type="hidden" name="page" value="${cri.page }">
-                                            	<input type="hidden" name="perPageNum" value="${cri.perPageNum }">
-                                            	<input type="hidden" name="pocket_no" value="${pocketDTO.pocket_no}">
-                                        </div>
-                                     
-                                    <div class="form-actions">
-                                    		
-                                        <button type="submit" class="btn btn-success" id="modify"><i class="fa fa-save"></i> Modify</button>
-                                        <button type="button" class="btn btn-inverse" id="golist"><i class="fa fa-history"></i>Go List</button>
-                                        <button type="submit" class="btn btn-success" id="remove"><i class="fa fa-trash-alt"></i> Remove</button>
-                                    </div>
-                                </form>
-								</div>
+								<div><canvas id="weekChart"></canvas></div>
+								
+							</div>
+                        </div>
+                    </div>
+                       <div class="col-6">
+                        <div class="card">
+			                           
+                            <div class="card-body">
+								<!--chart 1  -->
+								<div><canvas id="monthChart"></canvas></div>
+								
+							</div>
+                        </div>
+                    </div>
+               
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+			                           
+                            <div class="card-body">
+								<!--chart 1  -->
+								<div><canvas id="categoryChart"></canvas></div>
+								
+							</div>
+                        </div>
+                    </div>
+                       <div class="col-6">
+                        <div class="card">
+			                           
+                            <div class="card-body">
+								<!--chart 1  -->
+								<div><canvas id="hline"></canvas></div>
 								
 							</div>
                         </div>
@@ -279,192 +211,219 @@
 	<!--stickey kit -->
 	<!-- <script src="/ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
 	<script src="/ElaAdmin-master/js/lib/chart-js/Chart.bundle.js"></script>
-		<script type="text/javascript" src="/uploadjs/upload.js"></script>
-	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-
-<script id="template" type="text/x-handlebars-template">
-<li>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	<a href="{{fullName}}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
-	</span>
-  </div>
-</li>                 
-</script>    
-
-<script>
-$(document).ready(function(){
-		
-	var formObj = $("form[role='form']");
-	
-	formObj.submit(function(event){
-		event.preventDefault();
-		
-		var that = $(this);
-		
-		var str ="";
-		$(".uploadedList .delbtn").each(function(index){
-			 str += "<input type='hidden' name='files' value='"+$(this).attr("href") +"'> ";
-		});
-		
-		that.append(str);
-
-		console.log(str);
-		
-		that.get(0).submit();
-	});
-	
-	
-	$("#goList ").on("click", function(){
-		formObj.attr("method", "get");
-		formObj.attr("action", "/pocketGallery.do");
-		formObj.submit();
-	});
-
-	/* $("#modify").on("click", function(){
-		formObj.attr("action", "/pocketRead.do");
-		formObj.attr("method", "post");		
-		formObj.submit();
-	}); */
-	
-	
-	$("#remove").on("click", function(){
-		
-		
-		var arr = [];
-		$(".uploadedList li").each(function(index){
-			 arr.push($(this).attr("data-src"));
-		});
-		
-		if(arr.length > 0){
-			$.post("/deleteAllFiles.do",{files:arr}, function(){
+	<script>
+		$(document).ready(function(){
+			var weekChart = document.getElementById("weekChart");
+			var monthChart = document.getElementById("monthChart");
+			var categoryChart = document.getElementById("categoryChart");
+			var hline = document.getElementById("hline");
+			
+			var week=[];
+			var month=[];
+			var category=[];
+			
+			
+			$.ajax({
+				url:"/expenseUserData.do",
+				method:"GET",
+				success:function(data){
+					console.log(data);
+					$.each(data,function(key,val){
+						week.push(val.first);
+						week.push(val.second);
+						week.push(val.third);
+						week.push(val.forth);
+						week.push(val.fifth);
+						
+						month.push(val.jan);
+						month.push(val.feb);
+						month.push(val.mar);
+						month.push(val.api);
+						month.push(val.may);
+						month.push(val.jun);
+						
+						category.push(val.foods);
+						category.push(val.alcohol_cigarette);
+						category.push(val.clothes);
+						category.push(val.utility_bill);
+						category.push(val.housewares);
+						category.push(val.health);
+						category.push(val.transportation);
+						category.push(val.telephone);
+						category.push(val.entertainment);
+						category.push(val.education);
+						category.push(val.travel);
+						
+						
+						
+						
+						
+					});
+				console.log(week);
 				
+				console.log(category);
+				
+					var weekdata={
+							labels:["첫째","둘째","셋째","넷째","다섯째"],
+							datasets:[{
+										
+										backgroundColor: "rgba(179,181,198,0.2)",
+										borderColor: "rgba(179,181,198,1)",
+										borderWidth:1,
+										data:week
+							
+									}]
+								};
+					myhLineChart  = new Chart(weekChart, {
+						type: 'bar',
+						data: weekdata,
+						options: {
+							// Elements options apply to all of the options unless overridden in a dataset
+							// In this case, we are setting the border of each horizontal bar to be 2px wide
+							elements: {
+								rectangle: {
+									borderWidth: 2,
+								}
+							},
+							responsive: true,
+							legend: {
+								//position: 'right',
+								display:false,
+							},
+							title: {
+								display: true,
+								text: '주별 지출'
+							}
+						}
+				});
+					
+					var linedata={
+	    					labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+	    					datasets: [{
+	    						label: '전체',
+	    						borderColor:"rgba(0, 123, 255, 0.9)",
+	    						borderWidth: "1",
+	    						backgroundColor: "rgba(0, 123, 255, 0.5)",
+	    						//pointHighlightStroke: "rgba(26,179,148,1)",
+	    						data: month,
+	    						fill: false,
+	    					}
+	    					]
+	    					
+	    			};
+	    		
+	    			myLineChart  = new Chart(monthChart, {
+						type: 'line',
+						data: linedata,
+						options: {
+							responsive: true,
+							title: {
+								display: true,
+								text: '월 별 지출'
+							},
+							scales: {
+								yAxes: [{
+									ticks: {
+										// the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
+										suggestedMin: 10,
+										// the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
+										suggestedMax: 50
+									}
+								}]
+							}
+						}	
+					});
+					
+	    		
+	    			
+	    			var categorydata={
+	    					labels: ['식비','술/담배','의복','세금','가정용품','건강','교통','통신','오락','교육','여행'],
+	    					datasets: [{
+	    						label: '분류별',
+	    						backgroundColor: [
+    								"#D98880",
+    								"#C39BD3",
+    								"#A9CCE3",
+    								"#A3E4D7",
+    								"#FAD7A0",
+    								"#E74C3C",
+    								"#F9E79F",
+    								"#D7DBDD",
+    								"#2ECC71",
+    								"#F9EBEA",
+    								"#C39BD3",
+    								"#EBF5FB"		
+    								
+    							],
+	    						
+	    						data: category,
+	    						fill: true,
+	    					}
+	    					]
+	    					
+	    			};
+	    			
+	    			 polar = new Chart(categoryChart,{
+	    				 type:'polarArea',
+	    				 data:categorydata,
+	    				 options: {
+	    						responsive: true,
+	    						legend: {
+	    							position: 'right',
+	    						},
+	    						title: {
+	    							display: true,
+	    							text: '분류별 지출'
+	    						},
+	    						scale: {
+	    							ticks: {
+	    								beginAtZero: true
+	    							},
+	    							reverse: false
+	    						},
+	    						animation: {
+	    							animateRotate: false,
+	    							animateScale: true
+	    						}
+	    					}
+	    				 
+	    				 
+	    			 });
+	    			 
+	    			
+	    			hline.height=300;
+	    			 
+	 				myLineChart  = new Chart(hline, {
+						type: 'horizontalBar',
+						data: categorydata,
+						options: {
+							// Elements options apply to all of the options unless overridden in a dataset
+							// In this case, we are setting the border of each horizontal bar to be 2px wide
+							elements: {
+								rectangle: {
+									borderWidth: 2,
+								}
+							},
+							responsive: true,
+							legend: {
+								position: 'right',
+								display:true,
+							},
+							title: {
+								display: true,
+								text: '분류별 지출'
+							}
+						}
+				});
+					
+					
+					
+				}
 			});
-		}
-		
-		formObj.attr("action", "/removePocket.do");
-		formObj.submit();
-	});	
+			
+		});
+	</script>
 
-
-var template = Handlebars.compile($("#template").html());
-
-
-$(".fileDrop").on("dragenter dragover", function(event){
-	event.preventDefault();
-});
-
-
-$(".fileDrop").on("drop", function(event){
-	event.preventDefault();
-	
-	var files = event.originalEvent.dataTransfer.files;
-	
-	var file = files[0];
-
-	//console.log(file);
-	
-	var formData = new FormData();
-	
-	formData.append("file", file);	
-	
-	$.ajax({
-		  url: '/uploadAjax.do',
-		  data: formData,
-		  dataType:'text',
-		  processData: false,
-		  contentType: false,
-		  type: 'POST',
-		  success: function(data){
-			  
-			  var fileInfo = getFileInfo(data);
-			  
-			  var html = template(fileInfo);
-			  
-			  $(".uploadedList").append(html);
-		  }
-		});	
-});
-
-
-$(".uploadedList").on("click", ".delbtn", function(event){
-	
-	event.preventDefault();
-	
-	var that = $(this);
-	 
-	$.ajax({
-	   url:"/deleteFile.do",
-	   type:"post",
-	   data: {fileName:$(this).attr("href")},
-	   dataType:"text",
-	   success:function(result){
-		   if(result == 'deleted'){
-			   that.closest("li").remove();
-		   }
-	   }
-   });
-});
-
-
-var pocket_no = ${pocketDTO.pocket_no};
-var template = Handlebars.compile($("#template").html());
-
-$.ajax({
-    
-    url: "/getPocketAttach.do",
-    data:{pocket_no:pocket_no},
-    success: function(list){
-        $(list).each(function(){
-      	console.log(list);
-      	var fileInfo = getFileInfo(this);
-      	console.log(fileInfo);
-      	console.log(fileInfo.imgsrc);
-      	
-    	
-		var fileInfo = getFileInfo(this);
-		
-		var html = template(fileInfo);
-		
-		 $(".uploadedList").append(html);
-      	
-      	
-      	
-
-        });
-    }
-});
-
-$(".uploadedList").on("click", ".mailbox-attachment-name", function(event){
-	
-	var fileLink = $(this).attr("href");
-	
-	if(checkImageType(fileLink)){
-		
-		event.preventDefault();
-				
-		var imgTag = $("#popup_img");
-		imgTag.attr("src", fileLink);
-		
-		console.log(imgTag.attr("src"));
-				
-		$(".popup").show('slow');
-		imgTag.addClass("show");		
-	}	
-});
-
-$("#popup_img").on("click", function(){
-	
-	$(".popup").hide('slow');
-	
-});	
-
-});
-</script>
-
-		</body>
+</body>
 
 </html>

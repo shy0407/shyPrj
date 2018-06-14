@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //import org.apache.commons.httpclient.HttpStatus;
 import org.apache.log4j.Logger;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pocket.DTO.DataDTO;
-import com.pocket.DTO.TestDTO;
+import com.pocket.DTO.userDTO;
 import com.pocket.service.IDataService;
 
 	
@@ -222,5 +223,117 @@ public class DataController {
 		return entity;
 		
 	}
+	
+	@RequestMapping(value="/admin/storeChart", method=RequestMethod.GET)
+	public String storeChart(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		
+		log.info("storeChart..!!!");
+		
+		HashMap<String, Object> hash=dataService.storeLocalData();
+		String[] keys = hash.keySet().toArray(new String[0]);
+
+		for(int i=0;i<keys.length;i++){
+		 String key = keys[i];
+		 String val = hash.get(key).toString();
+		 
+		 System.out.println(key+" : "+val);
+		}
+		model.addAttribute("hash",hash);
+		return "/admin/storeChart";
+		
+	}
+	
+	@RequestMapping(value="/admin/dataForStore", method=RequestMethod.POST)
+	public @ResponseBody ResponseEntity<List<HashMap<String, String>>> storeChartData(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		log.info("스토어 전체 데이터가져옵니당 .................");
+			
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		 try{
+		        entity = new ResponseEntity<>(dataService.dataForStoreInfo(), HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+
+		return entity;
+	 
+		
+	}
+	
+	@RequestMapping(value="/expenseUserData", method=RequestMethod.GET)
+	public ResponseEntity<List<HashMap<String, String>>> expenseUserData(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model,HttpSession session) throws Exception {
+		log.info("개인 지출 데이터가져옵니당 .................");
+		userDTO uDTO=(userDTO)session.getAttribute("userDTO");
+		
+		String user_no =uDTO.getUser_no();
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		 try{
+		        entity = new ResponseEntity<>(dataService.expenseUserData(user_no), HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+
+		return entity;
+	 
+		
+	}
+	
+	@RequestMapping(value="expenseChart", method=RequestMethod.GET)
+	public String expenseChart(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		//log.info("스토어 전체 데이터가져옵니당 .................");
+			
+		
+		return "/expenseChart";
+	 
+		
+	}
+	@RequestMapping(value="compareChart", method=RequestMethod.GET)
+	public String compareChart(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model,HttpSession session) throws Exception {
+		log.info("compareChart .................");	
+		userDTO uDTO=(userDTO)session.getAttribute("userDTO");		
+		String user_no =uDTO.getUser_no();
+		
+		
+		
+		return "/compareChart";
+	 
+		
+	}
+	
+	@RequestMapping(value="/compIncomeTwo", method=RequestMethod.GET)
+	public ResponseEntity<List<HashMap<String, String>>> compIncomeTwo(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model,HttpSession session) throws Exception {
+		log.info("compIncomeTwo .................");
+		
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		 try{
+		        entity = new ResponseEntity<>(dataService.compIncomeTwo(), HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+
+		return entity;
+	 
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 }

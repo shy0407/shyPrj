@@ -22,5 +22,7 @@ public interface IPocketService {
 	void replacePocketAttach(String fullName, String pocket_no, String user_no)throws Exception;
 	void editPocket(PocketDTO pocketDTO) throws Exception;
 	//void replacePocketAttach(Map<String, Object> paramMap);
+	List<PocketDTO> getExpenceSeven(String user_no)throws Exception;
+	PocketDTO mainExIn(String user_no)throws Exception;
 
 }
