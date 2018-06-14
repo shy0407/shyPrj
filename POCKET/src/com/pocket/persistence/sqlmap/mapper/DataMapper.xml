@@ -319,7 +319,7 @@ count(case when GUNAME='중랑구' then 1 end) as junrang,
 count(case when GUNAME='동대문구' then 1 end) as dongdae,
 count(case when GUNAME='도봉구' then 1 end) as dobong,
 count(case when substring(REG_DATE,6,2)=1 then 1 end) as jan,
-count(case when substring(REG_DATE,6,2)=2 then 1 end) as fab,
+count(case when substring(REG_DATE,6,2)=2 then 1 end) as feb,
 count(case when substring(REG_DATE,6,2)=3 then 1 end) as mar,
 count(case when substring(REG_DATE,6,2)=4 then 1 end) as api,
 count(case when substring(REG_DATE,6,2)=5 then 1 end) as may,
@@ -405,4 +405,13 @@ where USER_NO=#{user_no}
 	where CATEGORY='income 전체평균'
 
 </select>
+
+<select id="onlyUserCount" resultType="java.util.HashMap">
+select
+COUNT(CASE WHEN GENDER = 'F' THEN 1 END) AS FEMALE,
+COUNT(CASE WHEN GENDER = 'M' THEN 1 END) AS MALE
+from aws.USER_INFO
+</select>
+
+
 </mapper>

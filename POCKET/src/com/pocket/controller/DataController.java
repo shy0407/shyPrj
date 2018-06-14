@@ -245,14 +245,21 @@ public class DataController {
 	}
 	
 	@RequestMapping(value="/admin/dataForStore", method=RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> storeChartData(HttpServletRequest request, HttpServletResponse response, 
+	public @ResponseBody ResponseEntity<List<HashMap<String, String>>> storeChartData(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
 		log.info("스토어 전체 데이터가져옵니당 .................");
 			
-		HashMap<String, Object> hash=dataService.storeLocalData();
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
 		
-		model.addAttribute("hash",hash);
-		return hash;
+		 try{
+		        entity = new ResponseEntity<>(dataService.dataForStoreInfo(), HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+
+		return entity;
 	 
 		
 	}
