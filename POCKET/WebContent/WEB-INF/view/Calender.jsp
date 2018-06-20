@@ -38,6 +38,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/grid/css/jquery-ui.css" />
     <!-- The link to the CSS that the grid needs -->
     <link rel="stylesheet" type="text/css" media="screen" href="/grid/css/trirand/ui.jqgrid.css" />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
 
 
 </head>
@@ -57,10 +59,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                        <!-- Logo icon -->
-                        <b><img src="/ElaAdmin-master/images/logo.png" class="dark-logo" /></b>
+                        <b><img src="/image/lo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="/ElaAdmin-master/images/logo (1).png" class="dark-logo" /></span>
+                        <span><img src="/image/pocket.png" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -119,6 +121,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="Calender.do">가계부</a></li>
                                 <li><a href="pocketRegister.do">영수증올리기</a></li>
+                                <li><a href="pocketGallery.do">영수증 확인</a></li>
                                
                             </ul>
                         </li>
@@ -129,11 +132,19 @@
                                 
                             </ul>
                         </li>
-                        <li class="nav-label">가맹점</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES <span class="label label-rouded label-warning pull-right">2</span></span></a>
+                        <li class="nav-label">공지사항</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fas fa-bars"></i><span class="hide-menu">공지사항 </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/admin/storeGallery.do">가맹점 사진으로 보기</a></li>
-                                 <li><a href="/admin/listPage.do">리스트로보기</a></li>
+                                <li><a href="noticeList.do">공지사항</a></li>
+                                 
+                            </ul>
+                        </li>
+                        
+                         <li class="nav-label">가맹점</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">가맹점 </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="storeGallery.do">가맹점</a></li>
+                                 
                             </ul>
                         </li>
 						
@@ -143,19 +154,16 @@
             </div>
             <!-- End Sidebar scroll-->
         </div>
-            <!-- End Sidebar scroll-->
-        </div>
-        <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">회원정보 시각화</h3> </div>
+                    <h3 class="text-primary">MY POCKET</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">회원정보 시각화</li>
+                        <li class="breadcrumb-item active">MY POCKET</li>
                     </ol>
                 </div>
             </div>
@@ -172,9 +180,9 @@
 								
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs customtab2" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages7" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">달력</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">가계부 </span></a> </li>
+                                       
                                     </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content">
@@ -188,7 +196,7 @@
 												    <table id="jqGrid"></table>
 												    <div id="jqGridPager"></div>                                        
                                         </div>
-                                        <div class="tab-pane p-20" id="messages7" role="tabpanel">3</div>
+                                       
                                     </div>
 
 
@@ -282,7 +290,7 @@
     		  swal(`You typed: ${value}`);
     		});
 		  },
-      defaultDate: '2018-05-12',
+      //defaultDate: '2018-05-12',
       navLinks: true, // can click day/week names to navigate views
       //editable: true,
       eventLimit: true, // allow "more" link when too many events

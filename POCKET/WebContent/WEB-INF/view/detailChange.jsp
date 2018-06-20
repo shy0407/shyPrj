@@ -79,6 +79,7 @@
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
+       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
    
     <script>
 	var result ='${msg}';
@@ -96,7 +97,7 @@
 			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <!-- Main wrapper  -->
-    <div id="main-wrapper">
+   <div id="main-wrapper">
         <!-- header header  -->
         <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
@@ -104,10 +105,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                        <!-- Logo icon -->
-                        <b><img src="/ElaAdmin-master/images/logo.png" class="dark-logo" /></b>
+                        <b><img src="/image/lo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="/ElaAdmin-master/images/logo (1).png" class="dark-logo" /></span>
+                        <span><img src="/image/pocket.png" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -166,6 +167,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="Calender.do">가계부</a></li>
                                 <li><a href="pocketRegister.do">영수증올리기</a></li>
+                                <li><a href="pocketGallery.do">영수증 확인</a></li>
                                
                             </ul>
                         </li>
@@ -176,11 +178,19 @@
                                 
                             </ul>
                         </li>
-                        <li class="nav-label">가맹점</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES <span class="label label-rouded label-warning pull-right">2</span></span></a>
+                        <li class="nav-label">공지사항</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fas fa-bars"></i><span class="hide-menu">공지사항 </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/admin/storeGallery.do">가맹점 사진으로 보기</a></li>
-                                 <li><a href="/admin/listPage.do">리스트로보기</a></li>
+                                <li><a href="noticeList.do">공지사항</a></li>
+                                 
+                            </ul>
+                        </li>
+                        
+                         <li class="nav-label">가맹점</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">가맹점 </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="storeGallery.do">가맹점</a></li>
+                                 
                             </ul>
                         </li>
 						
@@ -191,12 +201,13 @@
             <!-- End Sidebar scroll-->
         </div>
         <!-- End Left Sidebar  -->
+        <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">가맹점 등록</h3> </div>
+                    <h3 class="text-primary">회원정보수정</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
@@ -316,10 +327,10 @@
                                     </div>
                                     
                                     <div class="form-actions">
-                                    	<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
+                                    	<button type="submit" class="btn btn-dark btn-outline m-b-10 m-l-5"><i class="fa fa-save"></i> 저장</button>
                                         <!-- <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button> -->
                                         
-                                        <button type="submit" class="btn btn-inverse" id="delete">탈퇴</button>
+                                        <button type="submit" class="btn btn-dark btn-outline m-b-10 m-l-5" id="delete"><i class="far fa-trash-alt"></i>탈퇴</button>
                                     </div>
                                 </form>
                             </div>

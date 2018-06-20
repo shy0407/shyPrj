@@ -13,7 +13,8 @@
 
 	width :100%;
 	height:308px;
-	border:solid;
+	border: 1px solid;
+	border-color: #e7e7e7;
 
 }
 
@@ -22,6 +23,7 @@ margin:0 auto;
 width: 100%;
 height: 100%;
 }
+
 
 </style>
 <head>
@@ -39,6 +41,8 @@ height: 100%;
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -56,10 +60,10 @@ height: 100%;
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                        <!-- Logo icon -->
-                        <b><img src="/ElaAdmin-master/images/logo.png" class="dark-logo" /></b>
+                        <b><img src="/image/lo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="/ElaAdmin-master/images/logo (1).png" class="dark-logo" /></span>
+                        <span><img src="/image/pocket.png" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -69,9 +73,7 @@ height: 100%;
                         <!-- This is  -->
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <!-- Messages -->
-                        
-                        <!-- End Messages -->
+                     
                     </ul>
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
@@ -81,17 +83,18 @@ height: 100%;
                             <form class="app-search">
                                 <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
                         </li>
-
+                        
+                        <!-- Messages -->
+                        
+                        <!-- End Messages -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sessionScope.userDTO.email}</a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="ti-user"></i> Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="detailChange.do"><i class="ti-user"></i> Profile</a></li>                            
+                                  
+                                    <li><a href="logout.do"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -101,7 +104,7 @@ height: 100%;
         </div>
         <!-- End header header -->
         <!-- Left Sidebar  -->
-     	  <div class="left-sidebar">
+        <div class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
@@ -109,36 +112,40 @@ height: 100%;
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a   href="/idex.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
+                        <li> <a href="/index.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
                             <ul aria-expanded="false" class="collapse">
                                
                             </ul>
                         </li>
-                        <li class="nav-label">Apps</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">Email</span></a>
+                        <li class="nav-label">POCKET</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">가계부</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="jqgridTest.do">가계부</a></li>
-                                <li><a href="email-read.html">Read</a></li>
-                                <li><a href="email-inbox.html">Inbox</a></li>
+                                <li><a href="Calender.do">가계부</a></li>
+                                <li><a href="pocketRegister.do">영수증올리기</a></li>
+                                <li><a href="pocketGallery.do">영수증 확인</a></li>
+                               
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">Charts</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">시각화</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-flot.html">Flot</a></li>
-                                <li><a href="chart-morris.html">Morris</a></li>
-                                <li><a href="chart-chartjs.html">ChartJs</a></li>
-                                <li><a href="chart-chartist.html">Chartist </a></li>
-                                <li><a href="chart-amchart.html">AmChart</a></li>
-                                <li><a href="chart-echart.html">EChart</a></li>
-                                <li><a href="chart-sparkline.html">Sparkline</a></li>
-                                <li><a href="chart-peity.html">Peity</a></li>
+                                <li><a href="compareChart.do">대한민국 평균과비교</a></li>
+                                <li><a href="expenseChart.do">내 지출 시각화</a></li>
+                                
                             </ul>
                         </li>
-                        <li class="nav-label">가맹점</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES <span class="label label-rouded label-warning pull-right">2</span></span></a>
+                        <li class="nav-label">공지사항</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fas fa-bars"></i><span class="hide-menu">공지사항 </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-alert.html">SEE ALL</a></li>
-                                <li><a href="ui-button.html">NEAR ME</a></li>             
+                                <li><a href="noticeList.do">공지사항</a></li>
+                                 
+                            </ul>
+                        </li>
+                        
+                         <li class="nav-label">가맹점</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">가맹점 </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="storeGallery.do">가맹점</a></li>
+                                 
                             </ul>
                         </li>
 						
@@ -149,16 +156,17 @@ height: 100%;
             <!-- End Sidebar scroll-->
         </div>
         <!-- End Left Sidebar  -->
+        <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">회원정보 시각화</h3> </div>
+                    <h3 class="text-primary">영수증 올리기</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">회원정보 시각화</li>
+                        <li class="breadcrumb-item active">영수증 올리기</li>
                     </ol>
                 </div>
             </div>
@@ -171,7 +179,7 @@ height: 100%;
                         <div class="card">
 			                   	<div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">가맹점 상세보기</h4>
+                                <h4 class="m-b-0 text-white">영수증 등록</h4>
                             </div>        
                             <div class="card-body">
                           
@@ -192,8 +200,8 @@ height: 100%;
                                             
                                              <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label>점포명</label>
-                                                    <input type="text" name="store_name" class="form-control">
+                                                    <label>결제금액</label>
+                                                    <input type="text" name="expense_cash" class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>결제일</label>
@@ -207,15 +215,15 @@ height: 100%;
                                                     <label>결제 카테고리</label>
                                                     <select class="form-control custom-select" name="expense_category">
                                                         <option>--카테고리를 선택해주세요--</option>
-                                                        <option>식비</option>
-                                                        <option>주거/통신</option>
-                                                        <option>생활용품</option>
-                                                        <option>의복/미용</option>
-                                                        <option>건강/문화</option>
-                                                        <option>교육/육아</option>
-                                                        <option>교통/차량</option>
-                                                        <option>경조사/회비</option>
-                                                        <option>세금/이자</option>
+                                                        <option value="foods">식비</option>
+                                                        <option value="living">주거/통신</option>
+                                                        <option value="houseware">생활용품</option>
+                                                        <option value="clothes">의복/미용</option>
+                                                        <option value="health">건강/문화</option>
+                                                        <option value="edu">교육/육아</option>
+                                                        <option value="transport">교통/차량</option>
+                                                        <option value="fee">경조사/회비</option>
+                                                        <option value="tax">세금/이자</option>
                                                     </select>
                                                 </div>
                                             </div>  	
@@ -233,8 +241,8 @@ height: 100%;
                                         </div>               
                                     </div>
                                     <div class="form-actions">                                  		
-                                        <button type="submit" class="btn btn-success" id="modify"><i class="fa fa-save"></i>SAVE</button>
-                                        <button type="button" class="btn btn-inverse" id="golist">Go List</button>
+                                        <button type="submit" class="btn btn-dark btn-outline m-b-10 m-l-5" id="register"><i class="far fa-check-circle"></i> 등록</button>
+                                        <button type="button" class="btn btn-dark btn-outline m-b-10 m-l-5" id="golist"><i class="fas fa-history"></i> 목록</button>
                                     </div>
                                     </form>
  								</div>
@@ -287,6 +295,17 @@ height: 100%;
 	</script>    
 	<script>
     $(document).ready(function () {
+    	
+    	var formObj = $("form[role='form']");
+    	
+    	$("#golist").on("click", function(){
+			formObj.attr("method", "get");
+			formObj.attr("action", "/pocketGallery.do");
+			formObj.submit();
+		});
+    	
+    	
+    	
        $(".initMsg").show();
        var template = Handlebars.compile($("#template").html());
         // 전체 페이지 파일 끌어 놓기 기본 이벤트 방지 : 지정된 영역외에 파일 드래그 드랍시 페이지 이동방지

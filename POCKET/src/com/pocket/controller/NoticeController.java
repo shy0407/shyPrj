@@ -68,6 +68,24 @@ public class NoticeController {
 	    return "/admin/noticeList";
 	}
 	
+	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
+	  public String usernoticelistPage(@ModelAttribute("cri")Criteria cri, Model model) throws Exception {
+
+			log.info(cri.toString());
+			log.info(cri);
+	  
+	    model.addAttribute("list", noticeService.nlistCriteria(cri));
+	    log.info(noticeService.nlistCriteria(cri));
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	   // pageMaker.setTotalCount(131);
+
+	    pageMaker.setTotalCount(noticeService.nlistCountCriteria(cri));
+
+	    model.addAttribute("pageMaker", pageMaker);
+	    return "/noticeList";
+	}
+	
 	
 	
 	//공지사항 목록 체크박스
@@ -107,6 +125,19 @@ public class NoticeController {
 			
 			
 			return "/admin/noticeDetail";
+
+		}
+		
+
+		@RequestMapping(value="/noticeDetail", method=RequestMethod.GET)
+		public String usernoticeDetail(HttpServletRequest request, HttpServletResponse response, 
+				ModelMap model,String notice_no) throws Exception {
+			
+			log.info("noticeDetail GET!!!!!!..............");
+			model.addAttribute("nDTO",noticeService.noticeDetail(notice_no));
+			
+			
+			return "/noticeDetail";
 
 		}
 		

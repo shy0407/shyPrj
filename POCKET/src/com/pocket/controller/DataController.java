@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pocket.DTO.DataDTO;
@@ -150,12 +151,12 @@ public class DataController {
 		
 	}
 		
-	/*@RequestMapping(value="/admin/genderCountByMonth", method=RequestMethod.POST)
-	public ResponseEntity<List<HashMap<String, String>>> genderCountByMonth(HttpServletRequest request, HttpServletResponse response, 
+	@RequestMapping(value="/admin/data", method=RequestMethod.POST)
+	public ResponseEntity<HashMap<String, String>> aa(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
 		log.info("성별 월별 가입자 수 .................");
 		
-		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		ResponseEntity<HashMap<String, String>> entity = null;
 		
 		 try{
 		        entity = new ResponseEntity<>(dataService.genderCountByMonth(), HttpStatus.OK);
@@ -167,7 +168,7 @@ public class DataController {
 
 		return entity;
 		
-	}*/
+	}
 	
 	@RequestMapping(value="/admin/userAnalysis", method=RequestMethod.POST)
 	public ResponseEntity<List<HashMap<String, String>>> userAnalysis(HttpServletRequest request, HttpServletResponse response, 
@@ -286,6 +287,27 @@ public class DataController {
 		
 	}
 	
+	@RequestMapping(value="/expenseUserDataa", method=RequestMethod.GET)
+	public ResponseEntity<List<HashMap<String, String>>> expenseUserDataa(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model,HttpSession session,@RequestParam("user_no")String user_no) throws Exception {
+		
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		 try{
+		        entity = new ResponseEntity<>(dataService.expenseUserData(user_no), HttpStatus.OK);
+		        //entity=ResponseEntity<>(dataService.countAll(), HttpStatus.OK));
+		    } catch(Exception e){
+		        e.printStackTrace();
+		        entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+		    }
+
+		return entity;
+	 
+		
+	}
+	
+	
+	
 	@RequestMapping(value="expenseChart", method=RequestMethod.GET)
 	public String expenseChart(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model) throws Exception {
@@ -296,6 +318,21 @@ public class DataController {
 	 
 		
 	}
+	
+
+	@RequestMapping(value="/admin/expenseChart", method=RequestMethod.GET)
+	public String aexpenseChart(HttpServletRequest request, HttpServletResponse response, 
+					ModelMap model) throws Exception {
+		//log.info("스토어 전체 데이터가져옵니당 .................");
+			
+		
+		return "/admin/expenseChart";
+	 
+		
+	}
+	
+	
+	
 	@RequestMapping(value="compareChart", method=RequestMethod.GET)
 	public String compareChart(HttpServletRequest request, HttpServletResponse response, 
 					ModelMap model,HttpSession session) throws Exception {

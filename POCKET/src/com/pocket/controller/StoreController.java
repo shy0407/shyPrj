@@ -149,19 +149,6 @@ public class StoreController {
 	
 
 	
-	@RequestMapping(value="/storeGallery", method=RequestMethod.GET)
-	public String storeListt(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
-		
-		log.info("/admin/storeList!!!!!..............");
-		
-		
-		/*List<StoreDTO> sList= storeService.getStoreList();
-		
-		model.addAttribute(sList);*/
-		
-		return "/admin/storeGallery";
-
-	}
 	
 	@RequestMapping(value = "/admin/listCri", method = RequestMethod.GET)
 	  public void listAll(Criteria cri, Model model) throws Exception {
@@ -290,6 +277,49 @@ public class StoreController {
 	      return entity;    
 	  }
 	  
+	  
+	  @ResponseBody
+	  @RequestMapping("/sdisplayFile")
+	  public ResponseEntity<byte[]>  udisplayFile(String fileName)throws Exception{
+	    
+	    InputStream in = null; 
+	    ResponseEntity<byte[]> entity = null;
+	    
+	    log.info("FILE NAME: " + fileName);
+	    
+	    try{
+	      
+	      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+	      
+	      MediaType mType = MediaUtils.getMediaType(formatName);
+	      
+	      HttpHeaders headers = new HttpHeaders();
+	      
+	      in = new FileInputStream(uploadPathStore+fileName);
+	      
+	      if(mType != null){
+	        headers.setContentType(mType);
+	      }else{
+	        
+	        fileName = fileName.substring(fileName.indexOf("_")+1);       
+	        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	        headers.add("Content-Disposition", "attachment; filename=\""+ 
+	          new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
+	      }
+
+	      entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), 
+	              headers, 
+	              HttpStatus.CREATED);
+	    }catch(Exception e){
+	      e.printStackTrace();
+	      entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+	    }finally{
+	      in.close();
+	    }
+	      return entity;    
+	  }
+	  
+	  
 	  @ResponseBody
 	  @RequestMapping(value="/admin/deleteFile", method=RequestMethod.POST)
 	  public ResponseEntity<String> deleteFile(String fileName){
@@ -352,11 +382,26 @@ public class StoreController {
 	  
 	  @RequestMapping(value="/admin/storeGallery", method=RequestMethod.GET)		
 		public String pocketGallery(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
-			log.info("storeGallery............ .....");
+			log.info("/admin/storeGallery............ .....");
 			
 			return "/admin/storeGallery";
 			
 		}
+	  
+	  @RequestMapping(value="/storeGallery", method=RequestMethod.GET)
+		public String storeListt(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+			
+			log.info("/storeGallery!!!!!..............");
+			
+			
+			/*List<StoreDTO> sList= storeService.getStoreList();
+			
+			model.addAttribute(sList);*/
+			
+			return "/storeGallery";
+
+		}
+	  
 	  
 	  @RequestMapping(value="/admin/storeImgAll")	
 	  @ResponseBody
@@ -367,7 +412,16 @@ public class StoreController {
 			return filelist;
 			
 		}
-	 
+	  @RequestMapping(value="/storeImgAll")	
+	  @ResponseBody
+		public List<String> allstoreImg(HttpServletRequest request, HttpServletResponse response ,ModelMap model) throws Exception {
+			log.info("/storeImgAll............ .....");
+			
+			List<String> filelist =storeService.storeImgAll();
+			return filelist;
+			
+		}
+	
 	  
 	  @RequestMapping(value="/amdin/ocr", method=RequestMethod.GET)	
 	  @ResponseBody

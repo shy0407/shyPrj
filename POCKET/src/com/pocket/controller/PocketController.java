@@ -211,9 +211,13 @@ public class PocketController {
 	
 	@RequestMapping(value="deletePocket", method=RequestMethod.POST)
 	public void deletePocket(HttpServletRequest request, HttpServletResponse response,
-							@RequestParam("id")String pocket_no) throws Exception {
+							@RequestParam("id")String pocket_no,RedirectAttributes rttr) throws Exception {
 		log.info("deletePocket..................");
 		pocketService.deletePocket(pocket_no);
+		
+		rttr.addFlashAttribute("msg", "delete");
+		
+		
 	}
 	
 	@RequestMapping(value = "uploadAjax", method = RequestMethod.GET)
@@ -356,8 +360,8 @@ public class PocketController {
 			pDTO.setFiles(files);
 			pocketService.insertExpense(pDTO);
 			
-			rttr.addFlashAttribute("msg", "SUCCESS");
-			return "/gridServer";
+			rttr.addFlashAttribute("msg", "success");
+			return "redirect:/pocketGallery.do";
 			
 		}
 
@@ -435,7 +439,7 @@ public class PocketController {
 			log.info(pocket_no);
 			 
 			pocketService.removePocket(pocket_no);
-			rttr.addAttribute("msg", "success");
+			rttr.addFlashAttribute("msg", "delete");
 			
 			return "redirect:/pocketGallery.do";
 			

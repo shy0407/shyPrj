@@ -12,6 +12,14 @@
     
     
 }
+
+#indexImg {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
 </style>
 <head>
     <meta charset="utf-8">
@@ -33,6 +41,7 @@
     <!--로그인 -->
     <link rel="stylesheet" href="/login-signup-form/css/style.css">
 
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
@@ -61,14 +70,14 @@
 			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <!-- Main wrapper  -->
-    <div id="main-wrapper">
+   <div id="main-wrapper">
         <!-- header header  -->
         <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <!-- Logo -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
+                       <!-- Logo icon -->
                         <b><img src="/image/lo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
@@ -82,7 +91,7 @@
                         <!-- This is  -->
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        
+                     
                     </ul>
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
@@ -93,7 +102,20 @@
                                 <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
                         </li>
                         
-                       
+                        <!-- Messages -->
+                        
+                        <!-- End Messages -->
+                        <!-- Profile -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sessionScope.userDTO.email}</a>
+                            <div class="dropdown-menu dropdown-menu-right animated zoomIn">
+                                <ul class="dropdown-user">
+                                    <li><a href="detailChange.do"><i class="ti-user"></i> Profile</a></li>                            
+                                  
+                                    <li><a href="logout.do"><i class="fa fa-power-off"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -108,40 +130,40 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a   href="#" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
+                        <li> <a href="/index.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
                             <ul aria-expanded="false" class="collapse">
                                
                             </ul>
                         </li>
-                        <li class="nav-label">Apps</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">Email</span></a>
+                        <li class="nav-label">POCKET</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">가계부</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="detailChange.do">수정</a></li>
-                                <li><a href="email-read.html">Read</a></li>
-                                <li><a href="email-inbox.html">Inbox</a></li>
+                                <li><a href="Calender.do">가계부</a></li>
+                                <li><a href="pocketRegister.do">영수증올리기</a></li>
+                                <li><a href="pocketGallery.do">영수증 확인</a></li>
+                               
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">Charts</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">시각화</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-flot.html">Flot</a></li>
-                                <li><a href="chart-morris.html">Morris</a></li>
-                                <li><a href="chart-chartjs.html">ChartJs</a></li>
-                                <li><a href="chart-chartist.html">Chartist </a></li>
-                                <li><a href="chart-amchart.html">AmChart</a></li>
-                                <li><a href="chart-echart.html">EChart</a></li>
-                                <li><a href="chart-sparkline.html">Sparkline</a></li>
-                                <li><a href="chart-peity.html">Peity</a></li>
+                                <li><a href="compareChart.do">대한민국 평균과비교</a></li>
+                                <li><a href="expenseChart.do">내 지출 시각화</a></li>
+                                
                             </ul>
                         </li>
-                        <li class="nav-label">Features</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">Bootstrap UI <span class="label label-rouded label-warning pull-right">6</span></span></a>
+                        <li class="nav-label">공지사항</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fas fa-bars"></i><span class="hide-menu">공지사항 </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-alert.html">Alert</a></li>
-                                <li><a href="ui-button.html">Button</a></li>
-                                <li><a href="ui-dropdown.html">Dropdown</a></li>
-                                <li><a href="ui-progressbar.html">Progressbar</a></li>
-                                <li><a href="ui-tab.html">Tab</a></li>
-                                <li><a href="ui-typography.html">Typography</a></li>
+                                <li><a href="noticeList.do">공지사항</a></li>
+                                 
+                            </ul>
+                        </li>
+                        
+                         <li class="nav-label">가맹점</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">가맹점 </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="storeGallery.do">가맹점</a></li>
+                                 
                             </ul>
                         </li>
 						
@@ -152,6 +174,7 @@
             <!-- End Sidebar scroll-->
         </div>
         <!-- End Left Sidebar  -->
+        <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             
@@ -161,7 +184,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-body"> <img src="image/indexImg.png" /></div>
+                            <div class="card-body" id="indexImg"> <img src="image/indexImg.png" /></div>
                             <!--  <div><button type="button" class="btn btn-primary btn-md m-b-10 m-l-5" id="btn">JOIN NOW</button></div> -->
                             <div><nav class="main-nav">
 	<ul>

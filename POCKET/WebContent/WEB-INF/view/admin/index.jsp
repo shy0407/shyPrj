@@ -51,10 +51,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                        <!-- Logo icon -->
-                        <b><img src="/ElaAdmin-master/images/logo.png" class="dark-logo" /></b>
+                        <b><img src="/image/lo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="/ElaAdmin-master/images/logo (1).png" class="dark-logo" /></span>
+                        <span><img src="/image/pocket.png" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -118,18 +118,28 @@
                         </li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">시각화</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="compareChart.do">대한민국 평균과비교</a></li>
-                                <li><a href="expenseChart.do">내 지출 시각화</a></li>
+                                <li><a href="/admin/userChart.do">회원정보시각화</a></li>
+                                <li><a href="/admin/expenseChart.do">회원 지출 시각화</a></li>
+                                <li><a href="/admin/storeChart.do">가맹점 통계 시각화</a></li>
                                 
                             </ul>
                         </li>
                         <li class="nav-label">가맹점</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES <span class="label label-rouded label-warning pull-right">2</span></span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/admin/storeGallery.do">가맹점 사진으로 보기</a></li>
+                            	<li><a href="/admin/storeRegister.do">가맹점 등록</a></li>
+                                <li><a href="/admin/storeGallery.do">가맹점  갤러리</a></li>
                                  <li><a href="/admin/listPage.do">리스트로보기</a></li>
                             </ul>
                         </li>
+                        <li class="nav-label">공지사항</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fas fa-bars"></i><span class="hide-menu">공지사항 </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="/admin/notice.do">공지사항 등록</a></li>
+                                 <li><a href="/admin/noticeList.do">리스트로보기</a></li>
+                            </ul>
+                        </li>
+                        
 						
                     </ul>
                 </nav>
@@ -202,7 +212,7 @@
                                     <span><i class="fas fa-store fa-4x"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    <h2 class="color-white">278</h2>
+                                    <h2 class="color-white">18387</h2>
                                     <p class="m-b-0">전체 가맹점</p>
                                 </div>
                             </div>
@@ -233,49 +243,7 @@
                                 <h4>Visitor in Device</h4>
                             </div>
                             <div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-hover ">
-										<thead>
-											<tr>
-												<th>Device</th>
-												<th>Visits</th>
-												<th>Avg. time</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Unknown</td>
-												<td>2,456</td>
-												<td>00:02:36</td>
-											</tr>
-											<tr>
-												<td>Apple iPad</td>
-												<td>1,006</td>
-												<td>00:03:41</td>
-											</tr>
-											<tr>
-												<td>Apple iPhone</td>
-												<td>68</td>
-												<td>00:04:10</td>
-											</tr>
-											<tr>
-												<td>HTC Desire</td>
-												<td>38</td>
-												<td>00:01:40</td>
-											</tr>
-											<tr>
-												<td>Samsung</td>
-												<td>20</td>
-												<td>00:04:54</td>
-											</tr>
-											<tr>
-												<td>Apple iPad</td>
-												<td>1,006</td>
-												<td>00:03:41</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+								<canvas id="genderPie"></canvas>
 							</div>
                         </div>
                     </div>
@@ -325,6 +293,7 @@
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
+        </div>
     </div>
     <!-- End Wrapper -->
     <!-- All Jquery -->
@@ -367,6 +336,7 @@
 
     $(document).ready(function(){
     	var ctx = document.getElementById("mycanvas").getContext('2d');
+    	var genderPie = document.getElementById("genderPie");
 
     	var con=[];
      	var con1=[];
@@ -384,8 +354,8 @@
     			$.each(data, function(key,value){
     				con.push(value.count);
     			});	
-    			//console.log(con);
-    			
+    			console.log(con);
+    			console.log(con1);
     			var chartdata={
     					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December'],
     					datasets: [{
@@ -395,23 +365,6 @@
     						backgroundColor: "rgba(0, 123, 255, 0.5)",
     						//pointHighlightStroke: "rgba(26,179,148,1)",
     						data: con,
-    						fill: false,
-    					},{
-    						label: '남성',
-    						borderColor:"#ffb64d",
-    						borderWidth: "1",
-    						backgroundColor: "#ffb64d",
-    						//pointHighlightStroke: "rgba(26,179,148,1)",
-    						data: con1,
-    						fill: false,
-    	
-    					},{
-    						label: '여성',
-    						borderColor:"#fc6180",
-    						borderWidth: "1",
-    						backgroundColor: "#fc6180",
-    						//pointHighlightStroke: "rgba(26,179,148,1)",
-    						data: con2,
     						fill: false,
     					}
     					]
@@ -425,7 +378,7 @@
 						responsive: true,
 						title: {
 							display: true,
-							text: 'Min and Max Settings'
+							text: '월별 회원수 변화'
 						},
 						scales: {
 							yAxes: [{
@@ -447,30 +400,7 @@
     		}
  		
     	}); //ajax end
- 		
-   
-    	$.ajax({
-    		
-    		url:"/admin/genderCountByMonth.do",
-    		method:"POST",
-    		success:function(data){
-    			console.log(data);
-    			
-    			$.each(data,function(key,value){
-    				if(value.gender=="M"){
-    					con1.push(value.count);
-    				}else{
-    					con2.push(value.count);
-    				}
-    				
-    			});
-    			console.log(con1);
-    			
-    		}
-    		
-    	});
-    	
-    	
+    	var gender=[];
 		$.ajax({
     		
     		url:"/admin/userAnalysis.do",
@@ -483,13 +413,47 @@
     				$("#female").html(value.FEMALE);
     				$("#male").html(value.MALE);
     				console.log(value.ALL_USER);
+    				if(value!=null){
+    				gender.push(value.FEMALE);
+    				gender.push(value.MALE);
+    				}
     			});
     			
-    			
+    			console.log(gender);
     		}
     		
     	});
     	
+ 		
+    	var piegenderdata={
+				labels:['여성','남성'],
+				datasets:[{
+							
+							backgroundColor: ["#FFD6D3","#F1C7D3"],
+							data:[385,220]
+				
+						}]
+					};
+		
+		//pie.height=100;
+		myPieChart  = new Chart(genderPie, {
+			type: 'pie',
+			data: piegenderdata,
+			options: {
+				responsive: true,
+				legend: {
+					position: 'right',
+					display:true,
+				},
+				title: {
+					display: true,
+					text: '회원 수 성비'
+				}
+			}
+	}); //pie gender chart draw end
+    
+    	
+
     	
     	
 	}); //document ready function end

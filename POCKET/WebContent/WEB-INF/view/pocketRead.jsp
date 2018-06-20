@@ -53,6 +53,8 @@
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -62,7 +64,7 @@
 			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <!-- Main wrapper  -->
-    <div id="main-wrapper">
+   <div id="main-wrapper">
         <!-- header header  -->
         <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
@@ -70,10 +72,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                        <!-- Logo icon -->
-                        <b><img src="/ElaAdmin-master/images/logo.png" class="dark-logo" /></b>
+                        <b><img src="/image/lo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="/ElaAdmin-master/images/logo (1).png" class="dark-logo" /></span>
+                        <span><img src="/image/pocket.png" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -132,6 +134,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="Calender.do">가계부</a></li>
                                 <li><a href="pocketRegister.do">영수증올리기</a></li>
+                                <li><a href="pocketGallery.do">영수증 확인</a></li>
                                
                             </ul>
                         </li>
@@ -142,11 +145,19 @@
                                 
                             </ul>
                         </li>
-                        <li class="nav-label">가맹점</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES <span class="label label-rouded label-warning pull-right">2</span></span></a>
+                        <li class="nav-label">공지사항</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fas fa-bars"></i><span class="hide-menu">공지사항 </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/admin/storeGallery.do">가맹점 사진으로 보기</a></li>
-                                 <li><a href="/admin/listPage.do">리스트로보기</a></li>
+                                <li><a href="noticeList.do">공지사항</a></li>
+                                 
+                            </ul>
+                        </li>
+                        
+                         <li class="nav-label">가맹점</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">가맹점 </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="storeGallery.do">가맹점</a></li>
+                                 
                             </ul>
                         </li>
 						
@@ -157,16 +168,17 @@
             <!-- End Sidebar scroll-->
         </div>
         <!-- End Left Sidebar  -->
+        <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">회원정보 시각화</h3> </div>
+                    <h3 class="text-primary">영수증 상세</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">회원정보 시각화</li>
+                        <li class="breadcrumb-item active">영수증 상세</li>
                     </ol>
                 </div>
             </div>
@@ -179,7 +191,7 @@
                         <div class="card">
 			                   	<div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">가맹점 상세보기</h4>
+                                <h4 class="m-b-0 text-white">영수증 상세</h4>
                             </div>        
                             <div class="card-body">
 								<!--chart 1  -->
@@ -194,7 +206,7 @@
                                                 <div class="form-group">
                                                     <!-- <label>City</label>
                                                     <input type="text" class="form-control"> -->
-                                                    <label for="exampleInputEmail1">File DROP Here</label>
+                                                    <label for="exampleInputEmail1">첨부 영수증</label>
 													
 											<!-- 		<div class="initMsg">파일을 올려주세요.</div>-->
 													<div class="uploadedList"></div> 
@@ -205,20 +217,32 @@
                                             
                                              <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>점포명</label>
-                                                    <input type="text" name="expense_detail" class="form-control" value="${pocketDTO.expense_detail }">
+                                                    <label>결제금액</label>
+                                                     <input type="text" name="expense_cash" class="form-control"  value="${pocketDTO.expense_cash }">                                                  
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>카테고리 </label>
-                                                    <input type="text" name="expense_category" class="form-control" value="${pocketDTO.expense_category}" >
+                                                	 <label>결제일</label>
+                                                    <input type="date" name="expense_date" class="form-control"  value="${pocketDTO.expense_date }">
+                                                
                                                 </div>
                                                 <div class="form-group">
                                                     <label>카테고리상세 </label>
-                                                    <input type="text" name="expense_cash" class="form-control" value="${pocketDTO.expense_cash }">
+                                                    <input type="text" name="expense_detail" class="form-control" value="${pocketDTO.expense_detail }">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>주소 </label>
-                                                    <input type="text" id="expense_card" name="expense_card" class="form-control" value="${pocketDTO.expense_card}" onclick="sample4_execDaumPostcode()" >
+                                                    <label>결제 카테고리 </label>
+                                                    <select class="form-control custom-select" name="expense_category">
+                                                        <option>--카테고리를 선택해주세요--</option>
+                                                       	<option value="foods" <c:if test="${pocketDTO.expense_category eq 'foods'}">selected</c:if>>식비</option>
+                                                        <option value="living" <c:if test="${pocketDTO.expense_category eq 'living'}">selected</c:if>>주거/통신</option>
+                                                        <option value="houseware" <c:if test="${pocketDTO.expense_category eq 'houseware'}">selected</c:if>>생활용품</option>
+                                                        <option value="clothes" <c:if test="${pocketDTO.expense_category eq 'clothes'}">selected</c:if>>의복/미용</option>
+                                                        <option value="health" <c:if test="${pocketDTO.expense_category eq 'health'}">selected</c:if>>건강/문화</option>
+                                                        <option value="edu" <c:if test="${pocketDTO.expense_category eq 'edu'}">selected</c:if>>교육/육아</option>
+                                                        <option value="transport" <c:if test="${pocketDTO.expense_category eq 'transport'}">selected</c:if>>교통/차량</option>
+                                                        <option value="fee" <c:if test="${pocketDTO.expense_category eq 'fee'}">selected</c:if>>경조사/회비</option>
+                                                        <option value="tax" <c:if test="${pocketDTO.expense_category eq 'tax'}">selected</c:if>>세금/이자</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             </div>
@@ -240,10 +264,9 @@
                                         </div>
                                      
                                     <div class="form-actions">
-                                    		
-                                        <button type="submit" class="btn btn-success" id="modify"><i class="fa fa-save"></i> Modify</button>
-                                        <button type="button" class="btn btn-inverse" id="golist"><i class="fa fa-history"></i>Go List</button>
-                                        <button type="submit" class="btn btn-success" id="remove"><i class="fa fa-trash-alt"></i> Remove</button>
+                                    	<button type="button" class="btn btn-dark btn-outline m-b-10 m-l-5" id="golist"><i class="fa fa-history"></i>Go List</button>	
+                                        <button type="submit" class="btn btn-dark btn-outline m-b-10 m-l-5" id="modify"><i class="fa fa-save"></i> Modify</button>
+                                        <button type="submit" class="btn btn-dark btn-outline m-b-10 m-l-5" id="remove"><i class="fa fa-trash-alt"></i> Remove</button>
                                     </div>
                                 </form>
 								</div>
@@ -318,7 +341,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$("#goList ").on("click", function(){
+	$("#golist ").on("click", function(){
 		formObj.attr("method", "get");
 		formObj.attr("action", "/pocketGallery.do");
 		formObj.submit();

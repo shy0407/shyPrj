@@ -53,23 +53,18 @@
     <!-- Custom CSS -->
     <link href="/ElaAdmin-master/css/helper.css" rel="stylesheet">
     <link href="/ElaAdmin-master/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
 </head>
 
 <body class="fix-header fix-sidebar">
-
-
- <div class='popup back' style="display:none;"></div>
-    <div id="popup_front" class='popup front' style="display:none;">
-     <img id="popup_img">
-    </div>
-
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
 			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <!-- Main wrapper  -->
-    <div id="main-wrapper">
+     <div id="main-wrapper">
         <!-- header header  -->
         <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
@@ -77,10 +72,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                        <!-- Logo icon -->
-                        <b><img src="/ElaAdmin-master/images/logo.png" class="dark-logo" /></b>
+                        <b><img src="/image/lo.png" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="/ElaAdmin-master/images/logo (1).png" class="dark-logo" /></span>
+                        <span><img src="/image/pocket.png" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -90,9 +85,7 @@
                         <!-- This is  -->
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <!-- Messages -->
-                        
-                        <!-- End Messages -->
+                     
                     </ul>
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
@@ -102,17 +95,18 @@
                             <form class="app-search">
                                 <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
                         </li>
-
+                        
+                        <!-- Messages -->
+                        
+                        <!-- End Messages -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sessionScope.userDTO.email}</a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="ti-user"></i> Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="detailChange.do"><i class="ti-user"></i> Profile</a></li>                            
+                                  
+                                    <li><a href="logout.do"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -122,7 +116,7 @@
         </div>
         <!-- End header header -->
         <!-- Left Sidebar  -->
-     	  <div class="left-sidebar">
+        <div class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
@@ -130,38 +124,43 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a   href="/idex.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
+                        <li> <a href="/admin/index.do" aria-expanded="false"><i class="fa fa-home" style="font-size:20px"></i><span class="hide-menu">HOME </span></a>
                             <ul aria-expanded="false" class="collapse">
                                
                             </ul>
                         </li>
-                        <li class="nav-label">Apps</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-krw" style="font-size:20px"></i><span class="hide-menu">Email</span></a>
+                        <li class="nav-label">회원정보</li>
+                        <li> <a class="has-arrow  " href="/admin/userList.do " aria-expanded="false"><i class="fas fa-users"></i><span class="hide-menu">회원리스트</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="jqgridTest.do">가계부</a></li>
-                                <li><a href="email-read.html">Read</a></li>
-                                <li><a href="email-inbox.html">Inbox</a></li>
+                                <li><a href="/admin/userList.do">회원리스트</a></li>
+                               
+                               
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">Charts</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">시각화</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-flot.html">Flot</a></li>
-                                <li><a href="chart-morris.html">Morris</a></li>
-                                <li><a href="chart-chartjs.html">ChartJs</a></li>
-                                <li><a href="chart-chartist.html">Chartist </a></li>
-                                <li><a href="chart-amchart.html">AmChart</a></li>
-                                <li><a href="chart-echart.html">EChart</a></li>
-                                <li><a href="chart-sparkline.html">Sparkline</a></li>
-                                <li><a href="chart-peity.html">Peity</a></li>
+                                <li><a href="/admin/userChart.do">회원정보시각화</a></li>
+                                <li><a href="/admin/expenseChart.do">회원 지출 시각화</a></li>
+                                <li><a href="/admin/storeChart.do">가맹점 통계 시각화</a></li>
+                                
                             </ul>
                         </li>
                         <li class="nav-label">가맹점</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES <span class="label label-rouded label-warning pull-right">2</span></span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">STORES </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-alert.html">SEE ALL</a></li>
-                                <li><a href="ui-button.html">NEAR ME</a></li>             
+                            	<li><a href="/admin/storeRegister.do">가맹점 등록</a></li>
+                                <li><a href="/admin/storeGallery.do">가맹점  갤러리</a></li>
+                                 <li><a href="/admin/listPage.do">리스트로보기</a></li>
                             </ul>
                         </li>
+                        <li class="nav-label">공지사항</li>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fas fa-bars"></i><span class="hide-menu">공지사항 </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="/admin/notice.do">공지사항 등록</a></li>
+                                 <li><a href="/admin/noticeList.do">리스트로보기</a></li>
+                            </ul>
+                        </li>
+                        
 						
                     </ul>
                 </nav>
@@ -175,11 +174,11 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">회원정보 시각화</h3> </div>
+                    <h3 class="text-primary">가맹점 수정</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">회원정보 시각화</li>
+                        <li class="breadcrumb-item active">가맹점 수정</li>
                     </ol>
                 </div>
             </div>
@@ -192,7 +191,7 @@
                         <div class="card">
 			                   	<div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">가맹점 상세보기</h4>
+                                <h4 class="m-b-0 text-white">가맹점 수정</h4>
                             </div>        
                             <div class="card-body">
 								<!--chart 1  -->
@@ -271,6 +270,7 @@
             <!-- footer -->
             <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com"><img src="/image/insta.png"><img src="/image/twit.png"><img src="/image/facebook.png"></a></footer>
             <!-- End footer -->
+        </div>
         </div>
         <!-- End Page wrapper  -->
     </div>
